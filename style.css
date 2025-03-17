@@ -1,8 +1,7 @@
 /* Estilo do corpo da página */
-/* Estilo do corpo da página */
 body {
     font-family: 'Roboto', sans-serif; /* Fonte moderna */
-    background: radial-gradient(circle, #0a0a0a, #000000); /* Gradiente radial escuro */
+    background: radial-gradient(circle at center, #0a0a0a, #000000); /* Gradiente radial escuro */
     color: #fff; /* Cor do texto */
     margin: 0;
     padding: 0;
@@ -12,9 +11,10 @@ body {
     height: 100vh; /* Preenche toda a altura da tela */
     flex-direction: column;
     overflow: hidden; /* Evita barras de rolagem */
+    position: relative;
 }
 
-/* Efeito de partículas futuristas (pode ser implementado com JavaScript) */
+/* Efeito de partículas futuristas */
 body::before {
     content: '';
     position: absolute;
@@ -39,13 +39,75 @@ body::before {
     }
 }
 
+/* Efeito de luz de fundo */
+body::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 255, 153, 0.2), transparent 70%);
+    transform: translate(-50%, -50%);
+    animation: pulse 3s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    from {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.3;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.6;
+    }
+}
+
+/* Container principal */
+.container {
+    background: rgba(26, 26, 26, 0.8); /* Fundo semi-transparente */
+    border: 2px solid #00ff99; /* Borda neon */
+    border-radius: 25px; /* Bordas arredondadas */
+    padding: 40px;
+    box-shadow: 0 0 50px rgba(0, 255, 153, 0.6), inset 0 0 20px rgba(0, 255, 153, 0.3); /* Sombra externa e interna */
+    backdrop-filter: blur(10px); /* Efeito de desfoque */
+    text-align: center;
+    max-width: 800px;
+    width: 90%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de brilho no container */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 255, 153, 0.3), transparent 70%);
+    animation: rotateGlow 10s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rotateGlow {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /* Estilo do textarea */
 textarea {
-    width: 80%;
+    width: 100%;
     height: 200px;
     font-size: 16px;
     font-family: 'Courier New', Courier, monospace; /* Fonte de estilo de código */
-    background: #1a1a1a; /* Cor de fundo escura */
+    background: rgba(26, 26, 26, 0.9); /* Cor de fundo escura */
     color: #00ff99; /* Cor do texto verde neon */
     border: 2px solid #00ff99; /* Borda neon */
     border-radius: 15px; /* Bordas arredondadas */
@@ -53,6 +115,7 @@ textarea {
     box-shadow: 0 0 20px rgba(0, 255, 153, 0.6), inset 0 0 10px rgba(0, 255, 153, 0.3); /* Sombra externa e interna */
     transition: all 0.3s ease; /* Transição suave */
     resize: none; /* Impede o redimensionamento */
+    margin-bottom: 20px;
 }
 
 /* Efeito de hover no textarea */
@@ -71,7 +134,7 @@ button {
     font-weight: bold;
     border-radius: 50px; /* Borda arredondada para botão */
     cursor: pointer;
-    margin-top: 30px;
+    margin-top: 20px;
     transition: all 0.3s ease; /* Transição suave */
     box-shadow: 0 0 20px rgba(0, 255, 153, 0.6); /* Efeito de sombra */
     position: relative;
@@ -106,11 +169,11 @@ button:hover::after {
 /* Estilo da área de saída */
 #output {
     margin-top: 30px;
-    background: #1a1a1a; /* Cor de fundo escura */
+    background: rgba(26, 26, 26, 0.9); /* Cor de fundo escura */
     color: #00ff99; /* Texto verde neon */
     padding: 20px;
     border-radius: 15px;
-    width: 80%;
+    width: 100%;
     min-height: 80px;
     white-space: pre-wrap;
     text-align: left;
