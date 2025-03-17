@@ -1,27 +1,149 @@
+/* Estilo do corpo da página */
+/* Estilo do corpo da página */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
+    font-family: 'Roboto', sans-serif; /* Fonte moderna */
+    background: radial-gradient(circle, #0a0a0a, #000000); /* Gradiente radial escuro */
+    color: #fff; /* Cor do texto */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Preenche toda a altura da tela */
+    flex-direction: column;
+    overflow: hidden; /* Evita barras de rolagem */
 }
 
+/* Efeito de partículas futuristas (pode ser implementado com JavaScript) */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 20%, #000 20%, #000 80%, transparent 80%, transparent),
+                radial-gradient(circle, transparent 20%, #000 20%, #000 80%, transparent 80%, transparent);
+    background-size: 50px 50px;
+    opacity: 0.1;
+    animation: moveParticles 10s linear infinite;
+    z-index: -1;
+}
+
+@keyframes moveParticles {
+    from {
+        transform: translateY(0) translateX(0);
+    }
+    to {
+        transform: translateY(-50px) translateX(-50px);
+    }
+}
+
+/* Estilo do textarea */
 textarea {
     width: 80%;
-    height: 150px;
+    height: 200px;
     font-size: 16px;
+    font-family: 'Courier New', Courier, monospace; /* Fonte de estilo de código */
+    background: #1a1a1a; /* Cor de fundo escura */
+    color: #00ff99; /* Cor do texto verde neon */
+    border: 2px solid #00ff99; /* Borda neon */
+    border-radius: 15px; /* Bordas arredondadas */
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 255, 153, 0.6), inset 0 0 10px rgba(0, 255, 153, 0.3); /* Sombra externa e interna */
+    transition: all 0.3s ease; /* Transição suave */
+    resize: none; /* Impede o redimensionamento */
 }
 
+/* Efeito de hover no textarea */
+textarea:hover {
+    border-color: #ff00ff; /* Altera a cor da borda ao passar o mouse */
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.8), inset 0 0 15px rgba(255, 0, 255, 0.4); /* Sombra mais intensa */
+}
+
+/* Estilo do botão */
 button {
-    margin-top: 10px;
-    padding: 10px 15px;
-    font-size: 16px;
+    background: linear-gradient(135deg, #00ff99, #00cc77); /* Gradiente neon */
+    color: #1f1f1f; /* Cor do texto */
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px; /* Borda arredondada para botão */
+    cursor: pointer;
+    margin-top: 30px;
+    transition: all 0.3s ease; /* Transição suave */
+    box-shadow: 0 0 20px rgba(0, 255, 153, 0.6); /* Efeito de sombra */
+    position: relative;
+    overflow: hidden;
 }
 
+/* Efeito de hover no botão */
+button:hover {
+    background: linear-gradient(135deg, #ff00ff, #cc00cc); /* Gradiente roxo neon */
+    color: #fff; /* Texto branco */
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.8); /* Sombra mais intensa */
+    transform: scale(1.05); /* Aumenta o tamanho do botão */
+}
+
+/* Efeito de brilho no botão */
+button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+}
+
+button:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Estilo da área de saída */
 #output {
-    margin-top: 20px;
-    background: #f4f4f4;
-    padding: 10px;
-    min-height: 50px;
+    margin-top: 30px;
+    background: #1a1a1a; /* Cor de fundo escura */
+    color: #00ff99; /* Texto verde neon */
+    padding: 20px;
+    border-radius: 15px;
+    width: 80%;
+    min-height: 80px;
     white-space: pre-wrap;
     text-align: left;
+    box-shadow: 0 0 20px rgba(0, 255, 153, 0.6), inset 0 0 10px rgba(0, 255, 153, 0.3); /* Sombra externa e interna */
+    border: 2px solid #00ff99; /* Borda neon */
 }
-    
+
+/* Estilo futurista para títulos */
+h1 {
+    font-size: 4em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    color: #00ff99; /* Cor neon */
+    text-shadow: 0 0 30px rgba(0, 255, 153, 0.8); /* Efeito de luz neon */
+    margin-bottom: 20px;
+    animation: glow 2s infinite alternate; /* Animação de brilho */
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 20px rgba(0, 255, 153, 0.6);
+    }
+    to {
+        text-shadow: 0 0 40px rgba(0, 255, 153, 1);
+    }
+}
+
+/* Estilo do subtítulo */
+p {
+    font-size: 1.3em;
+    color: #fff;
+    margin-bottom: 40px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Efeito de sombra no texto */
+    opacity: 0.8;
+}
