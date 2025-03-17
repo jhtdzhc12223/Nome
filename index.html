@@ -5,16 +5,16 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 
-<title>Apresentação de Exercícios - PyScript</title>
+    <title>Apresentação de Exercícios - PyScript</title>
 
 
-<script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
 
 
 </head>
@@ -22,17 +22,17 @@
 
 <body>
 
-<main>
+    <main>
 
-<section class="exercicio">
+        <section class="exercicio">
 
-<h1>Apresentação de Exercícios - EX001</h1>
-
-
-<p>Conversão de Metros para centímetros e milímetros.</p>
+            <h1>Apresentação de Exercícios - EX001</h1>
 
 
-<textarea id="codigoPython">
+            <p>Conversão de Metros para centímetros e milímetros.</p>
+
+
+            <textarea id="codigoPython">
 
 nome = input('Qual é o seu nome?')
 
@@ -101,43 +101,43 @@ print(mensagem)
 
 </textarea>
 
-<br>
+            <br>
 
-<button id="executar">Executar</button>
-
-
-<h3>Saída:</h3>
-
-<div id="output"></div>
+            <button id="executar">Executar</button>
 
 
-<script>
+            <h3>Saída:</h3>
 
-async function executarCodigo() {
-
-let codigo = document.getElementById("codigoPython").value;
-
-let outputDiv = document.getElementById("output");
+            <div id="output"></div>
 
 
-// Inicializa o Pyodide se ainda não estiver carregado
+            <script>
 
-if (!window.pyodide) {
+                async function executarCodigo() {
 
-outputDiv.innerText = "Carregando o interpretador Python...";
+                    let codigo = document.getElementById("codigoPython").value;
 
-window.pyodide = await loadPyodide();
-
-outputDiv.innerText = "";
-
-}
+                    let outputDiv = document.getElementById("output");
 
 
-try {
+                    // Inicializa o Pyodide se ainda não estiver carregado
 
-// Redireciona a saída para capturar os prints
+                    if (!window.pyodide) {
 
-window.pyodide.runPython(`
+                        outputDiv.innerText = "Carregando o interpretador Python...";
+
+                        window.pyodide = await loadPyodide();
+
+                        outputDiv.innerText = "";
+
+                    }
+
+
+                    try {
+
+                        // Redireciona a saída para capturar os prints
+
+                        window.pyodide.runPython(`
 
 import sys
 
@@ -159,36 +159,36 @@ return js.prompt(prompt_text)
 `);
 
 
-// Executa o código Python
+                        // Executa o código Python
 
-window.pyodide.runPython(codigo);
-
-
-// Obtém a saída do print()
-
-let resultado = window.pyodide.runPython("sys.stdout.getvalue()");
-
-outputDiv.innerText = resultado;
-
-} catch (error) {
-
-outputDiv.innerText = "Erro: " + error;
-
-}
-
-}
+                        window.pyodide.runPython(codigo);
 
 
-// Adiciona evento ao botão
+                        // Obtém a saída do print()
 
-document.getElementById("executar").addEventListener("click", executarCodigo);
+                        let resultado = window.pyodide.runPython("sys.stdout.getvalue()");
 
-</script>
+                        outputDiv.innerText = resultado;
 
-</section>
+                    } catch (error) {
+
+                        outputDiv.innerText = "Erro: " + error;
+
+                    }
+
+                }
 
 
-</main>
+                // Adiciona evento ao botão
+
+                document.getElementById("executar").addEventListener("click", executarCodigo);
+
+            </script>
+
+        </section>
+
+
+    </main>
 
 </body>
 
