@@ -1,55 +1,21 @@
-/* banco-dados.css - Tema Azul/Roxo */
-
-.nav-link.active {
-  color: var(--neon-primary) !important;
-  text-shadow: 0 0 8px var(--neon-primary);
-}
-
-.nav-link.active::after {
-  background-color: var(--neon-primary);
-  box-shadow: 0 0 10px var(--neon-primary);
-}
-
-.discipline-intro {
-  border-bottom: 1px solid rgba(106, 0, 255, 0.2);
-}
-
-.trimester-badge {
-  background: linear-gradient(135deg, var(--neon-primary), var(--neon-accent));
-  box-shadow: 0 0 15px var(--neon-primary);
-}
-
-.topic-title {
-  color: var(--neon-primary);
-  border-bottom: 1px solid rgba(106, 0, 255, 0.3);
+.download-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .download-card {
-  background: rgba(30, 20, 50, 0.5);
-  border: 1px solid rgba(106, 0, 255, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
-.download-card:hover {
-  border-color: var(--neon-primary);
-}
-
-.file-icon {
-  background: linear-gradient(135deg, var(--neon-primary), var(--neon-accent));
-}
-
-.download-btn {
-  border-color: var(--neon-primary);
-  color: var(--neon-primary);
-}
-
-.download-btn:hover {
-  background: var(--neon-primary);
-}
-
-.coming-soon-container {
-  border: 1px dashed var(--neon-primary);
-}
-
-.coming-soon-icon {
-  color: var(--neon-primary);
+@media (max-width: 600px) {
+  .download-card {
+    flex-direction: column;
+  }
+  
+  .file-icon {
+    width: 100%;
+    padding: 15px;
+  }
 }
