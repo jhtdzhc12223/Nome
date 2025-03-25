@@ -1,79 +1,128 @@
-/* ---- Estilos Específicos Sistemas ---- */
-.nav-link.active {
-  color: var(--neon-secondary) !important;
-  text-shadow: 0 0 8px var(--neon-secondary);
+:root {
+  /* Cores atualizadas para sistemas */
+  --neon-secondary: #00d8ff; /* Azul neon */
+  --neon-primary: #b300ff; /* Roxo neon */
+  --card-bg: rgba(18, 18, 32, 0.7); /* Fundo escuro com transparência */
 }
 
-.nav-link.active::after {
-  background-color: var(--neon-secondary);
-  box-shadow: 0 0 10px var(--neon-secondary);
-}
-
+/* ---- Efeitos Globais ---- */
 .discipline-intro {
-  padding: 60px 0;
-  text-align: center;
-  border-bottom: 1px solid rgba(0, 168, 255, 0.2);
+  padding: 80px 0;
+  background: radial-gradient(circle at center, rgba(0, 216, 255, 0.05) 0%, transparent 70%);
 }
 
 .discipline-image-container {
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 30px;
+  width: 180px;
+  height: 180px;
   border: 3px solid transparent;
-  background: linear-gradient(135deg, var(--neon-secondary), var(--neon-primary)) border-box;
+  background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  transition: transform 0.4s ease;
 }
 
-.trimester-section {
-  padding: 40px 0;
-  border-bottom: 1px solid rgba(0, 168, 255, 0.1);
+.discipline-image-container:hover {
+  transform: scale(1.05) rotate(5deg);
 }
 
+/* ---- Tópicos e Exercícios ---- */
 .topic-container {
   background: var(--card-bg);
-  border-radius: 15px;
-  padding: 25px;
-  margin-bottom: 30px;
-  border: 1px solid rgba(0, 168, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.topic-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .topic-title {
-  color: var(--neon-secondary);
-  border-bottom: 1px solid rgba(0, 168, 255, 0.3);
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+.topic-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-primary), var(--neon-secondary));
 }
 
 .exercises-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
 }
 
 .exercise-card {
-  background: rgba(30, 20, 50, 0.5);
-  border-radius: 10px;
-  padding: 20px;
-  transition: all 0.3s ease;
+  background: rgba(30, 20, 50, 0.3);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .exercise-card:hover {
-  border: 1px solid var(--neon-secondary);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(179, 0, 255, 0.2);
 }
 
 .exercise-btn {
   background: transparent;
-  border: 2px solid var(--neon-secondary);
-  color: var(--neon-secondary);
-  padding: 8px 15px;
-  border-radius: 30px;
+  border: 1px solid var(--neon-secondary);
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
 }
 
 .exercise-btn:hover {
   background: var(--neon-secondary);
-  color: var(--dark-bg);
+  color: var(--space-black);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 600px) {
+/* ---- Trimestres ---- */
+.trimester-badge {
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary));
+  box-shadow: var(--glow-purple);
+}
+
+.coming-soon-container {
+  border: 1px dashed var(--neon-secondary);
+  background: rgba(18, 18, 32, 0.5);
+}
+
+.coming-soon-icon {
+  color: var(--neon-secondary);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* ---- Responsividade ---- */
+@media (max-width: 768px) {
   .exercises-container {
     grid-template-columns: 1fr;
+  }
+  
+  .discipline-intro {
+    padding: 50px 0;
   }
 }
