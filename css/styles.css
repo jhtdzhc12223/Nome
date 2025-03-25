@@ -1,206 +1,156 @@
 :root {
-  /* Cores base */
-  --dark-bg: #0f0c29;
-  --card-bg: rgba(30, 20, 50, 0.7);
-  --text-light: #f8f9fa;
-  --text-muted: #adb5bd;
+  /* Paleta Futurista */
+  --space-black: #0a0a12;
+  --deep-space: #121220;
+  --neon-purple: #8a2be2;
+  --neon-blue: #00d8ff;
+  --electric-purple: #b300ff;
+  --cyber-blue: #00f5ff;
   
-  /* Cores neon */
-  --neon-primary: #6a00ff;
-  --neon-accent: #00dbde;
-  --neon-shadow: 0 0 10px rgba(106, 0, 255, 0.3);
+  /* Efeitos Neon */
+  --glow-purple: 0 0 15px rgba(138, 43, 226, 0.7);
+  --glow-blue: 0 0 15px rgba(0, 216, 255, 0.5);
+  --double-glow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-blue);
   
-  /* Transições */
-  --transition-fast: all 0.3s ease;
-  --transition-medium: all 0.4s ease;
+  /* Tipografia Futurista */
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Poppins', sans-serif;
 }
 
-/* ---- Estilos Específicos Banco de Dados ---- */
-.nav-link.active {
-  color: var(--neon-primary) !important;
-  text-shadow: 0 0 8px var(--neon-primary);
+body {
+  background-color: var(--space-black);
+  color: white;
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* ---- Efeitos de Borda Neon ---- */
+.neon-border {
   position: relative;
 }
 
-.nav-link.active::after {
-  background-color: var(--neon-primary);
-  box-shadow: 0 0 10px var(--neon-primary);
+.neon-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ---- Navegação Futurista ---- */
+.navbar {
+  background-color: rgba(10, 10, 18, 0.9) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+}
+
+.nav-link {
+  font-family: var(--font-heading);
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link.active {
+  color: var(--neon-blue) !important;
+  text-shadow: var(--glow-blue);
 }
 
 .nav-link.active::before {
   content: '';
   position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
   height: 2px;
-  background: var(--neon-accent);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.4s ease;
+  background: var(--neon-blue);
+  box-shadow: var(--glow-blue);
 }
 
-.nav-link.active:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.discipline-intro {
-  padding: 40px 0;
-  border-bottom: 1px solid rgba(106, 0, 255, 0.2);
-}
-
-.trimester-badge {
-  background: linear-gradient(135deg, var(--neon-primary), var(--neon-accent));
-  box-shadow: 0 0 15px var(--neon-primary);
-}
-
-.topic-title {
-  color: var(--neon-primary);
-  border-bottom: 1px solid rgba(106, 0, 255, 0.3);
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-}
-
-/* ---- Layout dos Cards de Download ---- */
-.download-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-  padding: 15px 0;
-}
-
+/* ---- Cards Futuristas ---- */
 .download-card {
-  display: flex;
-  min-height: 180px;
-  background: var(--card-bg);
-  border-radius: 12px;
-  border: 1px solid rgba(106, 0, 255, 0.2);
-  transition: var(--transition-medium);
+  background: rgba(18, 18, 32, 0.7);
+  border: none;
+  border-radius: 8px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: hidden;
-  position: relative;
-  isolation: isolate;
-}
-
-.download-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--neon-primary), var(--neon-accent));
-  z-index: -1;
-  opacity: 0;
-  transition: var(--transition-fast);
-  border-radius: inherit;
+  backdrop-filter: blur(5px);
 }
 
 .download-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--neon-primary);
-  box-shadow: var(--neon-shadow);
-}
-
-.download-card:hover::before {
-  opacity: 0.1;
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--double-glow);
 }
 
 .file-icon {
-  min-width: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--neon-primary), var(--neon-accent));
-  color: white;
-  font-size: 1.8rem;
-  padding: 0 20px;
-}
-
-.download-content {
-  padding: 20px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.download-content h4 {
-  font-size: 1.15rem;
-  margin-bottom: 12px;
-  line-height: 1.4;
-  color: var(--text-light);
-  flex-grow: 1;
-}
-
-.download-description {
-  font-size: 0.95rem;
-  margin-bottom: 15px;
-  color: var(--text-muted);
-  line-height: 1.5;
-  flex-grow: 1;
+  background: linear-gradient(135deg, var(--electric-purple), var(--cyber-blue));
+  color: var(--space-black);
+  font-size: 2rem;
 }
 
 .download-btn {
-  align-self: flex-start;
-  margin-top: auto;
   background: transparent;
-  border: 2px solid var(--neon-primary);
-  color: var(--neon-primary);
-  padding: 8px 20px;
-  border-radius: 30px;
-  font-weight: 500;
-  transition: var(--transition-fast);
-  text-decoration: none;
+  border: 1px solid var(--neon-blue);
+  color: var(--neon-blue);
+  font-family: var(--font-heading);
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
 }
 
 .download-btn:hover {
-  background: var(--neon-primary);
-  color: var(--dark-bg);
-  transform: scale(1.05);
+  background: var(--neon-blue);
+  color: var(--space-black);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-.download-btn:focus-visible {
-  outline: 2px solid var(--neon-accent);
-  outline-offset: 2px;
-  background: var(--neon-primary);
-  color: var(--dark-bg);
+/* ---- Tipografia Especial ---- */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  letter-spacing: 1.5px;
 }
 
-.coming-soon-container {
-  background: var(--card-bg);
-  border: 1px dashed var(--neon-primary);
+h1 {
+  text-shadow: 0 0 10px var(--neon-purple), 
+              0 0 20px rgba(138, 43, 226, 0.3);
+  position: relative;
+  display: inline-block;
 }
 
-.coming-soon-icon {
-  color: var(--neon-primary);
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
+  box-shadow: var(--glow-purple);
+}
+
+/* ---- Efeitos de Hover Futuristas ---- */
+.hover-glow:hover {
+  text-shadow: var(--glow-purple);
 }
 
 /* ---- Responsividade ---- */
 @media (max-width: 768px) {
-  .download-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .navbar-brand {
+    font-size: 1.2rem;
   }
   
-  .download-card {
-    flex-direction: column;
-    min-height: auto;
-  }
-  
-  .file-icon {
-    width: 100%;
-    padding: 15px;
-    font-size: 2rem;
+  h1 {
+    font-size: 2.5rem;
+    text-shadow: 0 0 8px var(--neon-purple);
   }
 }
-
-@media (max-width: 576px) {
-  .hero-section .profile-info {
-    text-align: center;
-  }
-  
-  .badge-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
   
   .badge {
     width: fit-content;
