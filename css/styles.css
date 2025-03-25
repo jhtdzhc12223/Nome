@@ -1,12 +1,48 @@
+:root {
+  /* Cores base */
+  --dark-bg: #0f0c29;
+  --card-bg: rgba(30, 20, 50, 0.7);
+  --text-light: #f8f9fa;
+  --text-muted: #adb5bd;
+  
+  /* Cores neon */
+  --neon-primary: #6a00ff;
+  --neon-accent: #00dbde;
+  --neon-shadow: 0 0 10px rgba(106, 0, 255, 0.3);
+  
+  /* Transições */
+  --transition-fast: all 0.3s ease;
+  --transition-medium: all 0.4s ease;
+}
+
 /* ---- Estilos Específicos Banco de Dados ---- */
 .nav-link.active {
   color: var(--neon-primary) !important;
   text-shadow: 0 0 8px var(--neon-primary);
+  position: relative;
 }
 
 .nav-link.active::after {
   background-color: var(--neon-primary);
   box-shadow: 0 0 10px var(--neon-primary);
+}
+
+.nav-link.active::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--neon-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+
+.nav-link.active:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .discipline-intro {
@@ -37,17 +73,34 @@
 .download-card {
   display: flex;
   min-height: 180px;
-  background: rgba(30, 20, 50, 0.7);
+  background: var(--card-bg);
   border-radius: 12px;
   border: 1px solid rgba(106, 0, 255, 0.2);
-  transition: all 0.4s ease;
+  transition: var(--transition-medium);
   overflow: hidden;
+  position: relative;
+  isolation: isolate;
+}
+
+.download-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--neon-primary), var(--neon-accent));
+  z-index: -1;
+  opacity: 0;
+  transition: var(--transition-fast);
+  border-radius: inherit;
 }
 
 .download-card:hover {
   transform: translateY(-5px);
   border-color: var(--neon-primary);
-  box-shadow: 0 5px 25px rgba(106, 0, 255, 0.3);
+  box-shadow: var(--neon-shadow);
+}
+
+.download-card:hover::before {
+  opacity: 0.1;
 }
 
 .file-icon {
@@ -93,7 +146,7 @@
   padding: 8px 20px;
   border-radius: 30px;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: var(--transition-fast);
   text-decoration: none;
 }
 
@@ -101,6 +154,22 @@
   background: var(--neon-primary);
   color: var(--dark-bg);
   transform: scale(1.05);
+}
+
+.download-btn:focus-visible {
+  outline: 2px solid var(--neon-accent);
+  outline-offset: 2px;
+  background: var(--neon-primary);
+  color: var(--dark-bg);
+}
+
+.coming-soon-container {
+  background: var(--card-bg);
+  border: 1px dashed var(--neon-primary);
+}
+
+.coming-soon-icon {
+  color: var(--neon-primary);
 }
 
 /* ---- Responsividade ---- */
@@ -122,11 +191,18 @@
   }
 }
 
-.coming-soon-container {
-  background: var(--card-bg);
-  border: 1px dashed var(--neon-primary);
-}
-
-.coming-soon-icon {
-  color: var(--neon-primary);
+@media (max-width: 576px) {
+  .hero-section .profile-info {
+    text-align: center;
+  }
+  
+  .badge-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .badge {
+    width: fit-content;
+  }
 }
