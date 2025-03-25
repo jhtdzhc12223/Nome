@@ -11,6 +11,11 @@
     <meta name="author" content="Gabriel Alves Vieira">
     <meta name="robots" content="index, follow">
     <meta property="og:type" content="website">
+    <meta property="og:title" content="Portfólio de Gabriel Alves - Desenvolvedor Full Stack">
+    <meta property="og:description" content="Portfólio profissional com projetos em desenvolvimento de sistemas, banco de dados e programação mobile">
+    <meta property="og:image" content="https://seusite.com/img/logo-social.png">
+    <meta property="og:url" content="https://seusite.com">
+    <meta name="twitter:card" content="summary_large_image">
     
     <!-- Pré-carregamento crítico -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -19,6 +24,7 @@
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
     <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="img/logo.png" as="image" importance="high">
     
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -37,9 +43,9 @@
     <a class="skip-link visually-hidden-focusable" href="#main-content">Pular para o conteúdo principal</a>
     
     <header class="fixed-top">
-        <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navegação principal">
+        <nav aria-label="Navegação principal" class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
-                <a class="navbar-brand fw-bold" href="index.html">
+                <a class="navbar-brand fw-bold" href="index.html" aria-label="Página inicial">
                     <span class="d-inline-block align-middle">Gabriel Alves Vieira</span>
                 </a>
                 
@@ -80,7 +86,12 @@
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-4 text-center">
                         <div class="profile-image-container">
-                            <img src="img/logo.png" alt="Foto de perfil de Gabriel Alves" class="profile-image img-fluid rounded-circle">
+                            <img src="img/logo.png" 
+                                 alt="Foto de perfil de Gabriel Alves" 
+                                 class="profile-image img-fluid rounded-circle"
+                                 loading="eager"
+                                 width="200"
+                                 height="200">
                         </div>
                     </div>
                     <div class="col-md-8 profile-info">
@@ -106,11 +117,11 @@
             </div>
         </section>
         
-        <section class="projects-section py-5 bg-dark">
+        <section aria-labelledby="projects-heading" class="projects-section py-5 bg-dark">
             <div class="container">
-                <h2 class="text-center mb-5">Meus Projetos</h2>
-                <div class="row justify-content-center g-4">
-                    <div class="col-md-4">
+                <h2 id="projects-heading" class="text-center mb-5">Meus Projetos</h2>
+                <div class="row justify-content-center g-4" role="list">
+                    <div class="col-md-4" role="listitem">
                         <div class="project-card h-100">
                             <div class="card-icon text-primary">
                                 <i class="fas fa-laptop-code fa-3x mb-3" aria-hidden="true"></i>
@@ -120,7 +131,7 @@
                             <a href="sistemas.html" class="btn btn-outline-primary mt-auto">Ver projetos</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" role="listitem">
                         <div class="project-card h-100">
                             <div class="card-icon text-success">
                                 <i class="fas fa-database fa-3x mb-3" aria-hidden="true"></i>
@@ -130,7 +141,7 @@
                             <a href="banco-dados.html" class="btn btn-outline-success mt-auto">Ver projetos</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" role="listitem">
                         <div class="project-card h-100">
                             <div class="card-icon text-warning">
                                 <i class="fas fa-mobile-alt fa-3x mb-3" aria-hidden="true"></i>
@@ -186,23 +197,13 @@
     </footer>
 
     <!-- Scripts otimizados -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
+            crossorigin="anonymous"></script>
+    
     <script>
         // Atualiza o ano automaticamente
         document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // Carrega o Bootstrap de forma assíncrona
-        if (typeof bootstrap === 'undefined') {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js';
-            script.integrity = 'sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz';
-            script.crossOrigin = 'anonymous';
-            script.defer = true;
-            document.body.appendChild(script);
-        }
     </script>
-</body>
-</html>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
