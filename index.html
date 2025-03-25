@@ -1,153 +1,205 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="dark">
 <head>
+    <!-- Metadados básicos -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio do Gabriel</title>
-    <!-- Otimização de carregamento -->
+    
+    <!-- Metadados SEO -->
+    <meta name="description" content="Portfólio profissional de Gabriel Alves Vieira - Desenvolvedor Full Stack especializado em Java, Python e JavaScript">
+    <meta name="keywords" content="desenvolvedor, portfolio, programação, Gabriel Alves, Java, Python, JavaScript, desenvolvimento web">
+    <meta name="author" content="Gabriel Alves Vieira">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    
+    <!-- Pré-carregamento crítico -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="css/styles.css" as="style">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- CSS personalizado -->
     <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
 </head>
 <body>
+    <!-- Skip to Content para acessibilidade -->
+    <a class="skip-link visually-hidden-focusable" href="#main-content">Pular para o conteúdo principal</a>
+    
     <header class="fixed-top">
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navegação principal">
             <div class="container">
-                <a class="navbar-brand fw-bold" href="index.html">Gabriel Alves Vieira</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <a class="navbar-brand fw-bold" href="index.html">
+                    <span class="d-inline-block align-middle">Gabriel Alves Vieira</span>
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="sistemas.html" class="nav-link menu-item"><i class="fas fa-laptop-code me-2"></i>Prog. Des. Sistemas</a>
+                            <a href="sistemas.html" class="nav-link menu-item" aria-current="page">
+                                <i class="fas fa-laptop-code me-2" aria-hidden="true"></i>
+                                <span>Prog. Des. Sistemas</span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="banco-dados.html" class="nav-link menu-item"><i class="fas fa-database me-2"></i>Banco de Dados</a>
+                            <a href="banco-dados.html" class="nav-link menu-item">
+                                <i class="fas fa-database me-2" aria-hidden="true"></i>
+                                <span>Banco de Dados</span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link menu-item"><i class="fas fa-mobile-alt me-2"></i>Prog. Mobile</a>
+                            <a href="#" class="nav-link menu-item">
+                                <i class="fas fa-mobile-alt me-2" aria-hidden="true"></i>
+                                <span>Prog. Mobile</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    
-    <main>
+
+    <main id="main-content" tabindex="-1">
         <section class="hero-section">
-            <div class="container">
+            <div class="container py-5">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-4 text-center">
                         <div class="profile-image-container">
-                            <img src="img/logo.png" alt="Foto de Gabriel Alves" class="profile-image">
+                            <img src="img/logo.png" alt="Foto de perfil de Gabriel Alves" class="profile-image img-fluid rounded-circle">
                         </div>
                     </div>
                     <div class="col-md-8 profile-info">
                         <h1 class="display-5 fw-bold">Gabriel Alves Vieira</h1>
-                        <div class="badge-container">
-                            <span class="badge rounded-pill bg-primary"><i class="fas fa-code me-1"></i> Desenvolvedor Full-Stack</span>
-                            <span class="badge rounded-pill bg-success"><i class="fas fa-database me-1"></i> Especialista em Dados</span>
-                            <span class="badge rounded-pill bg-warning text-dark"><i class="fas fa-mobile-alt me-1"></i> Desenvolvedor Mobile</span>
+                        <div class="badge-container mb-4">
+                            <span class="badge rounded-pill bg-primary me-2">
+                                <i class="fas fa-code me-1" aria-hidden="true"></i> Desenvolvedor Full-Stack
+                            </span>
+                            <span class="badge rounded-pill bg-success me-2">
+                                <i class="fas fa-database me-1" aria-hidden="true"></i> Especialista em Dados
+                            </span>
+                            <span class="badge rounded-pill bg-warning text-dark">
+                                <i class="fas fa-mobile-alt me-1" aria-hidden="true"></i> Desenvolvedor Mobile
+                            </span>
                         </div>
-                        <p class="lead mt-3">
+                        <p class="lead">
                             Desenvolvedor apaixonado por criar experiências web completas, combinando Java, Python e
                             JavaScript no back-end com HTML/CSS para interfaces responsivas. Já desenvolvi 4 projetos do zero,
-                            focando na harmonia entre funcionalidade e design. Atualmente, aprimoro minhas habilidades em sistemas
-                            e mobile sob orientação do professor Bruno Carvalho, sempre buscando inovação e código eficiente.
+                            focando na harmonia entre funcionalidade e design.
                         </p>
-                        <h2 class="h4 fw-bold highlight-text mt-4">Meus Projetos de 2025</h2>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section class="projects-section">
-            <div class="container text-center">
-                <div class="row justify-content-center">
-                    <div class="col-md-4 mb-4">
-                        <div class="project-card">
-                            <div class="card-icon">
-                                <i class="fas fa-laptop-code"></i>
+        <section class="projects-section py-5 bg-dark">
+            <div class="container">
+                <h2 class="text-center mb-5">Meus Projetos</h2>
+                <div class="row justify-content-center g-4">
+                    <div class="col-md-4">
+                        <div class="project-card h-100">
+                            <div class="card-icon text-primary">
+                                <i class="fas fa-laptop-code fa-3x mb-3" aria-hidden="true"></i>
                             </div>
-                            <h3>Programação e Desenvolvimento de Sistemas</h3>
+                            <h3 class="h4">Programação e Desenvolvimento de Sistemas</h3>
                             <p>Projetos com foco em desenvolvimento web e desktop utilizando tecnologias modernas.</p>
-                            <a href="sistemas.html" class="btn btn-primary project-btn">Ver projetos</a>
+                            <a href="sistemas.html" class="btn btn-outline-primary mt-auto">Ver projetos</a>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="project-card">
-                            <div class="card-icon">
-                                <i class="fas fa-database"></i>
+                    <div class="col-md-4">
+                        <div class="project-card h-100">
+                            <div class="card-icon text-success">
+                                <i class="fas fa-database fa-3x mb-3" aria-hidden="true"></i>
                             </div>
-                            <h3>Banco de Dados</h3>
+                            <h3 class="h4">Banco de Dados</h3>
                             <p>Modelagem, implementação e otimização de bancos de dados relacionais e NoSQL.</p>
-                            <a href="banco-dados.html" class="btn btn-success project-btn">Ver projetos</a>
+                            <a href="banco-dados.html" class="btn btn-outline-success mt-auto">Ver projetos</a>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="project-card">
-                            <div class="card-icon">
-                                <i class="fas fa-mobile-alt"></i>
+                    <div class="col-md-4">
+                        <div class="project-card h-100">
+                            <div class="card-icon text-warning">
+                                <i class="fas fa-mobile-alt fa-3x mb-3" aria-hidden="true"></i>
                             </div>
-                            <h3>Programação Mobile</h3>
+                            <h3 class="h4">Programação Mobile</h3>
                             <p>Desenvolvimento de aplicativos mobile com interfaces intuitivas e responsivas.</p>
-                            <a href="#" class="btn btn-warning project-btn text-dark">Ver projetos</a>
+                            <a href="#" class="btn btn-outline-warning mt-auto">Ver projetos</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-    
-    <footer>
+
+    <footer class="bg-dark text-white py-4 mt-5">
         <div class="container">
             <div class="text-center mb-4">
-                <h3>Conecte-se comigo</h3>
-                <div class="social-icons">
-                    <!-- LinkedIn (você pode adicionar depois) -->
-                    <a href="#" 
-                       class="social-icon linkedin-placeholder"
-                       title="LinkedIn (em breve)">
-                       <i class="fab fa-linkedin"></i>
+                <h2 class="h4">Conecte-se comigo</h2>
+                <div class="social-icons d-flex justify-content-center gap-3">
+                    <a href="https://www.linkedin.com/in/seu-perfil" 
+                       class="social-icon" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Meu LinkedIn">
+                       <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                     </a>
-                    
-                    <!-- GitHub -->
                     <a href="https://github.com/jhtdzhc12223" 
+                       class="social-icon" 
                        target="_blank" 
-                       class="social-icon"
-                       title="Meu GitHub">
-                       <i class="fab fa-github"></i>
+                       rel="noopener noreferrer"
+                       aria-label="Meu GitHub">
+                       <i class="fab fa-github" aria-hidden="true"></i>
                     </a>
-                    
-                    <!-- Instagram -->
                     <a href="https://instagram.com/gabrielalves9234" 
+                       class="social-icon" 
                        target="_blank" 
-                       class="social-icon"
-                       title="Meu Instagram">
-                       <i class="fab fa-instagram"></i>
+                       rel="noopener noreferrer"
+                       aria-label="Meu Instagram">
+                       <i class="fab fa-instagram" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
             <div class="text-center">
-                <p class="email-link">
-                    <i class="fas fa-envelope me-2"></i>
-                    <a href="mailto:alves.vieira.gabriel@escola.pr.gov.br">alves.vieira.gabriel@escola.pr.gov.br</a>
+                <p class="mb-2">
+                    <i class="fas fa-envelope me-2" aria-hidden="true"></i>
+                    <a href="mailto:alves.vieira.gabriel@escola.pr.gov.br" class="text-white text-decoration-none">
+                        alves.vieira.gabriel@escola.pr.gov.br
+                    </a>
                 </p>
-                <p class="copyright">© 2025 Gabriel Alves Vieira. Todos os direitos reservados.</p>
+                <p class="mb-0">&copy; <span id="current-year">2025</span> Gabriel Alves Vieira. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Scripts otimizados -->
+    <script>
+        // Atualiza o ano automaticamente
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Carrega o Bootstrap de forma assíncrona
+        if (typeof bootstrap === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js';
+            script.integrity = 'sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz';
+            script.crossOrigin = 'anonymous';
+            script.defer = true;
+            document.body.appendChild(script);
+        }
+    </script>
 </body>
 </html>
     <!-- Bootstrap JS -->
