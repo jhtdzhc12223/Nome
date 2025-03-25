@@ -1,132 +1,58 @@
-/* ---- Estilos Específicos Banco de Dados ---- */
-.nav-link.active {
-  color: var(--neon-primary) !important;
-  text-shadow: 0 0 8px var(--neon-primary);
+/* ===== ESTILOS ESPECÍFICOS PARA BANCO DE DADOS ===== */
+:root {
+    --neon-primary: #8a2be2;
+    --neon-accent: #00f5ff;
 }
 
-.nav-link.active::after {
-  background-color: var(--neon-primary);
-  box-shadow: 0 0 10px var(--neon-primary);
-}
-
-.discipline-intro {
-  padding: 40px 0;
-  border-bottom: 1px solid rgba(106, 0, 255, 0.2);
-}
-
-.trimester-badge {
-  background: linear-gradient(135deg, var(--neon-primary), var(--neon-accent));
-  box-shadow: 0 0 15px var(--neon-primary);
-}
-
-.topic-title {
-  color: var(--neon-primary);
-  border-bottom: 1px solid rgba(106, 0, 255, 0.3);
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-}
-
-/* ---- Layout dos Cards de Download ---- */
-.download-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-  padding: 15px 0;
-}
-
+/* Efeitos de cards de download */
 .download-card {
-  display: flex;
-  min-height: 180px;
-  background: rgba(30, 20, 50, 0.7);
-  border-radius: 12px;
-  border: 1px solid rgba(106, 0, 255, 0.2);
-  transition: all 0.4s ease;
-  overflow: hidden;
+    display: flex;
+    background: rgba(18, 18, 32, 0.7);
+    backdrop-filter: blur(5px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .download-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--neon-primary);
-  box-shadow: 0 5px 25px rgba(106, 0, 255, 0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
 }
 
 .file-icon {
-  min-width: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--neon-primary), var(--neon-accent));
-  color: white;
-  font-size: 1.8rem;
-  padding: 0 20px;
-}
-
-.download-content {
-  padding: 20px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+    background: linear-gradient(135deg, var(--neon-primary), var(--neon-accent));
+    color: var(--space-black);
+    font-size: 2rem;
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .download-content h4 {
-  font-size: 1.15rem;
-  margin-bottom: 12px;
-  line-height: 1.4;
-  color: var(--text-light);
-  flex-grow: 1;
-}
-
-.download-description {
-  font-size: 0.95rem;
-  margin-bottom: 15px;
-  color: var(--text-muted);
-  line-height: 1.5;
-  flex-grow: 1;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
 }
 
 .download-btn {
-  align-self: flex-start;
-  margin-top: auto;
-  background: transparent;
-  border: 2px solid var(--neon-primary);
-  color: var(--neon-primary);
-  padding: 8px 20px;
-  border-radius: 30px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  text-decoration: none;
+    background: transparent;
+    border: 1px solid var(--neon-primary);
+    color: var(--neon-primary);
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
 }
 
 .download-btn:hover {
-  background: var(--neon-primary);
-  color: var(--dark-bg);
-  transform: scale(1.05);
+    background: var(--neon-primary);
+    color: var(--space-black);
 }
 
-/* ---- Responsividade ---- */
+/* Responsividade */
 @media (max-width: 768px) {
-  .download-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .download-card {
-    flex-direction: column;
-    min-height: auto;
-  }
-  
-  .file-icon {
-    width: 100%;
-    padding: 15px;
-    font-size: 2rem;
-  }
-}
-
-.coming-soon-container {
-  background: var(--card-bg);
-  border: 1px dashed var(--neon-primary);
-}
-
-.coming-soon-icon {
-  color: var(--neon-primary);
+    .download-card {
+        flex-direction: column;
+    }
+    
+    .file-icon {
+        width: 100%;
+        min-height: 60px;
+    }
 }
