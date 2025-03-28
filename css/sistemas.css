@@ -1,171 +1,65 @@
-/* ===== VARIÁVEIS ESPECÍFICAS ===== */
-:root {
-    --neon-secondary: #00d8ff;
-    --neon-primary: #b300ff;
-    --card-bg: rgba(18, 18, 32, 0.7);
-}
-
-/* ===== SEÇÃO DE INTRODUÇÃO ===== */
-.discipline-intro {
-    padding: 80px 0;
-    background: radial-gradient(circle at center, rgba(0, 216, 255, 0.05) 0%, transparent 70%);
-    position: relative;
-    overflow: hidden;
-}
-
-.discipline-intro::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(0,216,255,0.03)" stroke-width="0.5"/></svg>');
-    background-size: 20px 20px;
-    opacity: 0.5;
-    z-index: -1;
-}
-
 .discipline-image-container {
-    width: 180px;
-    height: 180px;
-    border: 3px solid transparent;
-    background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary)) border-box;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    transition: all 0.4s ease;
-    position: relative;
-    z-index: 1;
-}
-
-.discipline-image-container:hover {
-    transform: scale(1.05) rotate(5deg);
-    box-shadow: 0 0 30px rgba(179, 0, 255, 0.3);
-}
-
-/* ===== TÓPICOS E EXERCÍCIOS ===== */
-.topic-container {
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    padding: 2rem;
-    transition: all 0.4s ease;
-}
-
-.topic-container:hover {
-    box-shadow: 0 0 30px rgba(179, 0, 255, 0.2);
-}
-
-.topic-title {
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 1px;
-    position: relative;
-    display: inline-block;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, #b300ff, #00d8ff);
     margin-bottom: 1.5rem;
 }
 
-.topic-title::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
+.discipline-image {
     width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--neon-primary), var(--neon-secondary));
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #0a0a12;
+}
+
+.trimester-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #b300ff, #00d8ff);
+    border-radius: 30px;
+    font-family: 'Orbitron', sans-serif;
+    color: white;
 }
 
 .exercises-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
 }
 
 .exercise-card {
+    padding: 1.25rem;
     background: rgba(30, 20, 50, 0.3);
-    padding: 1.5rem;
     border-radius: 8px;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
-}
-
-.exercise-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: var(--hologram-effect);
-    transform: rotate(45deg);
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-
-.exercise-card:hover::before {
-    opacity: 0.3;
 }
 
 .exercise-btn {
     display: inline-block;
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1rem;
     background: transparent;
-    border: 1px solid var(--neon-secondary);
-    color: var(--neon-secondary);
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 1px;
+    border: 1px solid #00d8ff;
+    color: #00d8ff;
     border-radius: 30px;
     text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
     transition: all 0.3s ease;
-    margin-bottom: 1rem;
 }
 
 .exercise-btn:hover {
-    background: var(--neon-secondary);
-    color: var(--space-black);
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(0, 216, 255, 0.5);
+    background: #00d8ff;
+    color: #0a0a12;
 }
 
-/* ===== SEÇÃO EM DESENVOLVIMENTO ===== */
-.coming-soon-container {
-    border: 1px dashed var(--neon-secondary);
-    background: rgba(18, 18, 32, 0.5);
-    border-radius: 10px;
-    transition: all 0.4s ease;
-}
-
-.coming-soon-container:hover {
-    border-color: var(--neon-primary);
-    box-shadow: 0 0 25px rgba(179, 0, 255, 0.2);
-}
-
-.coming-soon-icon {
-    color: var(--neon-secondary);
-}
-
-/* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
+    .discipline-image-container {
+        width: 120px;
+        height: 120px;
+    }
+    
     .exercises-container {
         grid-template-columns: 1fr;
-    }
-    
-    .discipline-intro {
-        padding: 50px 0;
-    }
-    
-    .topic-container {
-        padding: 1.5rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .discipline-image-container {
-        width: 140px;
-        height: 140px;
-    }
-    
-    .exercise-btn {
-        padding: 0.4rem 1.2rem;
-        font-size: 0.9rem;
     }
 }
