@@ -1,57 +1,58 @@
+/* ===== ESTILOS ESPECÍFICOS PARA BANCO DE DADOS ===== */
+:root {
+    --neon-primary: #8a2be2;
+    --neon-accent: #00f5ff;
+}
+
+/* Efeitos de cards de download */
 .download-card {
     display: flex;
-    flex-direction: column;
     background: rgba(18, 18, 32, 0.7);
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 1.5rem;
+    backdrop-filter: blur(5px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.download-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
 }
 
 .file-icon {
-    background: linear-gradient(135deg, #8a2be2, #00f5ff);
-    color: #0a0a12;
-    padding: 1.5rem;
-    text-align: center;
+    background: linear-gradient(135deg, var(--neon-primary), var(--neon-accent));
+    color: var(--space-black);
     font-size: 2rem;
-    min-width: 83px;
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.download-content {
-    padding: 1.5rem;
+.download-content h4 {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
 }
 
 .download-btn {
-    display: inline-block;
-    padding: 0.6rem 1.25rem;
     background: transparent;
-    border: 1px solid #8a2be2;
-    color: #8a2be2;
-    border-radius: 30px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
+    border: 1px solid var(--neon-primary);
+    color: var(--neon-primary);
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
 }
 
 .download-btn:hover {
-    background: #8a2be2;
-    color: white;
+    background: var(--neon-primary);
+    color: var(--space-black);
 }
 
-@media (min-width: 768px) {
+/* Responsividade */
+@media (max-width: 768px) {
     .download-card {
-        flex-direction: row;
+        flex-direction: column;
     }
     
     .file-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 576px) {
-    .download-btn {
         width: 100%;
-        text-align: center;
+        min-height: 60px;
     }
 }
