@@ -1,15 +1,11 @@
 :root {
-    /* Cores */
     --space-black: #0a0a12;
     --neon-blue: #00d8ff;
     --neon-purple: #8a2be2;
-    
-    /* Tamanhos */
-    --foto-desktop: 150px;
-    --foto-mobile: 130px;
+    --foto-desktop: 153px;
+    --foto-mobile: 133px;
 }
 
-/* Base */
 body {
     background-color: var(--space-black);
     color: #f0f0f0;
@@ -17,14 +13,12 @@ body {
     padding-top: 56px;
 }
 
-/* Navbar */
 .cyber-navbar {
     background: rgba(10, 10, 18, 0.95) !important;
     backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(0, 216, 255, 0.2);
 }
 
-/* Foto de Perfil */
 .profile-pic-container {
     width: var(--foto-desktop);
     height: var(--foto-desktop);
@@ -42,7 +36,6 @@ body {
     border: 2px solid var(--space-black);
 }
 
-/* Cards */
 .project-card {
     background: rgba(18, 18, 32, 0.7);
     backdrop-filter: blur(5px);
@@ -55,13 +48,11 @@ body {
     transform: translateY(-5px);
 }
 
-/* Footer */
 .cyber-footer {
     background: var(--space-black);
     border-top: 1px solid rgba(0, 216, 255, 0.1);
 }
 
-/* Efeitos */
 .hover-glow:hover {
     text-shadow: 0 0 10px var(--neon-blue);
 }
@@ -84,7 +75,6 @@ body {
     pointer-events: none;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
     .profile-pic-container {
         width: var(--foto-mobile);
@@ -104,11 +94,6 @@ body {
 }
 
 @media (max-width: 576px) {
-    .profile-pic-container {
-        width: 120px;
-        height: 120px;
-    }
-    
     .projects-section .row {
         grid-template-columns: 1fr !important;
     }
