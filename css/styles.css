@@ -1,18 +1,10 @@
-/* Variáveis CSS */
 :root {
     --cyber-black: #0a0a12;
     --cyber-dark: #12122b;
     --cyber-purple: #b700ff;
     --cyber-blue: #00f7ff;
     --cyber-pink: #ff00aa;
-    --cyber-green: #00ff88;
     --cyber-text: #e0e0ff;
-}
-
-/* Reset Mobile */
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -20,142 +12,148 @@ body {
     background: var(--cyber-black);
     color: var(--cyber-text);
     overflow-x: hidden;
-    line-height: 1.6;
 }
 
-/* Layout Responsivo */
-.container {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Navbar Mobile */
+/* Navbar */
 .cyber-navbar {
-    padding: 10px 0;
     background: rgba(10, 10, 18, 0.95) !important;
     backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--cyber-purple);
 }
 
-.cyber-toggler {
-    border: none;
-    padding: 8px;
+.cyber-logo {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 3px;
 }
 
-.hamburger-line {
-    display: block;
-    width: 25px;
-    height: 2px;
-    background: var(--cyber-blue);
-    position: relative;
-}
-
-.hamburger-line::before,
-.hamburger-line::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    left: 0;
-}
-
-.hamburger-line::before {
-    top: -8px;
-}
-
-.hamburger-line::after {
-    bottom: -8px;
-}
-
-/* Hero Section Responsiva */
-.cyber-hero {
-    padding: 80px 0 40px;
-    min-height: calc(100vh - 60px);
-    display: flex;
-    align-items: center;
+/* Hero Section */
+.hero-section {
+    padding: 100px 0 50px;
 }
 
 .cyber-avatar {
-    max-width: 300px;
-    margin: 0 auto 30px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 3px solid var(--cyber-blue);
+    box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
 }
 
 .cyber-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-size: 2.5rem;
     margin-bottom: 20px;
-    letter-spacing: 2px;
 }
 
-/* Cards Responsivos */
+.bg-cyber {
+    background: rgba(0, 247, 255, 0.1);
+    border: 1px solid var(--cyber-blue);
+}
+
+/* Seção "Sobre Mim" */
+.cyber-about {
+    background: rgba(18, 18, 43, 0.5);
+    border-top: 1px solid var(--cyber-purple);
+    border-bottom: 1px solid var(--cyber-blue);
+}
+
+.cyber-bio {
+    padding: 30px;
+    border: 1px solid var(--cyber-blue);
+    border-radius: 10px;
+    background: rgba(10, 10, 25, 0.7);
+}
+
+.cyber-glitch {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--cyber-blue);
+    position: relative;
+}
+
+.cyber-divider {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyber-purple), var(--cyber-blue));
+    margin: 20px auto;
+}
+
+.skill-badge {
+    display: inline-block;
+    margin: 5px;
+    padding: 8px 15px;
+    background: rgba(0, 247, 255, 0.1);
+    border: 1px solid var(--cyber-blue);
+    border-radius: 30px;
+}
+
+/* Cards */
 .cyber-card {
+    background: rgba(18, 18, 43, 0.6);
+    border: 1px solid var(--cyber-purple);
+    border-radius: 10px;
     padding: 25px;
-    margin-bottom: 20px;
-    height: 100%;
+    transition: all 0.3s;
+}
+
+.cyber-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(183, 0, 255, 0.2);
 }
 
 .card-icon {
     font-size: 2.5rem;
-    margin-bottom: 15px;
     color: var(--cyber-blue);
+    margin-bottom: 15px;
 }
 
-/* Botões Touch-Friendly */
+/* Botões */
 .cyber-btn {
+    display: inline-block;
     padding: 10px 25px;
-    min-width: 120px;
-    font-size: 1rem;
-    border-width: 2px;
+    background: transparent;
+    border: 2px solid var(--cyber-blue);
+    color: var(--cyber-blue);
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s;
 }
 
-/* Media Queries */
-@media (max-width: 767.98px) {
-    .cyber-hero {
-        padding: 60px 0 30px;
+.cyber-btn:hover {
+    background: var(--cyber-blue);
+    color: var(--cyber-dark);
+}
+
+/* Footer */
+.cyber-footer {
+    background: var(--cyber-dark);
+    border-top: 1px solid rgba(0, 247, 255, 0.1);
+}
+
+.social-icon {
+    color: var(--cyber-text);
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.social-icon:hover {
+    color: var(--cyber-blue);
+    transform: scale(1.2);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 80px 0 30px;
         text-align: center;
     }
     
-    .cyber-badges {
-        justify-content: center;
-    }
-    
-    .navbar-collapse {
-        padding: 15px 0;
-        background: rgba(10, 10, 18, 0.98);
-        margin-top: 10px;
-    }
-    
-    .cyber-menu .nav-link {
-        padding: 12px 15px;
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 575.98px) {
     .cyber-title {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
     
-    .cyber-card {
-        padding: 20px;
+    .cyber-avatar {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 20px;
     }
-    
-    .cyber-footer {
-        text-align: center;
-    }
-    
-    .cyber-social {
-        justify-content: center;
-        margin-bottom: 15px;
-    }
-}
-
-/* Touch Device Adjustments */
-.touch-device .cyber-btn {
-    padding: 12px 28px;
-    min-width: 140px;
-}
-
-.touch-device .cyber-card {
-    border-width: 2px;
 }
