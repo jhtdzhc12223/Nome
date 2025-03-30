@@ -3,127 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriel Alves | Portfólio</title>
+    <title>Gabriel Alves | Portfólio Futurista</title>
+    
+    <!-- Pré-carregamento -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" as="font" crossorigin>
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Favicon Futurista -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%2300f7ff%22>⚡</text></svg>">
 </head>
 <body class="cyber-bg">
-    <!-- Navbar -->
-    <header class="fixed-top cyber-navbar">
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container">
-                <a class="navbar-brand cyber-logo" href="index.html">GABRIEL_ALVES</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a href="sistemas.html" class="nav-link"><i class="fas fa-laptop-code me-2"></i>SISTEMAS</a></li>
-                        <li class="nav-item"><a href="banco-dados.html" class="nav-link"><i class="fas fa-database me-2"></i>BANCO DE DADOS</a></li>
-                    </ul>
+    <!-- Efeito de Partículas -->
+    <div id="cyber-particles"></div>
+    
+    <!-- Navbar Holográfico -->
+    <nav class="cyber-navbar">
+        <div class="container">
+            <a class="cyber-logo" href="#">
+                <span class="glitch" data-text="GABRIEL_ALVES">GABRIEL_ALVES</span>
+            </a>
+            <div class="cyber-menu">
+                <a href="sistemas.html"><i class="fas fa-terminal"></i> SISTEMAS</a>
+                <a href="banco-dados.html"><i class="fas fa-database"></i> DADOS</a>
+                <a href="#"><i class="fas fa-mobile-alt"></i> MOBILE</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seção Hero -->
+    <section class="cyber-hero">
+        <div class="container">
+            <div class="cyber-avatar-container">
+                <div class="cyber-avatar-frame">
+                    <img src="img/avatar.webp" alt="Gabriel Alves" class="cyber-avatar">
+                    <div class="cyber-avatar-glow"></div>
                 </div>
             </div>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Seção Hero -->
-        <section class="hero-section">
-            <div class="container py-5">
-                <div class="row align-items-center">
-                    <div class="col-md-5 text-center">
-                        <img src="img/logo.png" alt="Gabriel Alves" class="cyber-avatar img-fluid rounded-circle">
-                    </div>
-                    <div class="col-md-7">
-                        <h1 class="cyber-title">DESENVOLVEDOR FULLSTACK</h1>
-                        <div class="cyber-badges mb-4">
-                            <span class="badge bg-cyber me-2"><i class="fas fa-code"></i> PYTHON</span>
-                            <span class="badge bg-cyber me-2"><i class="fas fa-database"></i> SQL</span>
-                            <span class="badge bg-cyber"><i class="fab fa-js"></i> JAVASCRIPT</span>
-                        </div>
-                    </div>
-                </div>
+            <h1 class="cyber-title typewriter">DESENVOLVEDOR FULL-STACK</h1>
+            <div class="cyber-scroll-indicator">
+                <span>SCROLL DOWN</span>
+                <div class="cyber-arrow"></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seção "Sobre Mim" (Adicionada) -->
-        <section class="cyber-about py-5">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="cyber-bio neon-border">
-                            <h2 class="cyber-glitch" data-text="SOBRE_MIM">SOBRE_MIM</h2>
-                            <div class="cyber-divider"></div>
-                            <p class="cyber-text">
-                                <i class="fas fa-quote-left cyber-quote"></i>
-                                Desenvolvedor full-stack com foco em Python, Java e JavaScript. 
-                                Crio soluções inovadoras combinando programação eficiente e design futurista. 
-                                Atualmente estudando desenvolvimento de sistemas no Paraná.
-                                <i class="fas fa-quote-right cyber-quote"></i>
-                            </p>
-                            <div class="cyber-skills mt-4">
-                                <span class="skill-badge"><i class="fas fa-code"></i> Back-End</span>
-                                <span class="skill-badge"><i class="fas fa-database"></i> Banco de Dados</span>
-                                <span class="skill-badge"><i class="fas fa-mobile-alt"></i> Mobile</span>
+    <!-- Carta de Apresentação Melhorada -->
+    <section class="cyber-about">
+        <div class="container">
+            <div class="cyber-bio-card">
+                <div class="cyber-bio-header">
+                    <h2><span class="cyber-highlight">SOBRE</span> MIM</h2>
+                    <div class="cyber-divider"></div>
+                </div>
+                
+                <div class="cyber-bio-content">
+                    <div class="cyber-bio-text">
+                        <p>
+                            <span class="cyber-quote">"</span>
+                            Desenvolvedor full-stack com especialização em Python e JavaScript. 
+                            Combino lógica de programação com design inovador para criar sistemas 
+                            eficientes e visualmente impactantes. Atualmente cursando Desenvolvimento 
+                            de Sistemas no Paraná, com 4 projetos completos implementados.
+                            <span class="cyber-quote">"</span>
+                        </p>
+                    </div>
+                    
+                    <div class="cyber-tech-stack">
+                        <div class="tech-item">
+                            <div class="tech-icon python">
+                                <i class="fab fa-python"></i>
                             </div>
+                            <span>PYTHON</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon js">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <span>JAVASCRIPT</span>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon database">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <span>SQL</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Seção Projetos -->
-        <section class="cyber-projects py-5">
-            <div class="container">
-                <h2 class="text-center mb-5"><span class="cyber-underline">MEUS_PROJETOS</span></h2>
-                <div class="row gy-4">
-                    <div class="col-md-4">
-                        <div class="cyber-card h-100">
-                            <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
-                            <h3>PROGRAMAÇÃO</h3>
-                            <p>Projetos completos em Python e JavaScript</p>
-                            <a href="sistemas.html" class="cyber-btn">ACESSAR</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="cyber-card h-100">
-                            <div class="card-icon"><i class="fas fa-database"></i></div>
-                            <h3>BANCO DE DADOS</h3>
-                            <p>Modelagem e implementação de bancos relacionais</p>
-                            <a href="banco-dados.html" class="cyber-btn">ACESSAR</a>
-                        </div>
-                    </div>
+                
+                <div class="cyber-signature">
+                    <div class="signature-line"></div>
+                    <p>Gabriel Alves Vieira</p>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="cyber-footer py-4">
-        <div class="container text-center">
-            <div class="social-icons mb-3">
-                <a href="#" class="social-icon mx-2"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-icon mx-2"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-icon mx-2"><i class="fab fa-instagram"></i></a>
+    <!-- Seção de Projetos -->
+    <section class="cyber-projects">
+        <div class="container">
+            <h2 class="section-title"><span class="cyber-underline">PROJETOS</span> RECENTES</h2>
+            
+            <div class="projects-grid">
+                <div class="cyber-project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Programação</h3>
+                    <p>Sistemas completos em Python e JavaScript</p>
+                    <a href="sistemas.html" class="cyber-btn">EXPLORAR <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="cyber-project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Banco de Dados</h3>
+                    <p>Modelagem e implementação profissional</p>
+                    <a href="banco-dados.html" class="cyber-btn">EXPLORAR <i class="fas fa-arrow-right"></i></a>
+                </div>
             </div>
-            <p class="mb-1">
-                <i class="fas fa-envelope me-2"></i>
-                <a href="mailto:alves.vieira.gabriel@escola.pr.gov.br" class="cyber-link">alves.vieira.gabriel@escola.pr.gov.br</a>
-            </p>
-            <p class="mb-0">&copy; <span id="current-year">2025</span> Gabriel Alves Vieira</p>
+        </div>
+    </section>
+
+    <!-- Footer Futurista -->
+    <footer class="cyber-footer">
+        <div class="container">
+            <div class="cyber-contact">
+                <a href="mailto:alves.vieira.gabriel@escola.pr.gov.br" class="cyber-email">
+                    <i class="fas fa-envelope"></i> alves.vieira.gabriel@escola.pr.gov.br
+                </a>
+                <div class="cyber-social">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="cyber-copyright">
+                <p>&copy; <span id="current-year"></span> GABRIEL ALVES. TODOS OS DIREITOS RESERVADOS.</p>
+            </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
         // Atualiza o ano automaticamente
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // Efeito de digitação
-        const typeElements = document.querySelectorAll('.cyber-title');
-        typeElements.forEach(el => {
+        // Inicializa partículas
+        particlesJS.load('cyber-particles', 'assets/particles.json', function() {
+            console.log('Efeito de partículas carregado');
+        });
+        
+        // Efeito de máquina de escrever
+        const typewriterElements = document.querySelectorAll('.typewriter');
+        typewriterElements.forEach(el => {
             const text = el.textContent;
             el.textContent = '';
             let i = 0;
