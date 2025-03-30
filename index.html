@@ -1,229 +1,118 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
 <head>
-    <!-- Metadados básicos -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Gabriel Alves | Portfólio Responsivo</title>
     
-    <!-- Metadados SEO -->
-    <meta name="description" content="Portfólio profissional de Gabriel Alves Vieira - Desenvolvedor Full Stack especializado em Java, Python e JavaScript">
-    <meta name="keywords" content="desenvolvedor, portfolio, programação, Gabriel Alves, Java, Python, JavaScript, desenvolvimento web">
-    <meta name="author" content="Gabriel Alves Vieira">
-    <meta name="robots" content="index, follow">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Portfólio de Gabriel Alves - Desenvolvedor Full Stack">
-    <meta property="og:description" content="Portfólio profissional com projetos em desenvolvimento de sistemas, banco de dados e programação mobile">
-    <meta property="og:image" content="https://seusite.com/img/logo-social.png">
-    <meta property="og:url" content="https://seusite.com">
-    <meta name="twitter:card" content="summary_large_image">
+    <!-- Otimização para mobile -->
+    <meta name="theme-color" content="#0a0a12">
+    <link rel="manifest" href="manifest.json">
     
-    <!-- Pré-carregamento crítico -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
-    <link rel="preload" href="css/styles.css" as="style">
-    <link rel="preload" href="img/logo.png" as="image" importance="high">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS otimizado -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     
-    <!-- Favicon -->
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <!-- Favicon moderno -->
+    <link rel="icon" href="img/favicon.webp">
 </head>
-<body>
-    <!-- Skip to Content para acessibilidade -->
-    <a class="skip-link visually-hidden-focusable" href="#main-content">Pular para o conteúdo principal</a>
-    
-    <header class="fixed-top">
-        <nav aria-label="Navegação principal" class="navbar navbar-expand-lg navbar-dark">
-            <div class="container">
-                <a class="navbar-brand fw-bold type-effect" href="index.html" aria-label="Página inicial">
-                    <span class="d-inline-block align-middle">Gabriel Alves Vieira</span>
+<body class="cyber-bg">
+    <!-- Navbar Responsivo -->
+    <header class="fixed-top cyber-navbar">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand cyber-logo" href="index.html">
+                    <span class="d-none d-md-inline">GABRIEL_ALVES</span>
+                    <span class="d-md-none">G_A</span>
                 </a>
-                
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler cyber-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    <span class="hamburger-line"></span>
                 </button>
-                
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="sistemas.html" class="nav-link menu-item hover-glow" aria-current="page">
-                                <i class="fas fa-laptop-code me-2" aria-hidden="true"></i>
-                                <span>Prog. Des. Sistemas</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="banco-dados.html" class="nav-link menu-item hover-glow">
-                                <i class="fas fa-database me-2" aria-hidden="true"></i>
-                                <span>Banco de Dados</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link menu-item hover-glow">
-                                <i class="fas fa-mobile-alt me-2" aria-hidden="true"></i>
-                                <span>Prog. Mobile</span>
-                            </a>
-                        </li>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav ms-auto cyber-menu">
+                        <li class="nav-item"><a href="sistemas.html" class="nav-link active"><i class="fas fa-terminal"></i> <span class="nav-text">SISTEMAS</span></a></li>
+                        <li class="nav-item"><a href="banco-dados.html" class="nav-link"><i class="fas fa-database"></i> <span class="nav-text">BANCO DE DADOS</span></a></li>
+                        <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-mobile-alt"></i> <span class="nav-text">MOBILE</span></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main id="main-content" tabindex="-1">
-        <section class="hero-section">
-            <div class="container py-5">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-md-4 text-center">
-                        <div class="profile-image-container neon-border">
-                            <img src="img/logo.png" 
-                                 alt="Foto de perfil de Gabriel Alves" 
-                                 class="profile-image img-fluid rounded-circle"
-                                 loading="eager"
-                                 width="200"
-                                 height="200">
+    <!-- Conteúdo Principal -->
+    <main class="cyber-main">
+        <!-- Hero Section Responsiva -->
+        <section class="cyber-hero">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-5 order-md-1 order-2 text-center text-md-start">
+                        <h1 class="cyber-title">DESENVOLVEDOR FULLSTACK</h1>
+                        <div class="cyber-badges">
+                            <span class="badge cyber-badge"><i class="fas fa-code"></i> PYTHON</span>
+                            <span class="badge cyber-badge"><i class="fas fa-database"></i> SQL</span>
+                            <span class="badge cyber-badge"><i class="fab fa-js"></i> JAVASCRIPT</span>
                         </div>
+                        <p class="cyber-text">Soluções tecnológicas para desktop e mobile</p>
                     </div>
-                    <div class="col-md-8 profile-info">
-                        <h1 class="display-5 fw-bold type-effect">Gabriel Alves Vieira</h1>
-                        <div class="badge-container mb-4">
-                            <span class="badge rounded-pill bg-primary me-2 hover-glow">
-                                <i class="fas fa-code me-1" aria-hidden="true"></i> Desenvolvedor Full-Stack
-                            </span>
-                            <span class="badge rounded-pill bg-success me-2 hover-glow">
-                                <i class="fas fa-database me-1" aria-hidden="true"></i> Especialista em Dados
-                            </span>
-                            <span class="badge rounded-pill bg-warning text-dark hover-glow">
-                                <i class="fas fa-mobile-alt me-1" aria-hidden="true"></i> Desenvolvedor Mobile
-                            </span>
+                    <div class="col-md-5 order-md-2 order-1">
+                        <div class="cyber-avatar mx-auto">
+                            <img src="img/logo.webp" alt="Avatar" class="img-fluid" loading="eager" width="300" height="300">
                         </div>
-                        <p class="lead">
-                            Desenvolvedor apaixonado por criar experiências web completas, combinando Java, Python e
-                            JavaScript no back-end com HTML/CSS para interfaces responsivas. Já desenvolvi 4 projetos do zero,
-                            focando na harmonia entre funcionalidade e design.
-                        </p>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <section aria-labelledby="projects-heading" class="projects-section py-5">
+
+        <!-- Seção de Projetos -->
+        <section class="cyber-projects">
             <div class="container">
-                <h2 id="projects-heading" class="text-center mb-5 type-effect">Meus Projetos</h2>
-                <div class="row justify-content-center g-4" role="list">
-                    <div class="col-md-4" role="listitem">
-                        <div class="project-card h-100 neon-border">
-                            <div class="card-icon text-primary">
-                                <i class="fas fa-laptop-code fa-3x mb-3" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="h4 hover-glow">Programação e Desenvolvimento de Sistemas</h3>
-                            <p>Projetos com foco em desenvolvimento web e desktop utilizando tecnologias modernas.</p>
-                            <a href="sistemas.html" class="btn btn-outline-primary mt-auto hover-glow">Ver projetos</a>
+                <h2 class="cyber-section-title"><span>//</span> MEUS_PROJETOS</h2>
+                <div class="row gy-4">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="cyber-card h-100">
+                            <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                            <h3>PROGRAMAÇÃO</h3>
+                            <p>Projetos completos em Python e JavaScript</p>
+                            <a href="sistemas.html" class="cyber-btn">ACESSAR</a>
                         </div>
                     </div>
-                    <div class="col-md-4" role="listitem">
-                        <div class="project-card h-100 neon-border">
-                            <div class="card-icon text-success">
-                                <i class="fas fa-database fa-3x mb-3" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="h4 hover-glow">Banco de Dados</h3>
-                            <p>Modelagem, implementação e otimização de bancos de dados relacionais e NoSQL.</p>
-                            <a href="banco-dados.html" class="btn btn-outline-success mt-auto hover-glow">Ver projetos</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4" role="listitem">
-                        <div class="project-card h-100 neon-border">
-                            <div class="card-icon text-warning">
-                                <i class="fas fa-mobile-alt fa-3x mb-3" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="h4 hover-glow">Programação Mobile</h3>
-                            <p>Desenvolvimento de aplicativos mobile com interfaces intuitivas e responsivas.</p>
-                            <a href="#" class="btn btn-outline-warning mt-auto hover-glow">Ver projetos</a>
-                        </div>
-                    </div>
+                    <!-- Mais cards -->
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="py-4 mt-5">
+    <!-- Footer Responsivo -->
+    <footer class="cyber-footer">
         <div class="container">
-            <div class="text-center mb-4">
-                <h2 class="h4 hover-glow">Conecte-se comigo</h2>
-                <div class="social-icons d-flex justify-content-center gap-3">
-                    <a href="https://www.linkedin.com/in/seu-perfil" 
-                       class="social-icon hover-glow" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       aria-label="Meu LinkedIn">
-                       <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://github.com/jhtdzhc12223" 
-                       class="social-icon hover-glow" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       aria-label="Meu GitHub">
-                       <i class="fab fa-github" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://instagram.com/gabrielalves9234" 
-                       class="social-icon hover-glow" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       aria-label="Meu Instagram">
-                       <i class="fab fa-instagram" aria-hidden="true"></i>
-                    </a>
-                </div>
+            <div class="cyber-social">
+                <a href="#" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="text-center">
-                <p class="mb-2">
-                    <i class="fas fa-envelope me-2" aria-hidden="true"></i>
-                    <a href="mailto:alves.vieira.gabriel@escola.pr.gov.br" class="text-white text-decoration-none hover-glow">
-                        alves.vieira.gabriel@escola.pr.gov.br
-                    </a>
-                </p>
-                <p class="mb-0">&copy; <span id="current-year">2025</span> Gabriel Alves Vieira. Todos os direitos reservados.</p>
+            <div class="cyber-copyright">
+                <p>© <span id="current-year"></span> GABRIEL ALVES</p>
+                <div class="cyber-email">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:alves.vieira.gabriel@escola.pr.gov.br">alves.vieira.gabriel@escola.pr.gov.br</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts otimizados -->
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
-            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
-            crossorigin="anonymous"></script>
-    
+    <!-- Scripts Otimizados -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Atualiza o ano automaticamente
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // Efeito de digitação futurista
-        document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('.type-effect');
-            
-            elements.forEach(el => {
-                const text = el.textContent;
-                el.textContent = '';
-                
-                let i = 0;
-                const typing = setInterval(() => {
-                    if (i < text.length) {
-                        el.textContent += text.charAt(i);
-                        i++;
-                    } else {
-                        clearInterval(typing);
-                    }
-                }, 100);
-            });
-        });
+        // Detecta touch screen
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints;
+        if (isTouchDevice) {
+            document.body.classList.add('touch-device');
+        }
     </script>
 </body>
 </html>
