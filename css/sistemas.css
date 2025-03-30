@@ -1,82 +1,172 @@
-/* Estilos base do index.css já aplicados */
-
-/* Layout Específico para Sistemas */
-.cyber-discipline {
-    padding: 20px 0 40px;
+/* ===== ESTILOS FUTURISTAS PARA PROGRAMAÇÃO DE SISTEMAS ===== */
+:root {
+    --neon-primary: #b700ff;
+    --neon-secondary: #00f7ff;
+    --cyber-dark: #0a0a12;
+    --cyber-card-bg: rgba(18, 18, 43, 0.7);
 }
 
+/* Efeito de Circuito na Página */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(10,10,25,0.9), rgba(10,10,25,0.9)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,50 L100,50 M50,0 L50,100" stroke="%23b700ff" stroke-width="0.3" stroke-dasharray="5,5"/></svg>');
+    z-index: -1;
+    opacity: 0.15;
+}
+
+/* Cabeçalho da Disciplina */
 .discipline-header {
-    margin-bottom: 30px;
+    text-align: center;
+    padding: 40px 0;
+    position: relative;
+}
+
+.discipline-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-primary), var(--neon-secondary));
+    box-shadow: 0 0 15px var(--neon-primary);
 }
 
 .discipline-icon {
-    font-size: 3rem;
-    color: var(--cyber-blue);
-    margin-bottom: 15px;
+    font-size: 4rem;
+    color: var(--neon-secondary);
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px var(--neon-secondary);
 }
 
-/* Accordion Mobile */
-.cyber-accordion {
-    background: rgba(18, 18, 43, 0.4);
-    border: 1px solid var(--cyber-purple);
-    border-radius: 5px;
+/* Tópicos com Efeito de Terminal */
+.topic-container {
+    background: var(--cyber-card-bg);
+    border: 1px solid var(--neon-primary);
+    border-radius: 8px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    position: relative;
 }
 
-.cyber-accordion-item {
-    background: transparent;
-    border-color: rgba(138, 43, 226, 0.3);
+.topic-container::before {
+    content: ">";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-family: 'Courier New', monospace;
+    color: var(--neon-secondary);
+    font-weight: bold;
 }
 
-.accordion-button {
-    background: rgba(10, 10, 25, 0.6);
-    color: var(--cyber-text);
+.topic-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.1rem;
+    color: var(--neon-secondary);
+    padding: 20px 20px 10px 40px;
+    margin: 0;
+    letter-spacing: 1px;
+    position: relative;
 }
 
-.accordion-button:not(.collapsed) {
-    background: rgba(10, 10, 25, 0.8);
-    color: var(--cyber-blue);
+.topic-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 40px;
+    width: calc(100% - 60px);
+    height: 1px;
+    background: linear-gradient(90deg, var(--neon-primary), transparent);
 }
 
-/* Exercícios Responsivos */
-.cyber-exercise {
-    background: rgba(10, 10, 25, 0.6);
-    border-left: 3px solid var(--cyber-blue);
-    display: flex;
-    margin-bottom: 15px;
-    min-height: 100%;
+/* Cards de Exercícios Holográficos */
+.exercise-card {
+    background: rgba(30, 20, 50, 0.4);
+    border: 1px solid var(--neon-primary);
+    border-left: 5px solid var(--neon-secondary);
+    margin-bottom: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.exercise-card:hover {
+    transform: translateY(-5px) rotate(1deg);
+    box-shadow: 0 10px 30px rgba(183, 0, 255, 0.3);
+}
+
+.exercise-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 247, 255, 0.1), transparent);
+    transition: 0.5s;
+}
+
+.exercise-card:hover::before {
+    left: 100%;
 }
 
 .exercise-number {
-    min-width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    background: var(--cyber-blue);
+    background: var(--neon-secondary);
     color: var(--cyber-dark);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    padding: 15px;
+    text-align: center;
+    min-width: 70px;
 }
 
 .exercise-content {
     padding: 15px;
-    flex: 1;
 }
 
-/* Media Queries */
-@media (max-width: 767.98px) {
-    .cyber-discipline {
-        padding-top: 10px;
-    }
-    
-    .discipline-header h1 {
-        font-size: 1.8rem;
-    }
-    
-    .cyber-exercise {
+/* Efeito "Em Breve" */
+.coming-soon-container {
+    background: rgba(10, 10, 25, 0.5);
+    border: 2px dashed var(--neon-secondary);
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+}
+
+.coming-soon-container::after {
+    content: "LOCKED";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cyber-dark);
+    color: var(--neon-secondary);
+    padding: 0 15px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+}
+
+.coming-soon-icon {
+    font-size: 3rem;
+    color: var(--neon-secondary);
+    margin-bottom: 15px;
+    animation: pulse 2s infinite;
+}
+
+/* Responsividade Total */
+@media (max-width: 992px) {
+    .exercise-card {
         flex-direction: column;
-        border-left: none;
-        border-top: 3px solid var(--cyber-blue);
+        border-left: 1px solid var(--neon-primary);
+        border-top: 5px solid var(--neon-secondary);
     }
     
     .exercise-number {
@@ -85,13 +175,17 @@
     }
 }
 
-@media (max-width: 575.98px) {
-    .accordion-button {
-        padding: 12px 15px;
-        font-size: 1rem;
+@media (max-width: 576px) {
+    .discipline-header {
+        padding: 30px 0;
     }
     
-    .exercise-content h4 {
-        font-size: 1.1rem;
+    .discipline-icon {
+        font-size: 3rem;
+    }
+    
+    .topic-title {
+        font-size: 1.3rem;
+        padding-left: 35px;
     }
 }
