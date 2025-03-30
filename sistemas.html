@@ -1,76 +1,255 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="cyber-terminal">
 <head>
-    <!-- Mesmo cabeçalho do index.html -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programação de Sistemas | Gabriel Alves</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/sistemas.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
 </head>
-<body class="cyber-bg">
-    <!-- Navbar igual ao index.html -->
+<body class="matrix-bg">
+    <!-- Efeito de Fundo -->
+    <div id="terminal-bg"></div>
+    
+    <!-- Navbar Terminal -->
+    <nav class="terminal-nav">
+        <div class="container">
+            <div class="terminal-prompt">
+                <span class="prompt-user">root@dev</span>
+                <span class="prompt-symbol">:~#</span>
+                <span class="prompt-command">cd /portfolio/sistemas</span>
+                <span class="cursor blink">_</span>
+            </div>
+            <div class="terminal-links">
+                <a href="index.html" class="terminal-link">
+                    <span class="link-symbol">>></span> HOME
+                </a>
+                <a href="banco-dados.html" class="terminal-link">
+                    <span class="link-symbol">>></span> BANCO_DE_DADOS
+                </a>
+            </div>
+        </div>
+    </nav>
 
-    <main class="cyber-main">
-        <section class="cyber-discipline">
-            <div class="container">
-                <div class="discipline-header text-center">
-                    <div class="discipline-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h1>PROGRAMAÇÃO DE SISTEMAS</h1>
-                    <p class="lead">Domine Python e tecnologias avançadas</p>
+    <main class="terminal-main">
+        <div class="container">
+            <!-- Cabeçalho do Terminal -->
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <span class="title-symbol">#</span>
+                    <h1>PROGRAMAÇÃO_DE_SISTEMAS</h1>
                 </div>
-
-                <div class="accordion cyber-accordion" id="trimestersAccordion">
-                    <!-- 1º Trimestre -->
-                    <div class="accordion-item cyber-accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#trimestre1">
-                                1º TRIMESTRE
-                            </button>
-                        </h2>
-                        <div id="trimestre1" class="accordion-collapse collapse show" data-bs-parent="#trimestersAccordion">
-                            <div class="accordion-body">
-                                <div class="cyber-topic">
-                                    <h3><i class="fas fa-cube"></i> TIPOS PRIMITIVOS</h3>
-                                    <p>Fundamentos de dados em programação</p>
-                                    
-                                    <div class="row gy-3">
-                                        <div class="col-md-6">
-                                            <div class="cyber-exercise">
-                                                <div class="exercise-number">001</div>
-                                                <div class="exercise-content">
-                                                    <h4>CONVERSÃO DE TIPOS</h4>
-                                                    <p>Manipulação básica de dados</p>
-                                                    <a href="#" class="cyber-btn-sm">VER DETALHES</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Mais exercícios -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 2º Trimestre -->
-                    <div class="accordion-item cyber-accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#trimestre2">
-                                2º TRIMESTRE
-                            </button>
-                        </h2>
-                        <div id="trimestre2" class="accordion-collapse collapse" data-bs-parent="#trimestersAccordion">
-                            <div class="accordion-body">
-                                <div class="cyber-coming-soon">
-                                    <i class="fas fa-lock"></i>
-                                    <p>CONTEÚDO EM DESENVOLVIMENTO</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="terminal-subtitle">
+                    <span class="subtitle-symbol">//</span>
+                    <p>Domine Python e tecnologias avançadas</p>
+                </div>
+                <div class="terminal-divider">
+                    <span class="divider-line"></span>
+                    <span class="divider-symbol">***</span>
+                    <span class="divider-line"></span>
                 </div>
             </div>
-        </section>
+
+            <!-- Conteúdo do Terminal -->
+            <div class="terminal-content">
+                <!-- Menu de Trimestres -->
+                <div class="terminal-menu">
+                    <div class="menu-item active" data-target="trimestre1">
+                        <span class="menu-number">1</span>
+                        <span class="menu-text">PRIMEIRO_TRIMESTRE</span>
+                    </div>
+                    <div class="menu-item" data-target="trimestre2">
+                        <span class="menu-number">2</span>
+                        <span class="menu-text">SEGUNDO_TRIMESTRE</span>
+                    </div>
+                    <div class="menu-item" data-target="trimestre3">
+                        <span class="menu-number">3</span>
+                        <span class="menu-text">TERCEIRO_TRIMESTRE</span>
+                    </div>
+                </div>
+
+                <!-- Conteúdo dos Trimestres -->
+                <div class="terminal-sections">
+                    <!-- 1º Trimestre -->
+                    <section id="trimestre1" class="terminal-section active">
+                        <div class="section-header">
+                            <span class="header-symbol">></span>
+                            <h2>1º TRIMESTRE - FUNDAMENTOS</h2>
+                        </div>
+                        
+                        <div class="command-line">
+                            <span class="prompt">user@sistemas:~$</span>
+                            <span class="command">ls topicos/</span>
+                        </div>
+                        
+                        <!-- Tópico: Tipos Primitivos -->
+                        <div class="topic-container">
+                            <div class="topic-header">
+                                <span class="topic-icon">></span>
+                                <h3>tipos_primitivos/</h3>
+                                <span class="topic-status">[active]</span>
+                            </div>
+                            <div class="topic-content">
+                                <p class="topic-description">Fundamentos de dados em programação</p>
+                                
+                                <div class="command-line">
+                                    <span class="prompt">user@sistemas:~$</span>
+                                    <span class="command">cd exercicios/</span>
+                                </div>
+                                
+                                <div class="exercises-grid">
+                                    <!-- Exercício 1 -->
+                                    <div class="exercise-card">
+                                        <div class="exercise-header">
+                                            <span class="exercise-number">001</span>
+                                            <span class="exercise-status">[disponível]</span>
+                                        </div>
+                                        <div class="exercise-content">
+                                            <h4>CONVERSÃO_DE_TIPOS</h4>
+                                            <p>Manipulação básica de dados</p>
+                                            <div class="exercise-meta">
+                                                <span class="meta-item">
+                                                    <i class="fas fa-code"></i> Python
+                                                </span>
+                                                <span class="meta-item">
+                                                    <i class="fas fa-star"></i> Básico
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="exercise-actions">
+                                            <button class="terminal-btn">
+                                                <span class="btn-symbol">></span>
+                                                <span class="btn-text">VER_DETALHES</span>
+                                            </button>
+                                            <button class="terminal-btn">
+                                                <span class="btn-symbol">></span>
+                                                <span class="btn-text">BAIXAR</span>
+                                            </button>
+                                        </div>
+                                        <div class="exercise-glitch"></div>
+                                    </div>
+                                    
+                                    <!-- Mais exercícios -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mais tópicos -->
+                    </section>
+                    
+                    <!-- 2º Trimestre -->
+                    <section id="trimestre2" class="terminal-section">
+                        <div class="section-header">
+                            <span class="header-symbol">></span>
+                            <h2>2º TRIMESTRE - ESTRUTURAS DE CONTROLE</h2>
+                        </div>
+                        
+                        <div class="coming-soon">
+                            <div class="coming-soon-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <p>CONTEÚDO_EM_DESENVOLVIMENTO</p>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 45%"></div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- 3º Trimestre -->
+                    <section id="trimestre3" class="terminal-section">
+                        <div class="section-header">
+                            <span class="header-symbol">></span>
+                            <h2>3º TRIMESTRE - PROJETOS AVANÇADOS</h2>
+                        </div>
+                        
+                        <div class="coming-soon">
+                            <div class="coming-soon-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <p>CONTEÚDO_BLOQUEADO</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            
+            <!-- Rodapé do Terminal -->
+            <div class="terminal-footer">
+                <div class="footer-line">
+                    <span class="line-symbol">></span>
+                    <span class="line-text">SISTEMA_DE_ENSINO v3.1.4</span>
+                </div>
+                <div class="footer-line">
+                    <span class="line-symbol">></span>
+                    <span class="line-text">ÚLTIMA_ATUALIZAÇÃO: <span id="current-date"></span></span>
+                </div>
+            </div>
+        </div>
     </main>
     
-    <!-- Footer igual ao index.html -->
+    <!-- Scripts do Terminal -->
+    <script>
+        // Inicialização do efeito de fundo
+        VANTA.FOG({
+            el: "#terminal-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            highlightColor: 0xb700ff,
+            midtoneColor: 0x7000ff,
+            lowlightColor: 0x0,
+            baseColor: 0x0,
+            blurFactor: 0.70,
+            speed: 1.50
+        });
+
+        // Atualizar data
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            }).replace(/\//g, '-');
+            document.getElementById('current-date').textContent = formattedDate;
+            
+            // Alternar entre seções
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remover active de todos
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    document.querySelectorAll('.terminal-section').forEach(s => s.classList.remove('active'));
+                    
+                    // Adicionar active ao selecionado
+                    this.classList.add('active');
+                    const target = this.getAttribute('data-target');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+            
+            // Efeito de digitação
+            const commands = document.querySelectorAll('.command');
+            commands.forEach(cmd => {
+                const text = cmd.textContent;
+                cmd.textContent = '';
+                let i = 0;
+                const typing = setInterval(() => {
+                    if (i < text.length) {
+                        cmd.textContent += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typing);
+                    }
+                }, 50);
+            });
+        });
+    </script>
+    <script src="js/terminalEffects.js"></script>
 </body>
 </html>
