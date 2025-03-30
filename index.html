@@ -1,120 +1,334 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-bs-theme="dark">
+<html lang="pt-BR" data-bs-theme="dark" class="cyber-glitch">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriel Alves | Portfólio</title>
+    <title>Gabriel Alves | Portfólio Cybernético</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
 </head>
-<body class="cyber-bg">
-    <!-- Navbar -->
-    <nav class="cyber-navbar">
+<body class="cyber-matrix">
+    <!-- Efeito de Partículas -->
+    <div id="cyber-particles"></div>
+    
+    <!-- Navbar Holográfica -->
+    <nav class="cyber-navbar holographic">
         <div class="container">
-            <a class="cyber-logo" href="index.html">
-                <img src="img/logo.png" alt="Logo" class="logo-img">
+            <a class="cyber-logo glitch" href="index.html" data-text="GABRIEL_ALVES">
+                <img src="img/logo.png" alt="Logo" class="logo-img pulse">
                 <span>GABRIEL_ALVES</span>
+                <span class="glitch-line"></span>
             </a>
             <div class="cyber-menu">
-                <a href="sistemas.html"><i class="fas fa-laptop-code"></i> SISTEMAS</a>
-                <a href="banco-dados.html"><i class="fas fa-database"></i> DADOS</a>
+                <a href="sistemas.html" class="holographic-btn">
+                    <i class="fas fa-laptop-code"></i> 
+                    <span class="menu-text">SISTEMAS</span>
+                    <span class="holographic-effect"></span>
+                </a>
+                <a href="banco-dados.html" class="holographic-btn">
+                    <i class="fas fa-database"></i> 
+                    <span class="menu-text">DADOS</span>
+                    <span class="holographic-effect"></span>
+                </a>
+                <div class="cyber-scanline"></div>
             </div>
+            <button class="cyber-hamburger" id="cyberMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="cyber-hero">
+    <!-- Hero Section com Efeito de Distorção -->
+    <section class="cyber-hero distortion-layer">
+        <div class="cyber-distortion"></div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1 class="cyber-title">DESENVOLVEDOR FULL-STACK</h1>
-                    <p class="cyber-subtitle">Soluções tecnológicas inovadoras</p>
+                    <h1 class="cyber-title typewriter">
+                        <span class="title-line">DESENVOLVEDOR</span>
+                        <span class="title-line accent">FULL-STACK</span>
+                    </h1>
+                    <p class="cyber-subtitle glitch" data-text="Soluções tecnológicas inovadoras">
+                        Soluções tecnológicas inovadoras
+                    </p>
+                    <div class="cyber-binary">
+                        <span>01001000 01101001 00101101 01010100 01100101 01100011 01101000</span>
+                    </div>
                 </div>
                 <div class="hero-image">
-                    <img src="img/logo.png" alt="Gabriel Alves" class="profile-image">
+                    <div class="hologram-container">
+                        <img src="img/logo.png" alt="Gabriel Alves" class="profile-image hologram">
+                        <div class="hologram-grid"></div>
+                        <div class="hologram-light"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Seção Sobre Mim -->
-    <section class="cyber-about">
+    <!-- Seção Sobre Mim com Efeito de Terminal -->
+    <section class="cyber-about terminal-effect">
         <div class="container">
-            <div class="about-card">
-                <h2><span class="cyber-highlight">SOBRE</span> MIM</h2>
-                <div class="cyber-divider"></div>
-                <p class="about-text">
-                    "Desenvolvedor full-stack com especialização em Python e JavaScript. 
-                    Combino lógica de programação com design inovador para criar sistemas 
-                    eficientes e visualmente impactantes. Atualmente cursando Desenvolvimento 
-                    de Sistemas no Paraná, com 4 projetos completos implementados."
-                </p>
-                <div class="tech-stack">
-                    <div class="tech-item">
-                        <i class="fab fa-python"></i>
-                        <span>PYTHON</span>
+            <div class="about-card cyber-terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="terminal-btn red"></span>
+                        <span class="terminal-btn yellow"></span>
+                        <span class="terminal-btn green"></span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fab fa-js"></i>
-                        <span>JAVASCRIPT</span>
+                    <div class="terminal-title">user@gabriel-dev:~</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="prompt">user@gabriel-dev:~$</span>
+                        <span class="command">cat sobre_mim.txt</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fas fa-database"></i>
-                        <span>BANCO DE DADOS</span>
+                    <div class="terminal-output">
+                        <p>"Desenvolvedor full-stack com especialização em Python e JavaScript. 
+                        Combino lógica de programação com design inovador para criar sistemas 
+                        eficientes e visualmente impactantes. Atualmente cursando Desenvolvimento 
+                        de Sistemas no Paraná, com 4 projetos completos implementados."</p>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt">user@gabriel-dev:~$</span>
+                        <span class="command">ls tech_stack/</span>
+                    </div>
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <i class="fab fa-python"></i>
+                            <span class="tech-name">PYTHON</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-js"></i>
+                            <span class="tech-name">JAVASCRIPT</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 78%"></div>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-database"></i>
+                            <span class="tech-name">BANCO DE DADOS</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="terminal-line blink">
+                        <span class="prompt">user@gabriel-dev:~$</span>
+                        <span class="cursor">_</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Seção Projetos -->
+    <!-- Seção Projetos com Efeito Holográfico -->
     <section class="cyber-projects">
         <div class="container">
-            <h2 class="section-title">MEUS <span class="cyber-underline">PROJETOS</span></h2>
+            <h2 class="section-title holographic-title">
+                <span class="title-text">MEUS PROJETOS</span>
+                <span class="holographic-overlay"></span>
+            </h2>
             
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="img/sistemas.jpg" alt="Programação de Sistemas">
+                <div class="project-card holographic-card">
+                    <div class="project-image-container">
+                        <img src="img/sistemas.jpg" alt="Programação de Sistemas" class="project-image">
+                        <div class="project-overlay">
+                            <div class="hexagon-grid"></div>
+                        </div>
                     </div>
-                    <h3>PROGRAMAÇÃO</h3>
-                    <p>Sistemas completos em Python e JavaScript</p>
-                    <a href="sistemas.html" class="cyber-btn">ACESSAR</a>
+                    <h3 class="project-title">PROGRAMAÇÃO</h3>
+                    <p class="project-description">Sistemas completos em Python e JavaScript</p>
+                    <a href="sistemas.html" class="cyber-btn neon-btn">
+                        <span>ACESSAR</span>
+                        <span class="btn-light"></span>
+                    </a>
+                    <div class="card-glitch"></div>
                 </div>
                 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="img/bdados.jpg" alt="Banco de Dados">
+                <div class="project-card holographic-card">
+                    <div class="project-image-container">
+                        <img src="img/bdados.jpg" alt="Banco de Dados" class="project-image">
+                        <div class="project-overlay">
+                            <div class="hexagon-grid"></div>
+                        </div>
                     </div>
-                    <h3>BANCO DE DADOS</h3>
-                    <p>Modelagem e implementação profissional</p>
-                    <a href="banco-dados.html" class="cyber-btn">ACESSAR</a>
+                    <h3 class="project-title">BANCO DE DADOS</h3>
+                    <p class="project-description">Modelagem e implementação profissional</p>
+                    <a href="banco-dados.html" class="cyber-btn neon-btn">
+                        <span>ACESSAR</span>
+                        <span class="btn-light"></span>
+                    </a>
+                    <div class="card-glitch"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="cyber-footer">
+    <!-- Seção de Habilidades com Gráficos 3D -->
+    <section class="cyber-skills">
+        <div class="container">
+            <h2 class="section-title">HABILIDADES <span class="cyber-underline">TÉCNICAS</span></h2>
+            <div class="skills-container">
+                <div class="skill-radar">
+                    <canvas id="radarChart"></canvas>
+                </div>
+                <div class="skill-bars">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>PYTHON</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level python" data-level="85">
+                                <div class="bar-pulse"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mais habilidades -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer com Efeito de Circuito -->
+    <footer class="cyber-footer circuit-bg">
+        <div class="circuit-overlay"></div>
         <div class="container">
             <div class="footer-content">
                 <p class="contact-email">
-                    <i class="fas fa-envelope"></i> alves.vieira.gabriel@escola.pr.gov.br
+                    <i class="fas fa-envelope"></i> 
+                    <span class="email-text">alves.vieira.gabriel@escola.pr.gov.br</span>
                 </p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-github"></i>
+                        <span class="icon-circle"></span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-linkedin"></i>
+                        <span class="icon-circle"></span>
+                    </a>
                 </div>
-                <p class="copyright">&copy; <span id="current-year"></span> Gabriel Alves</p>
+                <p class="copyright">&copy; <span id="current-year"></span> <span class="glitch" data-text="Gabriel Alves">Gabriel Alves</span></p>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts Complexos -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        // Inicialização do efeito Vanta.js
+        VANTA.NET({
+            el: "#cyber-particles",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x7000ff,
+            backgroundColor: 0x0a0a12,
+            points: 12.00,
+            maxDistance: 22.00,
+            spacing: 18.00
+        });
+
+        // Animação de digitação
+        document.addEventListener('DOMContentLoaded', function() {
+            // Atualizar ano
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Efeito de digitação
+            const typewriterElements = document.querySelectorAll('.typewriter');
+            typewriterElements.forEach(el => {
+                const text = el.textContent;
+                el.textContent = '';
+                let i = 0;
+                const typing = setInterval(() => {
+                    if (i < text.length) {
+                        el.textContent += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typing);
+                    }
+                }, 100);
+            });
+            
+            // Radar Chart
+            const radarCtx = document.getElementById('radarChart').getContext('2d');
+            const radarChart = new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Python', 'JavaScript', 'SQL', 'HTML/CSS', 'Bootstrap', 'Git'],
+                    datasets: [{
+                        label: 'Habilidades',
+                        data: [85, 78, 80, 90, 85, 75],
+                        backgroundColor: 'rgba(0, 247, 255, 0.2)',
+                        borderColor: 'rgba(183, 0, 255, 0.8)',
+                        pointBackgroundColor: 'rgba(0, 247, 255, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(0, 247, 255, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(183, 0, 255, 0.3)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 247, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: '#e0e0ff',
+                                font: {
+                                    family: 'Orbitron'
+                                }
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(10, 10, 18, 0)',
+                                color: 'rgba(0, 247, 255, 0.5)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e0e0ff',
+                                font: {
+                                    family: 'Orbitron'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Animar barras de habilidades
+            gsap.to('.skill-level', {
+                width: '100%',
+                duration: 2,
+                ease: 'power3.out',
+                stagger: 0.2
+            });
+        });
     </script>
+    <script src="js/cyberEffects.js"></script>
 </body>
 </html>
