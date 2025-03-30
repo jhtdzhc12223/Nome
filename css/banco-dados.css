@@ -1,50 +1,156 @@
-/* Estilos base do index.css já aplicados */
-
-/* Estilos Específicos para Banco de Dados */
-.cyber-download {
-    background: rgba(10, 10, 25, 0.6);
-    border-top: 3px solid var(--cyber-green);
-    display: flex;
-    margin-bottom: 15px;
-    min-height: 100%;
+/* ===== ESTILOS AVANÇADOS PARA BANCO DE DADOS ===== */
+:root {
+    --neon-db-primary: #00f7ff;
+    --neon-db-secondary: #00ff88;
+    --cyber-db-dark: #0a0a1a;
+    --cyber-db-card: rgba(10, 20, 30, 0.7);
 }
 
-.download-icon {
-    min-width: 60px;
+/* Efeito de Matrix no Fundo */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(10,10,25,0.9), rgba(10,10,25,0.9)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="15" font-family="monospace" font-size="10" fill="%2300f7ff" opacity="0.3">0101 1010</text></svg>');
+    z-index: -1;
+    opacity: 0.1;
+}
+
+/* Cabeçalho com Efeito de Dados */
+.discipline-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.discipline-header::after {
+    content: "01010101010101010101";
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    color: rgba(0, 247, 255, 0.1);
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    letter-spacing: 5px;
+    white-space: nowrap;
+    animation: dataFlow 20s linear infinite;
+}
+
+/* Cards de Download Futuristas */
+.download-card {
+    background: var(--cyber-db-card);
+    border: 1px solid var(--neon-db-primary);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+}
+
+.download-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 247, 255, 0.2);
+}
+
+.download-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 247, 255, 0.05), transparent);
+    z-index: 0;
+}
+
+.file-icon {
+    background: linear-gradient(135deg, var(--neon-db-primary), var(--neon-db-secondary));
+    color: var(--cyber-db-dark);
+    font-size: 1.8rem;
+    min-width: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    background: var(--cyber-green);
-    color: var(--cyber-dark);
+    position: relative;
+}
+
+.file-icon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 247, 255, 0.3), transparent);
 }
 
 .download-info {
-    padding: 15px;
-    flex: 1;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
 }
 
-/* Media Queries */
-@media (max-width: 767.98px) {
-    .cyber-download {
+.download-btn {
+    background: transparent;
+    border: 1px solid var(--neon-db-secondary);
+    color: var(--neon-db-secondary);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.download-btn:hover {
+    background: var(--neon-db-secondary);
+    color: var(--cyber-db-dark);
+    box-shadow: 0 0 15px var(--neon-db-secondary);
+}
+
+/* Efeitos de Animação */
+@keyframes dataFlow {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+@keyframes dbPulse {
+    0% { box-shadow: 0 0 5px var(--neon-db-primary); }
+    50% { box-shadow: 0 0 20px var(--neon-db-primary); }
+    100% { box-shadow: 0 0 5px var(--neon-db-primary); }
+}
+
+/* Layout Responsivo */
+@media (max-width: 768px) {
+    .download-card {
         flex-direction: column;
-        border-top: none;
-        border-left: 3px solid var(--cyber-green);
     }
     
-    .download-icon {
+    .file-icon {
         min-width: 100%;
+        padding: 20px;
+    }
+    
+    .download-info {
         padding: 15px;
     }
 }
 
-@media (max-width: 575.98px) {
-    .download-info h4 {
-        font-size: 1.1rem;
+@media (max-width: 576px) {
+    .discipline-header::after {
+        font-size: 0.8rem;
+        bottom: -10px;
     }
     
-    .cyber-btn-sm {
+    .download-btn {
         padding: 8px 15px;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 }
