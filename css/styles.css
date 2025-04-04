@@ -11,12 +11,12 @@
   --cyber-text-dim: #a0a0c0;
   --cyber-accent: #00ff88;
   --cyber-error: #ff0033;
-  
+ 
   /* Gradientes */
   --cyber-gradient: linear-gradient(135deg, var(--cyber-purple), var(--cyber-blue));
   --cyber-gradient-reverse: linear-gradient(135deg, var(--cyber-blue), var(--cyber-purple));
   --cyber-gradient-diagonal: linear-gradient(to bottom right, var(--cyber-purple), var(--cyber-blue));
-  
+ 
   /* Sombras */
   --cyber-shadow-sm: 0 0 10px rgba(183, 0, 255, 0.3);
   --cyber-shadow-md: 0 0 20px rgba(0, 247, 255, 0.4);
@@ -82,7 +82,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
+  background:
     linear-gradient(rgba(10,10,25,0.95), rgba(10,10,25,0.95)),
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="15" font-family="monospace" font-size="10" fill="%2300f7ff" opacity="0.1">0101 1010</text></svg>');
   z-index: -2;
@@ -349,7 +349,7 @@ body {
   left: -10%;
   width: 120%;
   height: 120%;
-  background: 
+  background:
     radial-gradient(circle, transparent 60%, rgba(0, 247, 255, 0.1) 60%, rgba(0, 247, 255, 0.2) 70%, transparent 70%),
     linear-gradient(0deg, transparent 48%, rgba(0, 247, 255, 0.1) 48%, rgba(0, 247, 255, 0.1) 52%, transparent 52%),
     linear-gradient(90deg, transparent 48%, rgba(0, 247, 255, 0.1) 48%, rgba(0, 247, 255, 0.1) 52%, transparent 52%);
@@ -405,11 +405,17 @@ body {
   width: 12px;
   height: 12px;
   border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .terminal-btn.red { background: #ff5f56; }
 .terminal-btn.yellow { background: #ffbd2e; }
 .terminal-btn.green { background: #27c93f; }
+
+.terminal-btn.red:hover { box-shadow: 0 0 10px rgba(255, 95, 86, 0.8); }
+.terminal-btn.yellow:hover { box-shadow: 0 0 10px rgba(255, 189, 46, 0.8); }
+.terminal-btn.green:hover { box-shadow: 0 0 10px rgba(39, 201, 63, 0.8); }
 
 .terminal-title {
   font-family: 'Share Tech Mono', monospace;
@@ -637,7 +643,7 @@ body {
 .hexagon-grid {
   width: 100%;
   height: 100%;
-  background: 
+  background:
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path d="M50 0 L100 25 L100 75 L50 100 L0 75 L0 25 Z" fill="none" stroke="%2300f7ff" stroke-width="0.5" opacity="0.3"/></svg>');
   background-size: 60px 60px;
   opacity: 0.5;
@@ -722,7 +728,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
+  background:
     linear-gradient(90deg, transparent, rgba(183, 0, 255, 0.1), transparent),
     linear-gradient(0deg, transparent, rgba(0, 247, 255, 0.1), transparent);
   opacity: 0;
@@ -745,7 +751,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
+  background:
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%237000ff" stroke-width="0.5" opacity="0.1"/></svg>');
   background-size: 100px 100px;
   opacity: 0.1;
@@ -841,7 +847,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
+  background:
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,50 L30,50 M70,50 L100,50 M50,0 L50,30 M50,70 L50,100" stroke="%2300f7ff" stroke-width="0.3" opacity="0.1"/></svg>');
   opacity: 0.1;
   pointer-events: none;
@@ -1102,101 +1108,4 @@ body {
 
 @keyframes hologram-effect {
   0% { transform: rotate(30deg) translate(-30%, -30%) }
-  100% { transform: rotate(30deg) translate(30%, 30%) }
-}
-
-@keyframes grid-move {
-  0% { background-position: 0 0 }
-  100% { background-position: 60px 60px }
-}
-
-@keyframes card-glitch {
-  0%, 100% { opacity: 0 }
-  5%, 95% { opacity: 0.1 }
-  50% { opacity: 0.3 }
-}
-
-@keyframes skill-animate {
-  to { transform: scaleX(1) }
-}
-
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 1200px) {
-  .skills-container {
-    flex-direction: column;
-  }
-  
-  .skill-radar {
-    min-height: 300px;
-  }
-}
-
-@media (max-width: 992px) {
-  .hero-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 3rem;
-  }
-  
-  .cyber-binary {
-    bottom: -1rem;
-  }
-  
-  .hologram-container {
-    width: 250px;
-    height: 250px;
-  }
-}
-
-@media (max-width: 768px) {
-  .cyber-navbar.holographic {
-    padding: 1rem 0;
-  }
-  
-  .cyber-logo.glitch {
-    font-size: 1.2rem;
-  }
-  
-  .cyber-menu {
-    gap: 1rem;
-  }
-  
-  .holographic-btn {
-    font-size: 0.9rem;
-    padding: 0.5rem;
-  }
-  
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .terminal-body {
-    padding: 1.5rem;
-  }
-  
-  .tech-stack {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 576px) {
-  .cyber-title.typewriter {
-    font-size: 2rem;
-  }
-  
-  .cyber-subtitle.glitch {
-    font-size: 1.2rem;
-  }
-  
-  .about-card {
-    padding: 1.5rem;
-  }
-  
-  .terminal-line {
-    font-size: 0.9rem;
-  }
-  
-  .tech-stack {
-    grid-template-columns: 1fr;
-  }
-}
+  100% {
