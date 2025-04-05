@@ -1,800 +1,147 @@
-/* ===== ESTILOS HOLOGRÁFICOS PARA BANCO DE DADOS ===== */
-:root {
-    --hologram-bg: #0a0a12;
-    --hologram-card: rgba(18, 18, 43, 0.6);
-    --hologram-primary: #b700ff;
-    --hologram-secondary: #00f7ff;
-    --hologram-text: #e0e0ff;
-    --hologram-text-dim: #a0a0c0;
-    --hologram-accent: #00ff88;
-    --hologram-error: #ff0033;
-}
-
-body.database-bg {
-    font-family: 'Rajdhani', sans-serif;
-    background-color: var(--hologram-bg);
-    color: var(--hologram-text);
-    overflow-x: hidden;
-    line-height: 1.6;
-    position: relative;
-}
-
-/* Efeito de Fundo Holográfico */
-#holographic-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
-/* Navbar Holográfica */
-.holographic-nav {
-    background: rgba(10, 10, 18, 0.7);
-    backdrop-filter: blur(10px);
-    padding: 1.2rem 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(183, 0, 255, 0.2);
-}
-
-.holographic-logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--hologram-secondary);
-}
-
-.logo-hologram {
-    position: relative;
-    width: 40px;
-    height: 40px;
-}
-
-.logo-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid var(--hologram-secondary);
-    position: relative;
-    z-index: 1;
-}
-
-.hologram-grid {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    width: calc(100% + 20px);
-    height: calc(100% + 20px);
-    background: 
-        radial-gradient(circle, transparent 60%, rgba(0, 247, 255, 0.1) 60%, rgba(0, 247, 255, 0.2) 70%, transparent 70%),
-        linear-gradient(0deg, transparent 48%, rgba(0, 247, 255, 0.1) 48%, rgba(0, 247, 255, 0.1) 52%, transparent 52%),
-        linear-gradient(90deg, transparent 48%, rgba(0, 247, 255, 0.1) 48%, rgba(0, 247, 255, 0.1) 52%, transparent 52%);
-    border-radius: 50%;
-    z-index: 0;
-    animation: rotate 20s linear infinite;
-}
-
-.holographic-links {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.holographic-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--hologram-text);
-    text-decoration: none;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 500;
-    position: relative;
-    padding: 0.5rem 0;
-}
-
-.holographic-link i {
-    font-size: 1.2rem;
-    color: var(--hologram-secondary);
-}
-
-.link-hologram {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--hologram-secondary);
-    transition: width 0.3s;
-}
-
-.holographic-link:hover .link-hologram {
-    width: 100%;
-}
-
-.nav-scanline {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--hologram-secondary);
-    box-shadow: 0 0 10px var(--hologram-secondary);
-    animation: scanline 3s linear infinite;
-}
-
-/* Cabeçalho Holográfico */
-.holographic-main {
-    margin-top: 80px;
-    padding: 3rem 0;
-}
-
-.holographic-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    position: relative;
-}
-
-.header-hologram {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.header-hologram i {
-    font-size: 3rem;
-    color: var(--hologram-secondary);
-    z-index: 1;
-}
-
-.hologram-effect {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0, 247, 255, 0.2), transparent 70%);
-    animation: pulse 3s infinite alternate;
-}
-
-.holographic-header h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.5rem;
-    color: var(--hologram-secondary);
-    margin-bottom: 0.5rem;
-}
-
-.holographic-header .subtitle {
-    color: var(--hologram-text-dim);
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-}
-
-.header-grid {
-    position: absolute;
-    bottom: -1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 3px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.grid-line {
-    height: 100%;
-    width: 30%;
-    background: linear-gradient(90deg, transparent, var(--hologram-secondary), transparent);
-    opacity: 0.5;
-}
-
-/* Menu de Navegação */
-.database-menu {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-}
-
-.menu-item {
-    padding: 1rem 1.5rem;
-    background: rgba(18, 18, 43, 0.4);
-    border: 1px solid rgba(183, 0, 255, 0.3);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 120px;
-}
-
-.menu-item.active {
-    background: rgba(183, 0, 255, 0.1);
-    border-color: var(--hologram-primary);
-    color: var(--hologram-secondary);
-}
-
-.menu-item.active .menu-icon {
-    color: var(--hologram-secondary);
-    text-shadow: 0 0 10px var(--hologram-secondary);
-}
-
-.menu-icon {
-    font-size: 1.8rem;
-    color: var(--hologram-text-dim);
-    margin-bottom: 0.5rem;
-    transition: all 0.3s;
-}
-
-.menu-item span {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-}
-
-.menu-hologram {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, transparent, rgba(0, 247, 255, 0.1), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.menu-item:hover .menu-hologram {
-    opacity: 1;
-}
-
-/* Seções de Conteúdo */
-.database-sections {
-    background: rgba(18, 18, 43, 0.3);
-    border: 1px solid rgba(183, 0, 255, 0.2);
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 0 30px rgba(183, 0, 255, 0.1);
-}
-
-.database-section {
-    display: none;
-}
-
-.database-section.active {
-    display: block;
-    animation: fadeIn 0.5s;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.section-header h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.8rem;
-    color: var(--hologram-secondary);
-    margin-bottom: 0.5rem;
-}
-
-.section-header p {
-    color: var(--hologram-text-dim);
-    margin-bottom: 1.5rem;
-}
-
-.section-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 0 auto;
-    max-width: 500px;
-}
-
-.divider-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--hologram-primary), transparent);
-}
-
-.divider-dots {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.divider-dots::before,
-.divider-dots::after {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--hologram-secondary);
-}
-
-/* Modelo de Banco de Dados */
-.database-model {
-    background: rgba(18, 18, 43, 0.5);
-    border: 1px solid rgba(183, 0, 255, 0.3);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.database-model::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, transparent, rgba(0, 247, 255, 0.05), transparent);
-    pointer-events: none;
-}
-
-.model-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.model-icon {
-    width: 50px;
-    height: 50px;
-    background: rgba(183, 0, 255, 0.1);
-    border: 1px solid var(--hologram-primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--hologram-secondary);
-}
-
-.model-header h3 {
-    font-family: 'Orbitron', sans-serif;
-    color: var(--hologram-secondary);
-    flex: 1;
-}
-
-.model-content {
-    display: flex;
-    gap: 2rem;
-}
-
-.model-description {
-    flex: 1;
-}
-
-.model-description p {
-    color: var(--hologram-text-dim);
-    margin-bottom: 1.5rem;
-}
-
-.model-keywords {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.keyword {
-    background: rgba(0, 247, 255, 0.1);
-    color: var(--hologram-secondary);
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.8rem;
-}
-
-.model-preview {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.preview-container {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    margin-bottom: 1rem;
-    border-radius: 6px;
-    overflow: hidden;
-}
-
-.preview-grid {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,50 L100,50 M50,0 L50,100" stroke="%2300f7ff" stroke-width="0.3" stroke-dasharray="5,5" opacity="0.3"/></svg>');
-    background-size: 20px 20px;
-}
-
-.preview-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.preview-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.preview-hologram {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, transparent, rgba(0, 247, 255, 0.1), transparent);
-}
-
-.preview-actions {
-    display: flex;
-    gap: 1rem;
-}
-
-.holographic-btn {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background: rgba(183, 0, 255, 0.1);
-    border: 1px solid var(--hologram-primary);
-    color: var(--hologram-text);
-    padding: 0.8rem;
-    border-radius: 4px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-}
-
-.holographic-btn:hover {
-    background: rgba(183, 0, 255, 0.2);
-    color: var(--hologram-secondary);
-    box-shadow: 0 0 15px rgba(183, 0, 255, 0.3);
-}
-
-.holographic-btn i {
-    font-size: 1rem;
-}
-
-.holographic-btn-sm {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-}
-
-/* Exercícios */
-.database-exercises {
-    margin-top: 3rem;
-}
-
-.exercises-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.exercises-header h3 {
-    font-family: 'Orbitron', sans-serif;
-    color: var(--hologram-secondary);
-    margin-bottom: 0.5rem;
-}
-
-.exercises-header p {
-    color: var(--hologram-text-dim);
-}
-
-.exercises-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-.exercise-card {
-    background: rgba(18, 18, 43, 0.5);
-    border: 1px solid rgba(183, 0, 255, 0.3);
-    border-radius: 6px;
-    padding: 1.5rem;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    gap: 1rem;
-}
-
-.exercise-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(183, 0, 255, 0.2);
-    border-color: var(--hologram-secondary);
-}
-
-.exercise-number {
-    width: 50px;
-    height: 50px;
-    background: rgba(183, 0, 255, 0.1);
-    border: 1px solid var(--hologram-primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Orbitron', sans-serif;
-    color: var(--hologram-secondary);
-    flex-shrink: 0;
-}
-
-.exercise-content {
-    flex: 1;
-}
-
-.exercise-content h4 {
-    font-family: 'Orbitron', sans-serif;
-    color: var(--hologram-text);
-    margin-bottom: 0.5rem;
-}
-
-.exercise-content p {
-    color: var(--hologram-text-dim);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
-
-.exercise-difficulty {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-.difficulty-level {
-    font-size: 0.8rem;
-    color: var(--hologram-text-dim);
-}
-
-.difficulty-stars {
-    color: var(--hologram-secondary);
-    font-size: 0.8rem;
-}
-
-.exercise-actions {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.exercise-grid {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,50 L100,50 M50,0 L50,100" stroke="%2300f7ff" stroke-width="0.1" opacity="0.1"/></svg>');
-    opacity: 0.1;
-    pointer-events: none;
-}
-
-/* Conteúdo em Breve */
-.coming-soon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 300px;
-    background: rgba(18, 18, 43, 0.3);
-    border: 2px dashed rgba(183, 0, 255, 0.3);
-    border-radius: 10px;
-    margin: 2rem 0;
-    padding: 2rem;
-    text-align: center;
-}
-
-.coming-soon-icon {
-    font-size: 3rem;
-    color: var(--hologram-primary);
-    margin-bottom: 1.5rem;
-    animation: pulse 2s infinite;
-}
-
-.coming-soon p {
-    font-family: 'Orbitron', sans-serif;
-    color: var(--hologram-text-dim);
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
-}
-
-.progress-bar {
-    width: 80%;
-    height: 6px;
-    background: rgba(183, 0, 255, 0.1);
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.progress-value {
-    height: 100%;
-    background: linear-gradient(90deg, var(--hologram-primary), var(--hologram-secondary));
-    animation: progress-animate 2s infinite alternate;
-}
-
-/* Rodapé Holográfico */
-.holographic-footer {
-    background: rgba(10, 10, 18, 0.7);
-    backdrop-filter: blur(10px);
-    padding: 3rem 0;
-    border-top: 1px solid rgba(183, 0, 255, 0.2);
-}
-
-.footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.contact-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--hologram-text);
-    font-family: 'Orbitron', sans-serif;
-}
-
-.contact-info i {
-    color: var(--hologram-secondary);
-}
-
-.footer-grid {
-    width: 200px;
-    height: 3px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.footer-grid .grid-line {
-    background: linear-gradient(90deg, transparent, var(--hologram-primary), transparent);
-}
-
-.copyright {
-    font-family: 'Orbitron', sans-serif;
-    color: var(--hologram-text-dim);
-    font-size: 0.9rem;
-    text-align: center;
-}
-
-/* Animações */
-@keyframes rotate {
-    from { transform: rotate(0deg) }
-    to { transform: rotate(360deg) }
-}
-
-@keyframes pulse {
-    0% { opacity: 0.5; transform: scale(1) }
-    50% { opacity: 1; transform: scale(1.05) }
-    100% { opacity: 0.5; transform: scale(1) }
-}
-
-@keyframes scanline {
-    0% { transform: translateY(-100%) }
-    100% { transform: translateY(100vh) }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0 }
-    to { opacity: 1 }
-}
-
-@keyframes progress-animate {
-    from { width: 30% }
-    to { width: 70% }
-}
-
-/* Responsividade */
-@media (max-width: 1200px) {
-    .model-content {
-        flex-direction: column;
+// Efeitos Cyberpunk para o site principal
+document.addEventListener('DOMContentLoaded', function() {
+    // Debounce para otimização de performance
+    function debounce(func, wait = 20, immediate = true) {
+        let timeout;
+        return function() {
+            const context = this, args = arguments;
+            const later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            const callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
     }
+
+    // 1. Efeito de glitch nos elementos
+    const glitchElements = document.querySelectorAll('.glitch');
+    glitchElements.forEach(el => {
+        const handleGlitch = debounce(function(e) {
+            this.style.textShadow = `
+                0.05em 0 0 rgba(255, 0, 170, 0.75),
+                -0.025em -0.05em 0 rgba(0, 247, 255, 0.75),
+                0.025em 0.05em 0 rgba(0, 255, 136, 0.75)
+            `;
+        }, 100);
+
+        el.addEventListener('mouseenter', handleGlitch);
+        
+        el.addEventListener('mouseleave', function() {
+            this.style.textShadow = 'none';
+        });
+    });
+
+    // 2. Efeito de hover holográfico nos cards (otimizado)
+    const holographicCards = document.querySelectorAll('.holographic-card');
     
-    .preview-container {
-        height: 300px;
+    function handleCardMove(e) {
+        const x = e.clientX - this.getBoundingClientRect().left;
+        const y = e.clientY - this.getBoundingClientRect().top;
+        const centerX = this.offsetWidth / 2;
+        const centerY = this.offsetHeight / 2;
+        const angleX = (centerY - y) / 10;
+        const angleY = (x - centerX) / 10;
+        
+        this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
     }
-}
 
-@media (max-width: 992px) {
-    .holographic-header h1 {
-        font-size: 2rem;
-    }
+    const debouncedCardMove = debounce(handleCardMove, 10);
     
-    .database-menu {
-        gap: 1rem;
-    }
-    
-    .menu-item {
-        min-width: calc(50% - 0.5rem);
-    }
-}
+    holographicCards.forEach(card => {
+        card.addEventListener('mousemove', debouncedCardMove);
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+    });
 
-@media (max-width: 768px) {
-    .holographic-nav {
-        padding: 1rem 0;
-    }
-    
-    .holographic-logo {
-        font-size: 1.2rem;
-    }
-    
-    .holographic-links {
-        gap: 1rem;
-    }
-    
-    .holographic-main {
-        margin-top: 70px;
-    }
-    
-    .header-hologram {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .header-hologram i {
-        font-size: 2.5rem;
-    }
-    
-    .exercises-grid {
-        grid-template-columns: 1fr;
-    }
-}
+    // 3. Efeito de digitação (com fallback)
+    const typewriterElements = document.querySelectorAll('.typewriter');
+    typewriterElements.forEach(el => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return; // Não animar se o usuário preferir movimento reduzido
+        }
 
-@media (max-width: 576px) {
-    .holographic-header h1 {
-        font-size: 1.5rem;
+        const text = el.textContent;
+        el.textContent = '';
+        
+        let i = 0;
+        const typing = setInterval(() => {
+            if (i < text.length) {
+                el.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(typing);
+            }
+        }, 100);
+    });
+
+    // 4. Animações das barras de habilidades (otimizada)
+    const animateSkillBars = () => {
+        const skillBars = document.querySelectorAll('.skill-level');
+        skillBars.forEach(bar => {
+            const level = bar.getAttribute('data-level') || bar.style.width.replace('%', '');
+            bar.style.width = '0';
+            
+            setTimeout(() => {
+                bar.style.width = `${level}%`;
+            }, 500);
+        });
+    };
+
+    // Executar apenas quando visível na tela
+    const skillSection = document.querySelector('.cyber-skills');
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            animateSkillBars();
+            observer.unobserve(skillSection);
+        }
+    }, { threshold: 0.1 });
+
+    if (skillSection) {
+        observer.observe(skillSection);
     }
-    
-    .holographic-header .subtitle {
-        font-size: 1rem;
-    }
-    
-    .menu-item {
-        min-width: 100%;
-    }
-    
-    .section-header h2 {
-        font-size: 1.5rem;
-    }
-    
-    .model-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .preview-actions {
-        flex-direction: column;
-    }
-}
+
+    // 5. Controles da janela terminal (com acessibilidade)
+    const setupTerminalButtons = () => {
+        // Botão vermelho - Fechar com confirmação
+        document.querySelectorAll('.terminal-btn.red').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.transform = 'scale(1.2)';
+                setTimeout(() => this.style.transform = 'scale(1)', 200);
+                
+                if (confirm('Deseja realmente fechar esta janela?')) {
+                    const terminal = this.closest('.cyber-terminal');
+                    if (terminal) {
+                        terminal.style.transition = 'all 0.3s ease';
+                        terminal.style.transform = 'scale(0.8) translateY(20px)';
+                        terminal.style.opacity = '0';
+                        
+                        setTimeout(() => {
+                            terminal.classList.add('closed');
+                            terminal.style.display = 'none';
+                        }, 300);
+                    }
+                }
+            });
+
+            // Acessibilidade - Teclado
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    btn.click();
+                }
+            });
+        });
+
+        // ... (outros botões do terminal)
+    };
+
+    // Inicializa todos os efeitos
+    setupTerminalButtons();
+});
+
+// Fallback para quando JS estiver desabilitado
+document.documentElement.classList.add('js-enabled');
