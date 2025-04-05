@@ -1,35 +1,51 @@
 // Efeitos específicos para a página holográfica
 document.addEventListener('DOMContentLoaded', function() {
-    // Efeito de hover holográfico
+    // Limpar intervalos quando sair da página
+    const animationIntervals = [];
+    const animationTimeouts = [];
+    
+    // Debounce para otimização
+    function debounce(func, wait = 10) {
+        let timeout;
+        return function() {
+            const context = this, args = arguments;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+        };
+    }
+
+    // 1. Efeito de hover holográfico (otimizado)
     const holographicItems = document.querySelectorAll('.holographic-card, .menu-item');
     
+    const handleHolographicMove = debounce(function(e) {
+        const x = e.clientX - this.getBoundingClientRect().left;
+        const y = e.clientY - this.getBoundingClientRect().top;
+        
+        const centerX = this.offsetWidth / 2;
+        const centerY = this.offsetHeight / 2;
+        
+        const angleX = (centerY - y) / 20;
+        const angleY = (x - centerX) / 20;
+        
+        this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+        
+        // Efeito de luz
+        const lightPosX = (x / this.offsetWidth) * 100;
+        const lightPosY = (y / this.offsetHeight) * 100;
+        
+        this.style.setProperty('--light-pos-x', `${lightPosX}%`);
+        this.style.setProperty('--light-pos-y', `${lightPosY}%`);
+    }, 10);
+    
     holographicItems.forEach(item => {
-        item.addEventListener('mousemove', function(e) {
-            const x = e.clientX - this.getBoundingClientRect().left;
-            const y = e.clientY - this.getBoundingClientRect().top;
-            
-            const centerX = this.offsetWidth / 2;
-            const centerY = this.offsetHeight / 2;
-            
-            const angleX = (centerY - y) / 20;
-            const angleY = (x - centerX) / 20;
-            
-            this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
-            
-            // Efeito de luz
-            const lightPosX = (x / this.offsetWidth) * 100;
-            const lightPosY = (y / this.offsetHeight) * 100;
-            
-            this.style.setProperty('--light-pos-x', `${lightPosX}%`);
-            this.style.setProperty('--light-pos-y', `${lightPosY}%`);
-        });
+        item.addEventListener('mousemove', handleHolographicMove);
         
         item.addEventListener('mouseleave', function() {
             this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
         });
     });
     
-    // Efeito de scanline
+    // 2. Efeito de scanline (otimizado)
     const scanline = document.querySelector('.nav-scanline');
     
     if (scanline) {
@@ -44,32 +60,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         animateScanline();
-        setInterval(animateScanline, 3000);
+        const scanlineInterval = setInterval(animateScanline, 3000);
+        animationIntervals.push(scanlineInterval);
     }
     
-    // Efeito de grid animado
+    // 3. Efeito de grid animado (otimizado)
     const grids = document.querySelectorAll('.hexagon-grid, .preview-grid');
     
     grids.forEach(grid => {
         let posX = 0;
         let posY = 0;
         
-        setInterval(() => {
+        const gridInterval = setInterval(() => {
             posX = (posX + 1) % 60;
             posY = (posY + 1) % 60;
             
             grid.style.backgroundPosition = `${posX}px ${posY}px`;
         }, 100);
+        
+        animationIntervals.push(gridInterval);
     });
     
-    // Ativar animação da barra de progresso
+    // 4. Ativar animação da barra de progresso (otimizada)
     const progressBars = document.querySelectorAll('.progress-value');
     
     progressBars.forEach(bar => {
         let width = parseInt(bar.style.width);
         let direction = 1;
         
-        setInterval(() => {
+        const progressInterval = setInterval(() => {
             width += direction * 2;
             
             if (width >= 70) direction = -1;
@@ -77,5 +96,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             bar.style.width = `${width}%`;
         }, 200);
+        
+        animationIntervals.push(progressInterval);
+    });
+
+    // Limpar animações ao sair da página
+    window.addEventListener('beforeunload', () => {
+        animationIntervals.forEach(interval => clearInterval(interval));
+        animationTimeouts.forEach(timeout => clearTimeout(timeout));
     });
 });
+
+// Fallback para quando JS estiver desabilitado
+document.documentElement.classList.add('js-enabled');
