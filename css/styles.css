@@ -11,6 +11,10 @@
   --cyber-text-dim: #a0a0c0;
   --cyber-accent: #00ff88;
   --cyber-error: #ff0033;
+  
+  /* Efeitos especiais */
+  --crack-color: rgba(0, 247, 255, 0.7);
+  --blackhole-intensity: 0.9;
  
   /* Gradientes */
   --cyber-gradient: linear-gradient(135deg, var(--cyber-purple), var(--cyber-blue));
@@ -37,17 +41,211 @@ body {
   color: var(--cyber-text);
   line-height: 1.6;
   position: relative;
+  overflow-x: hidden;
 }
 
-/* ... [restante do CSS permanece igual] ... */
-
-/* Acessibilidade - Foco visível */
-:focus-visible {
-  outline: 2px solid var(--cyber-blue);
-  outline-offset: 3px;
+/* === EFEITO DE VIDRO RACHADO === */
+#cracked-glass-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 L80,80 M30,70 L70,30" stroke="%2300f7ff" stroke-width="0.5" opacity="0"/></svg>');
+  background-size: 100px 100px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* Responsividade melhorada */
+[data-crack-trigger]:hover ~ #cracked-glass-overlay,
+[data-crack-trigger]:hover #cracked-glass-overlay {
+  opacity: 0.8;
+  animation: crackEffect 0.5s forwards;
+}
+
+@keyframes crackEffect {
+  0% { background-size: 100px 100px; opacity: 0; }
+  50% { background-size: 50px 50px; opacity: 0.8; }
+  100% { background-size: 30px 30px; opacity: 0.5; }
+}
+
+/* === EFEITO DE BURACO NEGRO === */
+#blackhole-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -9998;
+  background: radial-gradient(circle at center, 
+    rgba(0, 0, 0, 0) 0%, 
+    rgba(0, 0, 0, 0.8) 50%, 
+    rgba(0, 0, 0, 1) 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.blackhole-active #blackhole-bg {
+  opacity: var(--blackhole-intensity);
+}
+
+/* === PARTÍCULAS CYBER === */
+#cyber-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -9999;
+}
+
+/* === TIPOGRAFIA CYBER === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.cyber-title {
+  font-size: 3.5rem;
+  background: var(--cyber-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
+}
+
+/* === BOTÕES E INTERAÇÕES === */
+.cyber-btn {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  border: 2px solid var(--cyber-blue);
+  color: var(--cyber-blue);
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cyber-btn:hover {
+  color: var(--cyber-black);
+  background: var(--cyber-blue);
+  box-shadow: var(--cyber-shadow-md);
+}
+
+.neon-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+  background: var(--cyber-gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.neon-btn:hover::before {
+  opacity: 0.3;
+}
+
+/* === ANIMAÇÕES === */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 3px); }
+  40% { transform: translate(-3px, -3px); }
+  60% { transform: translate(3px, 3px); }
+  80% { transform: translate(3px, -3px); }
+  100% { transform: translate(0); }
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch:hover {
+  animation: glitch 0.5s linear infinite;
+}
+
+/* === TERMINAL EFFECT === */
+.cyber-terminal {
+  background: var(--cyber-darker);
+  border: 1px solid var(--cyber-purple);
+  box-shadow: var(--cyber-shadow-lg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.terminal-header {
+  background: var(--cyber-dark);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--cyber-purple);
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-btn.red { background: #ff5f56; }
+.terminal-btn.yellow { background: #ffbd2e; }
+.terminal-btn.green { background: #27c93f; }
+
+.terminal-title {
+  margin-left: 1rem;
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--cyber-text-dim);
+  font-size: 0.9rem;
+}
+
+.terminal-body {
+  padding: 1.5rem;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.terminal-line {
+  margin-bottom: 1rem;
+}
+
+.prompt {
+  color: var(--cyber-accent);
+}
+
+.command {
+  color: var(--cyber-blue);
+}
+
+.terminal-output {
+  color: var(--cyber-text);
+  margin: 1rem 0;
+  line-height: 1.6;
+}
+
+.blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* === RESPONSIVIDADE === */
 @media (max-width: 1200px) {
   .hero-content {
     flex-direction: column;
@@ -72,14 +270,18 @@ body {
   .tech-stack {
     grid-template-columns: 1fr;
   }
+  
+  .cyber-title {
+    font-size: 2.5rem;
+  }
 }
 
 @media (max-width: 576px) {
-  .cyber-title.typewriter {
+  .cyber-title {
     font-size: 2rem;
   }
   
-  .cyber-subtitle.glitch {
+  .cyber-subtitle {
     font-size: 1.2rem;
   }
   
@@ -87,4 +289,30 @@ body {
     width: 250px;
     height: 250px;
   }
+  
+  .terminal-body {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* === ACESSIBILIDADE === */
+:focus-visible {
+  outline: 2px solid var(--cyber-blue);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--cyber-purple);
+  color: white;
+  padding: 0.8rem;
+  z-index: 10000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
 }
