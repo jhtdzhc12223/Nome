@@ -1,9 +1,16 @@
 // Efeitos específicos para a página de terminal
 document.addEventListener('DOMContentLoaded', function() {
-    // Simular digitação nos comandos
+    // Limpar intervalos quando sair da página
+    const animationIntervals = [];
+    
+    // 1. Simular digitação nos comandos (com prefers-reduced-motion)
     const commandLines = document.querySelectorAll('.command-line');
     
     commandLines.forEach(line => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return; // Não animar se o usuário preferir movimento reduzido
+        }
+
         const command = line.querySelector('.command');
         const text = command.textContent;
         command.textContent = '';
@@ -17,55 +24,62 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearInterval(typing);
             }
         }, 50);
+        
+        animationIntervals.push(typing);
     });
     
-    // Efeito de hover nos cards de exercícios
+    // 2. Efeito de hover nos cards de exercícios (otimizado)
     const exerciseCards = document.querySelectorAll('.exercise-card');
     
     exerciseCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
             const glitch = this.querySelector('.exercise-glitch');
-            glitch.style.opacity = '0.3';
+            if (glitch) glitch.style.opacity = '0.3';
         });
         
         card.addEventListener('mouseleave', function() {
             const glitch = this.querySelector('.exercise-glitch');
-            glitch.style.opacity = '0';
+            if (glitch) glitch.style.opacity = '0';
         });
     });
     
-    // Efeito de terminal ativo
+    // 3. Efeito de terminal ativo (otimizado)
     const terminal = document.querySelector('.cyber-terminal');
     
-    function terminalNoise() {
-        const noise = document.createElement('div');
-        noise.className = 'terminal-noise';
-        terminal.appendChild(noise);
+    if (terminal && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        function terminalNoise() {
+            const noise = document.createElement('div');
+            noise.className = 'terminal-noise';
+            terminal.appendChild(noise);
+            
+            setTimeout(() => {
+                noise.remove();
+            }, 100);
+        }
         
-        setTimeout(() => {
-            noise.remove();
-        }, 100);
+        const noiseInterval = setInterval(terminalNoise, 5000);
+        animationIntervals.push(noiseInterval);
     }
     
-    setInterval(terminalNoise, 5000);
-    
-    // Efeito de cursor piscando
+    // 4. Efeito de cursor piscando (com acessibilidade)
     const cursor = document.querySelector('.cursor');
     
     if (cursor) {
-        setInterval(() => {
+        const cursorInterval = setInterval(() => {
             cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
         }, 500);
+        
+        animationIntervals.push(cursorInterval);
     }
     
-    // Simular processamento
+    // 5. Simular processamento (otimizado)
     const progressBars = document.querySelectorAll('.progress-value');
     
     progressBars.forEach(bar => {
         let width = parseInt(bar.style.width);
         let direction = 1;
         
-        setInterval(() => {
+        const progressInterval = setInterval(() => {
             width += direction * 5;
             
             if (width >= 100) direction = -1;
@@ -73,5 +87,15 @@ document.addEventListener('DOMContentLoaded', function() {
             
             bar.style.width = `${width}%`;
         }, 300);
+        
+        animationIntervals.push(progressInterval);
+    });
+
+    // Limpar animações ao sair da página
+    window.addEventListener('beforeunload', () => {
+        animationIntervals.forEach(interval => clearInterval(interval));
     });
 });
+
+// Fallback para quando JS estiver desabilitado
+document.documentElement.classList.add('js-enabled');
