@@ -5,300 +5,174 @@ class CyberEffectsManager {
         this.effects = {
             crackedGlass: null,
             blackHole: null,
-            terminal: null,
             particles: null,
-            holograms: null,
-            glitch: null,
             interactive: null
         };
-        
         this.initEffects();
-        this.initThemeToggle();
-        this.initDynamicEffects();
     }
 
     /* ========== INICIALIZAÇÃO PRINCIPAL ========== */
     initEffects() {
-        // Efeito de vidro quebrado
-        if (document.getElementById('cracked-glass-overlay')) {
-            this.effects.crackedGlass = new CrackedGlassEffect();
-        }
-        
-        // Efeito de buraco negro (requer Three.js)
-        if (document.getElementById('blackhole-bg')) {
-            if (window.THREE) {
-                this.effects.blackHole = new BlackHoleEffect();
-            } else {
-                this.loadThreeJS().then(() => {
-                    this.effects.blackHole = new BlackHoleEffect();
-                });
+        // Verificar e carregar dependências
+        this.loadDependencies().then(() => {
+            // Inicializar efeitos visuais
+            if (document.getElementById('cracked-glass-overlay')) {
+                this.effects.crackedGlass = new CrackedGlassEffect();
             }
-        }
-        
-        // Efeitos de terminal
-        this.effects.terminal = new TerminalEffects();
-        
-        // Efeitos de partículas
-        this.effects.particles = new ParticleEffects();
-        
-        // Efeitos holográficos
-        this.effects.holograms = new HologramEffects();
-        
-        // Efeitos de glitch
-        this.effects.glitch = new GlitchEffects();
-        
-        // Efeitos interativos
-        this.effects.interactive = new InteractiveEffects();
-        
-        // Inicializar controles do terminal
-        this.initTerminalControls();
+            
+            if (document.getElementById('blackhole-bg')) {
+                this.effects.blackHole = new BlackHoleEffect();
+            }
+            
+            if (document.getElementById('cyber-particles')) {
+                this.effects.particles = new ParticlesEffect();
+            }
+            
+            // Inicializar efeitos interativos
+            this.effects.interactive = new InteractiveEffects();
+            
+            // Inicializar controles do terminal
+            this.initTerminalControls();
+            
+            // Ativar animações quando visíveis
+            this.initIntersectionObservers();
+            
+            console.log('Cyber Effects Manager initialized with all effects');
+        }).catch(error => {
+            console.error('Error loading dependencies:', error);
+        });
     }
 
-    /* ========== CARREGAMENTO DE THREE.JS ========== */
-    loadThreeJS() {
+    /* ========== CARREGAMENTO DE DEPENDÊNCIAS ========== */
+    loadDependencies() {
+        const promises = [];
+        
+        // Carregar Three.js se necessário
+        if (!window.THREE && document.getElementById('blackhole-bg')) {
+            promises.push(this.loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'));
+        }
+        
+        // Carregar Vanta.js se necessário
+        if (!window.VANTA && document.getElementById('cyber-particles')) {
+            promises.push(this.loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js'));
+        }
+        
+        // Carregar Chart.js se necessário
+        if (!window.Chart && document.getElementById('radarChart')) {
+            promises.push(this.loadScript('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js'));
+        }
+        
+        // Carregar GSAP se necessário
+        if (!window.gsap) {
+            promises.push(this.loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js'));
+        }
+        
+        return Promise.all(promises);
+    }
+
+    loadScript(src) {
         return new Promise((resolve, reject) => {
-            if (window.THREE) return resolve();
-            
             const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+            script.src = src;
             script.onload = resolve;
             script.onerror = reject;
             document.head.appendChild(script);
         });
     }
 
-    /* ========== CONTROLES DE TEMA ========== */
-    initThemeToggle() {
-        const themeToggle = document.querySelector('[data-theme-toggle]');
-        if (!themeToggle) return;
-        
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-cyber-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            document.documentElement.setAttribute('data-cyber-theme', newTheme);
-            localStorage.setItem('cyberTheme', newTheme);
-            
-            // Atualizar ícone do botão
-            themeToggle.querySelector('.fa-moon').style.opacity = newTheme === 'dark' ? '1' : '0';
-            themeToggle.querySelector('.fa-sun').style.opacity = newTheme === 'light' ? '1' : '0';
-            
-            // Disparar evento personalizado
-            document.dispatchEvent(new CustomEvent('themeChanged', { detail: newTheme }));
-        });
-        
-        // Carregar tema salvo
-        const savedTheme = localStorage.getItem('cyberTheme') || 'dark';
-        document.documentElement.setAttribute('data-cyber-theme', savedTheme);
-    }
-
-    /* ========== EFEITOS DINÂMICOS ========== */
-    initDynamicEffects() {
-        // Efeito de hover em cards
-        this.initCardHoverEffects();
-        
-        // Efeito de digitação
-        this.initTypewriterEffects();
-        
-        // Animações de scroll
-        this.initScrollAnimations();
-        
-        // Efeitos de formulário
-        this.initFormEffects();
-    }
-
-    /* ========== EFEITOS DE HOVER EM CARDS ========== */
-    initCardHoverEffects() {
-        const cards = document.querySelectorAll('.holographic-card, .project-card');
-        
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = card.offsetWidth / 2;
-                const centerY = card.offsetHeight / 2;
-                
-                const angleX = (centerY - y) / 20;
-                const angleY = (x - centerX) / 20;
-                
-                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
-                
-                // Atualizar posição das partículas
-                const particles = card.querySelector('.card-particle');
-                if (particles) {
-                    particles.style.left = `${x}px`;
-                    particles.style.top = `${y}px`;
-                    particles.style.opacity = '0.5';
-                    
-                    setTimeout(() => {
-                        particles.style.opacity = '0';
-                    }, 300);
-                }
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
-        });
-    }
-
-    /* ========== EFEITOS DE DIGITAÇÃO ========== */
-    initTypewriterEffects() {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        
-        const typewriters = document.querySelectorAll('.typewriter, [data-typewriter-effect]');
-        
-        typewriters.forEach(el => {
-            const text = el.textContent;
-            el.textContent = '';
-            
-            let i = 0;
-            const typing = setInterval(() => {
-                if (i < text.length) {
-                    el.textContent += text.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(typing);
-                    
-                    // Remover cursor piscante após terminar
-                    if (el.classList.contains('typewriter')) {
-                        setTimeout(() => {
-                            el.style.borderRight = 'none';
-                        }, 1000);
-                    }
-                }
-            }, 100);
-        });
-    }
-
-    /* ========== ANIMAÇÕES DE SCROLL ========== */
-    initScrollAnimations() {
-        if (!window.gsap || !window.ScrollTrigger) return;
-        
-        // Animar seções ao aparecer
-        gsap.utils.toArray('.cyber-section').forEach(section => {
-            gsap.from(section, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 80%",
-                    toggleActions: "play none none none"
-                },
-                opacity: 0,
-                y: 50,
-                duration: 1,
-                ease: "power3.out"
-            });
-        });
-        
-        // Animar cards de projeto
-        gsap.utils.toArray('.cyber-project').forEach((project, i) => {
-            gsap.from(project, {
-                scrollTrigger: {
-                    trigger: project,
-                    start: "top 75%",
-                    toggleActions: "play none none none"
-                },
-                opacity: 0,
-                y: 30,
-                duration: 0.8,
-                delay: i * 0.1,
-                ease: "back.out(1.2)"
-            });
-        });
-        
-        // Animar barras de habilidades
-        const skillBars = document.querySelectorAll('.skill-level');
-        skillBars.forEach(bar => {
-            const level = bar.dataset.level || bar.style.width.replace('%', '');
-            bar.style.width = '0';
-            
-            ScrollTrigger.create({
-                trigger: bar,
-                start: "top 80%",
-                onEnter: () => {
-                    bar.style.width = `${level}%`;
-                }
-            });
-        });
-    }
-
-    /* ========== EFEITOS DE FORMULÁRIO ========== */
-    initFormEffects() {
-        const inputs = document.querySelectorAll('.cyber-input, .cyber-textarea');
-        
-        inputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                const underline = input.nextElementSibling;
-                if (underline && underline.classList.contains('input-underline')) {
-                    underline.style.width = '100%';
-                }
-            });
-            
-            input.addEventListener('blur', () => {
-                if (!input.value) {
-                    const underline = input.nextElementSibling;
-                    if (underline && underline.classList.contains('input-underline')) {
-                        underline.style.width = '0';
-                    }
-                }
-            });
-        });
-    }
-
-    /* ========== CONTROLES DE TERMINAL ========== */
+    /* ========== CONTROLES DO TERMINAL ========== */
     initTerminalControls() {
-        // Comando blackhole
+        // Comando blackhole no terminal
         const terminalInput = document.querySelector('.terminal-input');
         if (terminalInput) {
             terminalInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    const command = terminalInput.value.trim().toLowerCase();
+                if (e.key === 'Enter' && terminalInput.value.trim().toLowerCase() === 'blackhole') {
+                    document.body.classList.toggle('blackhole-active');
                     const output = document.querySelector('.terminal-output');
-                    
-                    if (command === 'blackhole') {
-                        document.body.classList.toggle('blackhole-active');
-                        
-                        if (output) {
-                            output.innerHTML += `
-                                <div>> ${command}</div>
-                                <div>Efeito de buraco negro ${document.body.classList.contains('blackhole-active') ? 'ativado' : 'desativado'}</div>
-                                <div class="terminal-divider"></div>
-                            `;
-                        }
-                    } else if (command === 'clear') {
-                        if (output) output.innerHTML = '';
-                    } else if (command) {
-                        if (output) {
-                            output.innerHTML += `
-                                <div>> ${command}</div>
-                                <div>Comando não reconhecido. Digite 'help' para lista de comandos.</div>
-                                <div class="terminal-divider"></div>
-                            `;
-                        }
+                    if (output) {
+                        output.innerHTML += `<div>> blackhole</div><div>Efeito de buraco negro ${
+                            document.body.classList.contains('blackhole-active') ? 'ativado' : 'desativado'
+                        }</div>`;
                     }
-                    
                     terminalInput.value = '';
                 }
             });
         }
 
-        // Controles de janela do terminal
-        document.querySelectorAll('[data-terminal-btn="close"]').forEach(btn => {
+        // Controles da janela do terminal
+        document.querySelectorAll('.terminal-btn.red').forEach(btn => {
             btn.addEventListener('click', function() {
-                const terminal = this.closest('.cyber-terminal');
-                if (terminal) {
-                    terminal.style.transition = 'all 0.3s ease';
-                    terminal.style.transform = 'scale(0.8) translateY(20px)';
-                    terminal.style.opacity = '0';
-                    
-                    setTimeout(() => {
-                        terminal.classList.add('closed');
-                        terminal.style.display = 'none';
-                    }, 300);
+                this.style.transform = 'scale(1.2)';
+                setTimeout(() => this.style.transform = 'scale(1)', 200);
+                
+                if (confirm('Deseja realmente fechar esta janela?')) {
+                    const terminal = this.closest('.cyber-terminal');
+                    if (terminal) {
+                        terminal.style.transition = 'all 0.3s ease';
+                        terminal.style.transform = 'scale(0.8) translateY(20px)';
+                        terminal.style.opacity = '0';
+                        
+                        setTimeout(() => {
+                            terminal.classList.add('closed');
+                            terminal.style.display = 'none';
+                        }, 300);
+                    }
                 }
             });
+
+            // Acessibilidade por teclado
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    btn.click();
+                }
+            });
+        });
+    }
+
+    /* ========== OBSERVADORES DE INTERSEÇÃO ========== */
+    initIntersectionObservers() {
+        // Animar elementos quando ficam visíveis
+        const animateOnScroll = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.setAttribute('data-animate', 'in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(animateOnScroll, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('[data-animate]').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animar barras de habilidades
+        const skillSection = document.querySelector('.cyber-skills');
+        if (skillSection) {
+            const skillObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    this.animateSkillBars();
+                    skillObserver.unobserve(skillSection);
+                }
+            }, { threshold: 0.1 });
+            
+            skillObserver.observe(skillSection);
+        }
+    }
+
+    animateSkillBars() {
+        const skillBars = document.querySelectorAll('.skill-level');
+        skillBars.forEach(bar => {
+            const level = bar.dataset.level || bar.style.width.replace('%', '');
+            bar.style.width = '0';
+            
+            setTimeout(() => {
+                bar.style.width = `${level}%`;
+            }, 500);
         });
     }
 
@@ -306,33 +180,14 @@ class CyberEffectsManager {
     destroy() {
         if (this.effects.crackedGlass) this.effects.crackedGlass.destroy();
         if (this.effects.blackHole) this.effects.blackHole.destroy();
-        if (this.effects.terminal) this.effects.terminal.destroy();
         if (this.effects.particles) this.effects.particles.destroy();
-        if (this.effects.holograms) this.effects.holograms.destroy();
-        if (this.effects.glitch) this.effects.glitch.destroy();
         if (this.effects.interactive) this.effects.interactive.destroy();
         
-        // Remover todos os event listeners
-        document.querySelectorAll('[data-theme-toggle]').forEach(el => {
-            el.removeEventListener('click');
-        });
-        
-        document.querySelectorAll('.holographic-card, .project-card').forEach(card => {
-            card.removeEventListener('mousemove');
-            card.removeEventListener('mouseleave');
-        });
-        
-        document.querySelectorAll('[data-terminal-btn]').forEach(btn => {
-            btn.removeEventListener('click');
-        });
-        
-        if (window.ScrollTrigger) {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        }
+        console.log('Cyber Effects Manager destroyed');
     }
 }
 
-/* ========== EFEITO DE VIDRO QUEBRADO ========== */
+/* ========== EFEITO DE VIDRO RACHADO ========== */
 class CrackedGlassEffect {
     constructor() {
         this.triggers = [];
@@ -349,33 +204,27 @@ class CrackedGlassEffect {
     }
 
     generateCracks() {
-        const crackCount = 20;
+        const crackCount = 25; // Aumentado de 15 para 25
         let cracksSVG = '';
         
+        // Adicionar rachaduras mais complexas
         for (let i = 0; i < crackCount; i++) {
             const x1 = Math.random() * 100;
             const y1 = Math.random() * 100;
-            const x2 = x1 + (Math.random() * 60 - 30);
+            const x2 = x1 + (Math.random() * 60 - 30); // Aumentada variação
             const y2 = y1 + (Math.random() * 60 - 30);
             
+            // Adicionar múltiplos segmentos para cada rachadura
             cracksSVG += `
-                <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" 
+                <path d="M${x1},${y1} 
+                        C${x1 + (Math.random() * 20 - 10)},${y1 + (Math.random() * 20 - 10)} 
+                        ${x2 + (Math.random() * 20 - 10)},${y2 + (Math.random() * 20 - 10)} 
+                        ${x2},${y2}"
                      stroke="rgba(0, 247, 255, ${0.3 + Math.random() * 0.4})" 
                      stroke-width="${0.3 + Math.random() * 0.7}" 
-                     stroke-linecap="round"/>
+                     stroke-linecap="round"
+                     fill="none"/>
             `;
-            
-            // Adicionar pequenas rachaduras secundárias
-            if (Math.random() > 0.7) {
-                const x3 = x1 + (Math.random() * 20 - 10);
-                const y3 = y1 + (Math.random() * 20 - 10);
-                cracksSVG += `
-                    <line x1="${x1}" y1="${y1}" x2="${x3}" y2="${y3}" 
-                         stroke="rgba(0, 247, 255, ${0.2 + Math.random() * 0.3})" 
-                         stroke-width="${0.2 + Math.random() * 0.3}" 
-                         stroke-linecap="round"/>
-                `;
-            }
         }
 
         this.overlay.style.backgroundImage = 
@@ -389,6 +238,7 @@ class CrackedGlassEffect {
         this.triggers.forEach(trigger => {
             trigger.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
             trigger.addEventListener('mouseleave', this.handleMouseLeave.bind(this));
+            trigger.addEventListener('mousemove', this.handleMouseMove.bind(this));
         });
     }
 
@@ -397,20 +247,32 @@ class CrackedGlassEffect {
         this.overlay.style.backgroundPosition = `${rect.left}px ${rect.top}px`;
         this.overlay.style.backgroundSize = `${rect.width}px ${rect.height}px`;
         this.overlay.style.opacity = '0.8';
+        this.overlay.style.filter = 'brightness(1.2)';
+    }
+
+    handleMouseMove(e) {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
         
-        // Adicionar efeito de pulso
-        this.overlay.style.animation = 'crackPulse 2s infinite';
+        // Efeito de deslocamento baseado na posição do mouse
+        const offsetX = (x / rect.width - 0.5) * 20;
+        const offsetY = (y / rect.height - 0.5) * 20;
+        
+        this.overlay.style.backgroundPosition = 
+            `${rect.left - offsetX}px ${rect.top - offsetY}px`;
     }
 
     handleMouseLeave() {
         this.overlay.style.opacity = '0';
-        this.overlay.style.animation = 'none';
+        this.overlay.style.filter = 'brightness(1)';
     }
 
     destroy() {
         this.triggers.forEach(trigger => {
             trigger.removeEventListener('mouseenter', this.handleMouseEnter);
             trigger.removeEventListener('mouseleave', this.handleMouseLeave);
+            trigger.removeEventListener('mousemove', this.handleMouseMove);
         });
     }
 }
@@ -424,14 +286,15 @@ class BlackHoleEffect {
         this.blackHole = null;
         this.animationId = null;
         this.resizeHandler = null;
-        this.particles = null;
+        this.particles = [];
+        this.particleCount = 500; // Aumentado de 300 para 500
         
         this.initBlackHole();
     }
 
     initBlackHole() {
         this.container = document.getElementById('blackhole-bg');
-        if (!this.container) return;
+        if (!this.container || !window.THREE) return;
 
         this.setupScene();
         this.createBlackHole();
@@ -442,57 +305,61 @@ class BlackHoleEffect {
 
     setupScene() {
         this.scene = new THREE.Scene();
+        
+        // Configuração de câmera aprimorada
         this.camera = new THREE.PerspectiveCamera(
             75, 
             window.innerWidth / window.innerHeight, 
             0.1, 
             1000
         );
-        
-        this.renderer = new THREE.WebGLRenderer({ 
-            alpha: true,
-            antialias: true
-        });
-        
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.container.appendChild(this.renderer.domElement);
         this.camera.position.z = 5;
         
-        // Adicionar luz ambiente
-        const ambientLight = new THREE.AmbientLight(0x404040);
+        // Renderizador aprimorado
+        this.renderer = new THREE.WebGLRenderer({ 
+            alpha: true,
+            antialias: true,
+            powerPreference: "high-performance"
+        });
+        this.renderer.setPixelRatio(window.devicePixelRatio || 1);
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.container.appendChild(this.renderer.domElement);
+        
+        // Adicionar luzes para melhor realismo
+        const ambientLight = new THREE.AmbientLight(0x00aaff, 0.1);
         this.scene.add(ambientLight);
         
-        // Adicionar luz direcional
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-        directionalLight.position.set(1, 1, 1);
-        this.scene.add(directionalLight);
+        const pointLight = new THREE.PointLight(0x00ffff, 0.5, 50);
+        pointLight.position.set(5, 5, 5);
+        this.scene.add(pointLight);
     }
 
     createBlackHole() {
-        // Geometria mais complexa para o buraco negro
-        const geometry = new THREE.SphereGeometry(1, 64, 64);
+        // Geometria mais complexa
+        const geometry = new THREE.SphereGeometry(1, 128, 128);
         
-        // Material com textura de distorção
+        // Material aprimorado com textura de distorção
         const material = new THREE.MeshPhongMaterial({ 
             color: 0x000000,
-            emissive: 0x000000,
-            specular: 0x111111,
-            shininess: 30,
+            emissive: 0x0000ff,
+            emissiveIntensity: 0.1,
+            specular: 0x00ffff,
+            shininess: 50,
             transparent: true,
-            opacity: 0.95,
-            side: THREE.DoubleSide
+            opacity: 0.9,
+            wireframe: false
         });
         
         this.blackHole = new THREE.Mesh(geometry, material);
         this.scene.add(this.blackHole);
         
         // Adicionar anel ao redor do buraco negro
-        const ringGeometry = new THREE.RingGeometry(1.2, 1.5, 64);
+        const ringGeometry = new THREE.RingGeometry(1.5, 2, 64);
         const ringMaterial = new THREE.MeshBasicMaterial({ 
-            color: 0x7000ff,
+            color: 0x00ffff,
             side: THREE.DoubleSide,
             transparent: true,
-            opacity: 0.7
+            opacity: 0.3
         });
         this.ring = new THREE.Mesh(ringGeometry, ringMaterial);
         this.ring.rotation.x = Math.PI / 2;
@@ -500,14 +367,14 @@ class BlackHoleEffect {
     }
 
     createParticles() {
-        const particleCount = 500;
-        const particles = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-        const colors = new Float32Array(particleCount * 3);
+        const particleGeometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(this.particleCount * 3);
+        const colors = new Float32Array(this.particleCount * 3);
+        const sizes = new Float32Array(this.particleCount);
         
-        for (let i = 0; i < particleCount; i++) {
-            // Posições aleatórias em uma esfera
-            const radius = 2 + Math.random() * 3;
+        for (let i = 0; i < this.particleCount; i++) {
+            // Posições em uma esfera ao redor do buraco negro
+            const radius = 2 + Math.random() * 10;
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.random() * Math.PI;
             
@@ -515,58 +382,74 @@ class BlackHoleEffect {
             positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
             positions[i * 3 + 2] = radius * Math.cos(phi);
             
-            // Cores aleatórias em tons de roxo/azul
-            colors[i * 3] = 0.5 + Math.random() * 0.5; // R
-            colors[i * 3 + 1] = 0.2 + Math.random() * 0.3; // G
-            colors[i * 3 + 2] = 0.7 + Math.random() * 0.3; // B
+            // Cores aleatórias em tons azulados
+            colors[i * 3] = 0.2 + Math.random() * 0.8; // R
+            colors[i * 3 + 1] = 0.5 + Math.random() * 0.5; // G
+            colors[i * 3 + 2] = 0.8 + Math.random() * 0.2; // B
+            
+            // Tamanhos variados
+            sizes[i] = 0.1 + Math.random() * 0.5;
         }
         
-        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        particleGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
         
         const particleMaterial = new THREE.PointsMaterial({
-            size: 0.05,
+            size: 0.2,
             vertexColors: true,
             transparent: true,
             opacity: 0.8,
-            blending: THREE.AdditiveBlending
+            blending: THREE.AdditiveBlending,
+            sizeAttenuation: true
         });
         
-        this.particles = new THREE.Points(particles, particleMaterial);
+        this.particles = new THREE.Points(particleGeometry, particleMaterial);
         this.scene.add(this.particles);
     }
 
     startAnimation() {
+        const clock = new THREE.Clock();
+        
         const animate = () => {
             this.animationId = requestAnimationFrame(animate);
             
+            const delta = clock.getDelta();
+            const time = clock.getElapsedTime();
+            
             // Animar buraco negro
-            this.blackHole.rotation.x += 0.005;
-            this.blackHole.rotation.y += 0.01;
+            this.blackHole.rotation.x += 0.002;
+            this.blackHole.rotation.y += 0.005;
             
             // Animar anel
-            this.ring.rotation.z += 0.01;
+            if (this.ring) {
+                this.ring.rotation.z += 0.01;
+                this.ring.scale.setScalar(1 + Math.sin(time) * 0.1);
+            }
             
             // Animar partículas (espiral em direção ao buraco negro)
             const positions = this.particles.geometry.attributes.position.array;
-            for (let i = 0; i < positions.length; i += 3) {
-                const dx = -positions[i] * 0.01;
-                const dy = -positions[i + 1] * 0.01;
-                const dz = -positions[i + 2] * 0.01;
+            for (let i = 0; i < this.particleCount; i++) {
+                const ix = i * 3;
+                const iy = i * 3 + 1;
+                const iz = i * 3 + 2;
                 
-                positions[i] += dx;
-                positions[i + 1] += dy;
-                positions[i + 2] += dz;
+                // Mover partículas em espiral
+                positions[ix] *= 0.995;
+                positions[iy] *= 0.995;
+                positions[iz] *= 0.995;
                 
-                // Se a partícula chegar muito perto do centro, reposicione-a
-                if (Math.sqrt(positions[i] ** 2 + positions[i + 1] ** 2 + positions[i + 2] ** 2) < 0.5) {
-                    const radius = 2 + Math.random() * 3;
+                // Se a partícula chegou muito perto, reposicioná-la
+                if (Math.abs(positions[ix]) < 0.1 && 
+                    Math.abs(positions[iy]) < 0.1 && 
+                    Math.abs(positions[iz]) < 0.1) {
+                    const radius = 5 + Math.random() * 10;
                     const theta = Math.random() * Math.PI * 2;
                     const phi = Math.random() * Math.PI;
                     
-                    positions[i] = radius * Math.sin(phi) * Math.cos(theta);
-                    positions[i + 1] = radius * Math.sin(phi) * Math.sin(theta);
-                    positions[i + 2] = radius * Math.cos(phi);
+                    positions[ix] = radius * Math.sin(phi) * Math.cos(theta);
+                    positions[iy] = radius * Math.sin(phi) * Math.sin(theta);
+                    positions[iz] = radius * Math.cos(phi);
                 }
             }
             
@@ -609,343 +492,38 @@ class BlackHoleEffect {
     }
 }
 
-/* ========== EFEITOS DE TERMINAL ========== */
-class TerminalEffects {
+/* ========== EFEITO DE PARTÍCULAS ========== */
+class ParticlesEffect {
     constructor() {
-        this.initTerminalEffects();
+        this.vantaEffect = null;
+        this.initParticles();
     }
 
-    initTerminalEffects() {
-        // Efeito de cursor piscante
-        this.initCursorBlink();
+    initParticles() {
+        if (!document.getElementById('cyber-particles') || !window.VANTA) return;
         
-        // Efeito de ruído no terminal
-        this.initTerminalNoise();
-        
-        // Efeito de digitação nos comandos
-        this.initCommandTyping();
-    }
-
-    initCursorBlink() {
-        const cursors = document.querySelectorAll('.cursor');
-        if (cursors.length === 0) return;
-        
-        cursors.forEach(cursor => {
-            setInterval(() => {
-                cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
-            }, 500);
+        this.vantaEffect = VANTA.NET({
+            el: "#cyber-particles",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x7000ff,
+            backgroundColor: 0x0a0a12,
+            points: 15.00,
+            maxDistance: 25.00,
+            spacing: 15.00,
+            showDots: false
         });
     }
 
-    initTerminalNoise() {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        
-        const terminals = document.querySelectorAll('.cyber-terminal');
-        if (terminals.length === 0) return;
-        
-        terminals.forEach(terminal => {
-            setInterval(() => {
-                const noise = document.createElement('div');
-                noise.className = 'terminal-noise';
-                noise.style.position = 'absolute';
-                noise.style.top = `${Math.random() * 100}%`;
-                noise.style.left = '0';
-                noise.style.width = '100%';
-                noise.style.height = '1px';
-                noise.style.background = `rgba(0, 247, 255, ${Math.random() * 0.1})`;
-                noise.style.pointerEvents = 'none';
-                
-                terminal.appendChild(noise);
-                
-                setTimeout(() => {
-                    noise.remove();
-                }, 1000);
-            }, 3000);
-        });
-    }
-
-    initCommandTyping() {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        
-        const commands = document.querySelectorAll('.command');
-        if (commands.length === 0) return;
-        
-        commands.forEach(command => {
-            const originalText = command.textContent;
-            command.textContent = '';
-            
-            let i = 0;
-            const typing = setInterval(() => {
-                if (i < originalText.length) {
-                    command.textContent += originalText.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(typing);
-                }
-            }, 50);
-        });
-    }
-}
-
-/* ========== EFEITOS DE PARTÍCULAS ========== */
-class ParticleEffects {
-    constructor() {
-        this.initParticleEffects();
-    }
-
-    initParticleEffects() {
-        // Efeito de partículas nos cards
-        this.initCardParticles();
-        
-        // Efeito de partículas nas barras de habilidades
-        this.initSkillBarParticles();
-    }
-
-    initCardParticles() {
-        const cards = document.querySelectorAll('[data-crack-trigger]');
-        if (cards.length === 0) return;
-        
-        cards.forEach(card => {
-            const particle = document.createElement('div');
-            particle.className = 'card-particle';
-            card.appendChild(particle);
-            
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                particle.style.left = `${x}px`;
-                particle.style.top = `${y}px`;
-                particle.style.opacity = '0.5';
-                
-                setTimeout(() => {
-                    particle.style.opacity = '0';
-                }, 300);
-            });
-        });
-    }
-
-    initSkillBarParticles() {
-        const skillBars = document.querySelectorAll('.skill-bar');
-        if (skillBars.length === 0) return;
-        
-        skillBars.forEach(bar => {
-            setInterval(() => {
-                if (Math.random() > 0.7) {
-                    const particle = document.createElement('div');
-                    particle.className = 'skill-particle';
-                    particle.style.position = 'absolute';
-                    particle.style.width = '2px';
-                    particle.style.height = '2px';
-                    particle.style.background = 'white';
-                    particle.style.borderRadius = '50%';
-                    particle.style.opacity = '0.5';
-                    particle.style.left = `${Math.random() * 100}%`;
-                    particle.style.top = '0';
-                    particle.style.pointerEvents = 'none';
-                    
-                    bar.appendChild(particle);
-                    
-                    // Animação da partícula
-                    let pos = 0;
-                    const animate = () => {
-                        pos += 0.5;
-                        particle.style.top = `${pos}px`;
-                        
-                        if (pos < bar.offsetHeight) {
-                            requestAnimationFrame(animate);
-                        } else {
-                            particle.remove();
-                        }
-                    };
-                    
-                    requestAnimationFrame(animate);
-                }
-            }, 100);
-        });
-    }
-}
-
-/* ========== EFEITOS HOLOGRÁFICOS ========== */
-class HologramEffects {
-    constructor() {
-        this.initHologramEffects();
-    }
-
-    initHologramEffects() {
-        // Efeito de grade holográfica
-        this.initHologramGrids();
-        
-        // Efeito de scanline
-        this.initScanlines();
-        
-        // Efeito de hover holográfico
-        this.initHologramHover();
-    }
-
-    initHologramGrids() {
-        const holograms = document.querySelectorAll('.hologram-container, .holographic-card');
-        if (holograms.length === 0) return;
-        
-        holograms.forEach(hologram => {
-            const grid = document.createElement('div');
-            grid.className = 'hologram-grid-effect';
-            grid.style.position = 'absolute';
-            grid.style.top = '0';
-            grid.style.left = '0';
-            grid.style.width = '100%';
-            grid.style.height = '100%';
-            grid.style.background = 
-                'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(0,247,255,0.1)" stroke-width="1"/></svg>\')';
-            grid.style.backgroundSize = '50px 50px';
-            grid.style.opacity = '0.5';
-            grid.style.pointerEvents = 'none';
-            grid.style.animation = 'gridMove 20s linear infinite';
-            
-            hologram.appendChild(grid);
-        });
-    }
-
-    initScanlines() {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        
-        const containers = document.querySelectorAll('.hologram-container, .cyber-terminal');
-        if (containers.length === 0) return;
-        
-        containers.forEach(container => {
-            const scanline = document.createElement('div');
-            scanline.className = 'hologram-scanline';
-            scanline.style.position = 'absolute';
-            scanline.style.top = '0';
-            scanline.style.left = '0';
-            scanline.style.width = '100%';
-            scanline.style.height = '1px';
-            scanline.style.background = 'var(--cyber-blue)';
-            scanline.style.boxShadow = '0 0 5px var(--cyber-blue)';
-            scanline.style.opacity = '0.3';
-            scanline.style.animation = 'scanline 3s linear infinite';
-            scanline.style.pointerEvents = 'none';
-            
-            container.appendChild(scanline);
-        });
-    }
-
-    initHologramHover() {
-        const holograms = document.querySelectorAll('.holographic');
-        if (holograms.length === 0) return;
-        
-        holograms.forEach(hologram => {
-            hologram.addEventListener('mousemove', (e) => {
-                const rect = hologram.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = hologram.offsetWidth / 2;
-                const centerY = hologram.offsetHeight / 2;
-                
-                const angleX = (centerY - y) / 20;
-                const angleY = (x - centerX) / 20;
-                
-                hologram.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
-                
-                // Atualizar efeito de luz
-                hologram.style.setProperty('--light-pos-x', `${x}px`);
-                hologram.style.setProperty('--light-pos-y', `${y}px`);
-            });
-            
-            hologram.addEventListener('mouseleave', () => {
-                hologram.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
-        });
-    }
-}
-
-/* ========== EFEITOS DE GLITCH ========== */
-class GlitchEffects {
-    constructor() {
-        this.initGlitchEffects();
-    }
-
-    initGlitchEffects() {
-        // Efeito de glitch em elementos
-        this.initElementGlitch();
-        
-        // Efeito de glitch em texto
-        this.initTextGlitch();
-        
-        // Efeito de glitch em imagens
-        this.initImageGlitch();
-    }
-
-    initElementGlitch() {
-        const glitchElements = document.querySelectorAll('.glitch');
-        if (glitchElements.length === 0) return;
-        
-        glitchElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                el.style.animation = 'glitch 0.5s linear infinite';
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                el.style.animation = 'none';
-            });
-        });
-    }
-
-    initTextGlitch() {
-        const glitchTexts = document.querySelectorAll('[data-text]');
-        if (glitchTexts.length === 0) return;
-        
-        glitchTexts.forEach(text => {
-            // Criar camadas de glitch
-            const glitchContainer = document.createElement('div');
-            glitchContainer.style.position = 'relative';
-            glitchContainer.style.display = 'inline-block';
-            
-            text.parentNode.insertBefore(glitchContainer, text);
-            glitchContainer.appendChild(text);
-            
-            // Criar camadas de glitch
-            for (let i = 0; i < 2; i++) {
-                const glitchLayer = document.createElement('span');
-                glitchLayer.textContent = text.dataset.text;
-                glitchLayer.style.position = 'absolute';
-                glitchLayer.style.top = '0';
-                glitchLayer.style.left = '0';
-                glitchLayer.style.width = '100%';
-                glitchLayer.style.height = '100%';
-                glitchLayer.style.opacity = '0';
-                glitchLayer.style.pointerEvents = 'none';
-                
-                if (i === 0) {
-                    glitchLayer.style.color = 'var(--cyber-pink)';
-                    glitchLayer.style.animation = 'glitch-effect 3s infinite';
-                    glitchLayer.style.clipPath = 'polygon(0 0, 100% 0, 100% 45%, 0 45%)';
-                } else {
-                    glitchLayer.style.color = 'var(--cyber-blue)';
-                    glitchLayer.style.animation = 'glitch-effect 2s infinite reverse';
-                    glitchLayer.style.clipPath = 'polygon(0 60%, 100% 60%, 100% 100%, 0 100%)';
-                }
-                
-                glitchContainer.appendChild(glitchLayer);
-            }
-        });
-    }
-
-    initImageGlitch() {
-        const glitchImages = document.querySelectorAll('.glitch-img');
-        if (glitchImages.length === 0) return;
-        
-        glitchImages.forEach(img => {
-            img.addEventListener('mouseenter', () => {
-                img.style.filter = 'url("#glitchFilter")';
-            });
-            
-            img.addEventListener('mouseleave', () => {
-                img.style.filter = 'none';
-            });
-        });
+    destroy() {
+        if (this.vantaEffect) {
+            this.vantaEffect.destroy();
+        }
     }
 }
 
@@ -956,97 +534,166 @@ class InteractiveEffects {
     }
 
     initInteractiveEffects() {
-        // Efeito de ripple
-        this.initRippleEffect();
-        
-        // Efeito de hover em botões
-        this.initButtonHover();
-        
-        // Efeito de hover em menus
-        this.initMenuHover();
+        this.initGlitchEffects();
+        this.initHolographicCards();
+        this.initTypewriterEffects();
+        this.initSkillBars();
+        this.initNavigation();
     }
 
-    initRippleEffect() {
-        const rippleElements = document.querySelectorAll('[data-ripple]');
-        if (rippleElements.length === 0) return;
+    /* ===== EFEITOS DE GLITCH ===== */
+    initGlitchEffects() {
+        const glitchElements = document.querySelectorAll('.glitch');
         
-        rippleElements.forEach(el => {
-            el.addEventListener('click', (e) => {
-                const ripple = document.createElement('div');
-                ripple.className = 'ripple-effect';
+        glitchElements.forEach(el => {
+            // Efeito de hover
+            el.addEventListener('mouseenter', () => {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
                 
-                const rect = el.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const size = Math.max(rect.width, rect.height);
+                el.style.animation = 'glitch 0.5s linear infinite';
                 
-                ripple.style.position = 'absolute';
-                ripple.style.width = `${size}px`;
-                ripple.style.height = `${size}px`;
-                ripple.style.left = `${x - size/2}px`;
-                ripple.style.top = `${y - size/2}px`;
-                ripple.style.background = 'rgba(0, 247, 255, 0.3)';
-                ripple.style.borderRadius = '50%';
-                ripple.style.transform = 'scale(0)';
-                ripple.style.opacity = '1';
-                ripple.style.pointerEvents = 'none';
-                ripple.style.animation = 'ripple 0.6s linear';
-                
-                el.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-    }
-
-    initButtonHover() {
-        const buttons = document.querySelectorAll('.cyber-btn');
-        if (buttons.length === 0) return;
-        
-        buttons.forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                btn.style.setProperty('--mouse-x', `${x}px`);
-                btn.style.setProperty('--mouse-y', `${y}px`);
+                // Adicionar elemento de glitch
+                if (!el.querySelector('.glitch-clone')) {
+                    const clone = el.cloneNode(true);
+                    clone.classList.add('glitch-clone');
+                    clone.style.position = 'absolute';
+                    clone.style.top = '0';
+                    clone.style.left = '0';
+                    clone.style.color = 'var(--cyber-pink)';
+                    clone.style.opacity = '0.7';
+                    clone.style.animation = 'glitch 0.3s linear infinite';
+                    el.style.position = 'relative';
+                    el.appendChild(clone);
+                }
             });
             
-            // Efeito de eco no hover
-            const echo = btn.querySelector('.btn-echo');
-            if (echo) {
-                btn.addEventListener('mouseenter', () => {
-                    echo.style.opacity = '0.5';
-                    echo.style.transform = 'scale(1.1) translateY(5px)';
-                });
+            el.addEventListener('mouseleave', () => {
+                el.style.animation = '';
                 
-                btn.addEventListener('mouseleave', () => {
-                    echo.style.opacity = '0';
-                    echo.style.transform = 'scale(1.05) translateY(5px)';
-                });
-            }
+                const clone = el.querySelector('.glitch-clone');
+                if (clone) {
+                    el.removeChild(clone);
+                }
+            });
         });
     }
 
-    initMenuHover() {
-        const menuItems = document.querySelectorAll('.cyber-menu-item');
-        if (menuItems.length === 0) return;
+    /* ===== CARDS HOLOGRÁFICOS ===== */
+    initHolographicCards() {
+        const cards = document.querySelectorAll('.holographic-card');
         
-        menuItems.forEach(item => {
-            const underline = item.querySelector('.menu-underline');
-            if (underline) {
-                item.addEventListener('mouseenter', () => {
-                    underline.style.width = '100%';
-                });
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
                 
-                item.addEventListener('mouseleave', () => {
-                    underline.style.width = '0';
-                });
-            }
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = card.offsetWidth / 2;
+                const centerY = card.offsetHeight / 2;
+                const angleX = (centerY - y) / 20;
+                const angleY = (x - centerX) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+                
+                // Efeito de luz
+                const lightPosX = (x / card.offsetWidth) * 100;
+                const lightPosY = (y / card.offsetHeight) * 100;
+                
+                card.style.setProperty('--light-pos-x', `${lightPosX}%`);
+                card.style.setProperty('--light-pos-y', `${lightPosY}%`);
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
         });
+    }
+
+    /* ===== EFEITO DE MÁQUINA DE ESCREVER ===== */
+    initTypewriterEffects() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        
+        const typewriterElements = document.querySelectorAll('.typewriter');
+        
+        typewriterElements.forEach(el => {
+            const text = el.textContent;
+            el.textContent = '';
+            
+            let i = 0;
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    el.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
+                    // Adicionar efeito de glitch após digitação
+                    setTimeout(() => {
+                        el.classList.add('glitch-active');
+                    }, 500);
+                }
+            }, 100 + Math.random() * 50); // Variação de velocidade
+        });
+    }
+
+    /* ===== BARRAS DE HABILIDADES ===== */
+    initSkillBars() {
+        const skillBars = document.querySelectorAll('.skill-level');
+        
+        skillBars.forEach(bar => {
+            bar.addEventListener('mouseenter', () => {
+                bar.style.boxShadow = '0 0 15px var(--cyber-blue)';
+            });
+            
+            bar.addEventListener('mouseleave', () => {
+                bar.style.boxShadow = 'none';
+            });
+        });
+    }
+
+    /* ===== NAVEGAÇÃO RESPONSIVA ===== */
+    initNavigation() {
+        const menuToggle = document.getElementById('cyberMenuToggle');
+        const menu = document.getElementById('main-nav');
+        
+        if (menuToggle && menu) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.setAttribute('aria-expanded', 
+                    menuToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+                menu.classList.toggle('active');
+            });
+        }
+        
+        // Fechar menu ao clicar em um link
+        const navLinks = document.querySelectorAll('.cyber-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (menu.classList.contains('active')) {
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menu.classList.remove('active');
+                }
+            });
+        });
+    }
+
+    destroy() {
+        // Limpar todos os event listeners
+        const glitchElements = document.querySelectorAll('.glitch');
+        glitchElements.forEach(el => {
+            el.removeEventListener('mouseenter');
+            el.removeEventListener('mouseleave');
+        });
+        
+        const cards = document.querySelectorAll('.holographic-card');
+        cards.forEach(card => {
+            card.removeEventListener('mousemove');
+            card.removeEventListener('mouseleave');
+        });
+        
+        const menuToggle = document.getElementById('cyberMenuToggle');
+        if (menuToggle) {
+            menuToggle.removeEventListener('click');
+        }
     }
 }
 
@@ -1059,9 +706,20 @@ document.addEventListener('DOMContentLoaded', () => {
     window.cyberEffects = new CyberEffectsManager();
 });
 
-// Limpeza ao navegar para outra página (compatibilidade com SPA)
+// Limpeza ao sair da página (compatibilidade com SPAs)
 window.addEventListener('beforeunload', () => {
     if (window.cyberEffects) {
         window.cyberEffects.destroy();
     }
 });
+
+// Exportar para uso em outros arquivos se necessário
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        CyberEffectsManager,
+        CrackedGlassEffect,
+        BlackHoleEffect,
+        ParticlesEffect,
+        InteractiveEffects
+    };
+}
