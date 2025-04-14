@@ -1,92 +1,398 @@
-/* ===== ESTILOS DE TERMINAL CYBERPUNK ===== */
-:root {
-    --terminal-bg: #0a0a12;
-    --terminal-header: #070710;
-    --terminal-text: #e0e0ff;
-    --terminal-text-dim: #a0a0c0;
-    --terminal-accent: #00f7ff;
-    --terminal-purple: #b700ff;
-    --terminal-error: #ff0033;
-    --terminal-success: #00ff88;
-    --terminal-warning: #ffbd2e;
+/* Estilos específicos para a página de Programação e Desenvolvimento de Sistemas - Tema Futurista */
+
+/* Ajuste para o espaçamento do topo devido ao header fixo */
+body {
+    padding-top: 80px;
+    background-color: #0a0a15;
 }
 
-body.cyber-terminal {
-    font-family: 'Share Tech Mono', monospace;
-    background-color: var(--terminal-bg);
-    color: var(--terminal-text);
+/* Estilo para o menu ativo */
+.nav-link.active {
+    color: #8a2be2 !important;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    bottom: 0;
+    left: 10%;
+    background: linear-gradient(90deg, #5c6bc0, #8a2be2);
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+}
+
+/* Seção de introdução da disciplina */
+.discipline-intro {
+    padding: 80px 0;
+    background: linear-gradient(135deg, rgba(10, 10, 21, 0.9) 0%, rgba(20, 20, 40, 0.95) 100%);
+    border-bottom: 1px solid rgba(92, 107, 192, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.discipline-intro::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(92, 107, 192, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+    z-index: -1;
+}
+
+.discipline-image-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5c6bc0, #8a2be2);
+    padding: 5px;
+    box-shadow: 
+        0 0 25px rgba(92, 107, 192, 0.5),
+        0 0 50px rgba(138, 43, 226, 0.3);
+    animation: pulse 6s ease-in-out infinite;
+}
+
+.discipline-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #0a0a15;
+    transition: all 0.5s ease;
+}
+
+.discipline-image:hover {
+    transform: scale(1.05) rotate(5deg);
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+}
+
+/* Estilos para os trimestres */
+.trimester-section {
+    padding: 60px 0;
+    background: rgba(15, 15, 30, 0.8);
+    border-bottom: 1px solid rgba(92, 107, 192, 0.2);
+    position: relative;
+}
+
+.trimester-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(45deg, transparent 65%, rgba(92, 107, 192, 0.05) 65%) 0 0,
+        linear-gradient(-45deg, transparent 65%, rgba(138, 43, 226, 0.05) 65%) 0 0;
+    background-size: 30px 30px;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.trimester-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.trimester-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #5c6bc0, #8a2be2);
+    color: white;
+    border-radius: 50%;
+    margin-right: 20px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(92, 107, 192, 0.3);
+    animation: pulse 4s ease-in-out infinite;
+}
+
+/* Estilo para cada tópico */
+.topic-container {
+    background: rgba(20, 20, 40, 0.7);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(92, 107, 192, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.2),
+        inset 0 0 15px rgba(92, 107, 192, 0.1);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.topic-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(45deg, transparent 65%, rgba(92, 107, 192, 0.05) 65%) 0 0,
+        linear-gradient(-45deg, transparent 65%, rgba(138, 43, 226, 0.05) 65%) 0 0;
+    background-size: 20px 20px;
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.topic-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(92, 107, 192, 0.2),
+        inset 0 0 20px rgba(138, 43, 226, 0.1);
+    border-color: rgba(138, 43, 226, 0.4);
+}
+
+.topic-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #8a2be2;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(92, 107, 192, 0.3);
+    text-shadow: 0 0 5px rgba(138, 43, 226, 0.3);
+    display: flex;
+    align-items: center;
+}
+
+.topic-title i {
+    margin-right: 15px;
+    font-size: 1.4rem;
+}
+
+.topic-description {
+    color: #b0b0b0;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Estilos para os exercícios */
+.exercises-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.exercise-card {
+    flex: 1 1 calc(50% - 25px);
+    min-width: 280px;
+    background: rgba(25, 25, 50, 0.6);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(92, 107, 192, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.exercise-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(92, 107, 192, 0.1), rgba(138, 43, 226, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.exercise-card:hover {
+    background: rgba(30, 30, 60, 0.7);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        0 0 25px rgba(92, 107, 192, 0.2);
+    border-color: rgba(138, 43, 226, 0.4);
+}
+
+.exercise-card:hover::before {
+    opacity: 1;
+}
+
+.exercise-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #5c6bc0, #8a2be2);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 15px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: none;
+    box-shadow: 0 5px 15px rgba(92, 107, 192, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.exercise-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.exercise-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(92, 107, 192, 0.4);
+}
+
+.exercise-btn:hover::before {
+    left: 100%;
+}
+
+.exercise-description {
+    font-size: 1rem;
+    color: #d0d0d0;
+    margin: 0;
     line-height: 1.6;
 }
 
-/* ... [restante do CSS permanece igual] ... */
-
-/* Melhorias de acessibilidade */
-a:focus, button:focus {
-    outline: 2px solid var(--terminal-accent);
-    outline-offset: 3px;
+/* Estilo para seções em desenvolvimento */
+.coming-soon-container {
+    text-align: center;
+    padding: 60px 40px;
+    background: rgba(20, 20, 40, 0.7);
+    border-radius: 15px;
+    border: 1px solid rgba(92, 107, 192, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 
+        inset 0 0 15px rgba(92, 107, 192, 0.1),
+        0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Performance - Reduzir animações em dispositivos com preferência por reduzir movimento */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
+.coming-soon-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(45deg, transparent 65%, rgba(92, 107, 192, 0.05) 65%) 0 0,
+        linear-gradient(-45deg, transparent 65%, rgba(138, 43, 226, 0.05) 65%) 0 0;
+    background-size: 25px 25px;
+    opacity: 0.3;
 }
 
-/* Responsividade melhorada */
+.coming-soon-icon {
+    font-size: 3.5rem;
+    color: #8a2be2;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.coming-soon-text {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+.coming-soon-container p {
+    color: #b0b0b0;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Responsividade */
 @media (max-width: 992px) {
-    .terminal-nav {
-        padding: 0.8rem 0;
-    }
-    
-    .terminal-prompt {
-        font-size: 0.9rem;
-    }
-    
-    .terminal-links {
-        gap: 1rem;
-    }
-    
-    .terminal-main {
-        margin-top: 70px;
+    .exercise-card {
+        flex: 1 1 100%;
     }
 }
 
 @media (max-width: 768px) {
-    .terminal-title {
-        font-size: 1.5rem;
+    .discipline-intro {
+        padding: 60px 0;
+    }
+
+    .discipline-image-container {
+        width: 180px;
+        height: 180px;
+    }
+
+    .trimester-title {
+        font-size: 1.8rem;
+    }
+
+    .topic-title {
+        font-size: 1.4rem;
     }
     
-    .terminal-subtitle {
-        font-size: 0.9rem;
+    .exercises-container {
+        flex-direction: column;
     }
     
-    .terminal-sections {
-        padding: 1.5rem;
-    }
-    
-    .exercises-grid {
-        grid-template-columns: 1fr;
+    .exercise-card {
+        min-width: 100%;
     }
 }
 
-@media (max-width: 576px) {
-    .terminal-prompt {
-        font-size: 0.8rem;
-    }
-    
-    .terminal-title {
-        font-size: 1.2rem;
-    }
-    
-    .menu-item {
-        min-width: 100%;
-    }
-    
-    .topic-header {
-        flex-wrap: wrap;
-    }
+/* Animações */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Efeito de digitação para títulos */
+.typewriter {
+    overflow: hidden;
+    border-right: 3px solid #8a2be2;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 2px;
+    animation: 
+        typing 3.5s steps(40, end),
+        blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #8a2be2; }
 }
