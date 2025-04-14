@@ -1,202 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banco de Dados</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- Font Awesome para ícones -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <!-- CSS personalizado -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/banco-dados.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banco de Dados</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/banco-dados.css">
 </head>
-<body>
-    <header class="fixed-top shadow-sm">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <a class="navbar-brand fw-bold" href="index.html">Nome do Estudante</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="sistemas.html" class="nav-link menu-item"><i class="fas fa-laptop-code me-2"></i>Prog. Des. Sistemas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="banco-dados.html" class="nav-link menu-item active"><i class="fas fa-database me-2"></i>Banco de Dados</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link menu-item"><i class="fas fa-mobile-alt me-2"></i>Prog. Mobile</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    
-    <main>
-        <!-- Seção de descrição da disciplina -->
-        <section class="discipline-intro">
-            <div class="container text-center">
-                <div class="discipline-image-container">
-                    <img src="img/bdados.jpg" alt="Banco de Dados" class="discipline-image">
-                </div>
-                <h1 class="display-5 fw-bold mt-4">Banco de Dados</h1>
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <p class="lead">
-                            Esta disciplina aborda os fundamentos de bancos de dados, incluindo modelagem, 
-                            normalização, linguagem SQL e administração de SGBDs. Aprenda a projetar, implementar e 
-                            consultar bancos de dados relacionais, habilidades essenciais para o desenvolvimento 
-                            de aplicações modernas e gestão eficiente de dados.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Primeiro Trimestre -->
-        <section class="trimester-section" id="trimestre1">
-            <div class="container">
-                <h2 class="trimester-title">
-                    <span class="trimester-badge">1º</span> Trimestre
-                </h2>
-                
-                <!-- Scripts SQL para Download -->
-                <div class="topic-container">
-                    <h3 class="topic-title"><i class="fas fa-file-code me-2"></i>Scripts SQL</h3>
-                    <p class="topic-description">
-                        Aqui você encontra scripts SQL desenvolvidos durante o primeiro trimestre, 
-                        incluindo criação de tabelas, consultas, junções e operações com dados.
-                    </p>
-                    
-                    <div class="download-container">
-                        <div class="download-card">
-                            <div class="file-icon">
-                                <i class="fas fa-file-code"></i>
-                            </div>
-                            <div class="download-content">
-                                <h4>Criação de Banco de Dados</h4>
-                                <p class="download-description">
-                                    Script para criação do banco de dados completo, incluindo tabelas, 
-                                    chaves primárias, estrangeiras e índices.
-                                </p>
-                                <a href="downloads/criacao_bd.sql" class="download-btn" download>
-                                    <i class="fas fa-download me-2"></i>Baixar Script
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="download-card">
-                            <div class="file-icon">
-                                <i class="fas fa-file-code"></i>
-                            </div>
-                            <div class="download-content">
-                                <h4>Consultas e Junções</h4>
-                                <p class="download-description">
-                                    Exemplos de consultas SQL com diferentes tipos de junções (INNER, LEFT, RIGHT),
-                                    filtros, agrupamentos e ordenação.
-                                </p>
-                                <a href="downloads/consultas.sql" class="download-btn" download>
-                                    <i class="fas fa-download me-2"></i>Baixar Script
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="download-card">
-                            <div class="file-icon">
-                                <i class="fas fa-file-code"></i>
-                            </div>
-                            <div class="download-content">
-                                <h4>Triggers e Procedures</h4>
-                                <p class="download-description">
-                                    Implementação de triggers e stored procedures para automatizar processos 
-                                    e manter a integridade dos dados.
-                                </p>
-                                <a href="downloads/triggers_procedures.sql" class="download-btn" download>
-                                    <i class="fas fa-download me-2"></i>Baixar Script
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Modelagem de Dados -->
-                <div class="topic-container">
-                    <h3 class="topic-title"><i class="fas fa-project-diagram me-2"></i>Modelagem de Dados</h3>
-                    <p class="topic-description">
-                        Documentos relacionados à modelagem conceitual, lógica e física de bancos de dados,
-                        incluindo diagramas ER, dicionário de dados e documentação técnica.
-                    </p>
-                    
-                    <div class="coming-soon-container">
-                        <i class="fas fa-tools coming-soon-icon"></i>
-                        <h3 class="coming-soon-text">Em preparação</h3>
-                        <p>Os arquivos de modelagem serão disponibilizados em breve.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Segundo Trimestre -->
-        <section class="trimester-section" id="trimestre2">
-            <div class="container">
-                <h2 class="trimester-title">
-                    <span class="trimester-badge">2º</span> Trimestre
-                </h2>
-                <div class="coming-soon-container">
-                    <i class="fas fa-hourglass-half coming-soon-icon"></i>
-                    <h3 class="coming-soon-text">Conteúdo em desenvolvimento</h3>
-                    <p>Os scripts e materiais do segundo trimestre serão disponibilizados em breve.</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Terceiro Trimestre -->
-        <section class="trimester-section" id="trimestre3">
-            <div class="container">
-                <h2 class="trimester-title">
-                    <span class="trimester-badge">3º</span> Trimestre
-                </h2>
-                <div class="coming-soon-container">
-                    <i class="fas fa-hourglass-start coming-soon-icon"></i>
-                    <h3 class="coming-soon-text">Conteúdo em desenvolvimento</h3>
-                    <p>Os scripts e materiais do terceiro trimestre serão disponibilizados em breve.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <div class="container">
-            <div class="text-center mb-4">
-                <h3>Conecte-se comigo</h3>
-                <div class="social-icons">
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="text-center">
-                <p class="email-link">
-                    <i class="fas fa-envelope me-2"></i>
-                    <a href="mailto:aluno@escola.pr.gov.br">aluno@escola.pr.gov.br</a>
-                </p>
-                <p class="copyright">© 2025 Nome do Estudante. Todos os direitos reservados.</p>
-            </div>
+<body class="bg-dark text-light">
+  <header class="fixed-top shadow-sm bg-black">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand text-gradient" href="index.html">Nome do Estudante</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="sistemas.html" class="nav-link"><i class="fas fa-laptop-code me-2"></i>Prog. Des. Sistemas</a>
+            </li>
+            <li class="nav-item">
+              <a href="banco-dados.html" class="nav-link active"><i class="fas fa-database me-2"></i>Banco de Dados</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link"><i class="fas fa-mobile-alt me-2"></i>Prog. Mobile</a>
+            </li>
+          </ul>
         </div>
-    </footer>
+      </div>
+    </nav>
+  </header>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-    <script src="js/holographicEffects.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <main class="pt-5">
+    <section class="py-5 text-center futuristic-gradient">
+      <div class="container">
+        <h1 class="display-4 fw-bold text-gradient">Banco de Dados</h1>
+        <p class="lead">Fundamentos de modelagem, linguagem SQL e administração de SGBDs. Criando estruturas robustas para sistemas eficientes e seguros.</p>
+      </div>
+    </section>
+
+    <section class="py-5 bg-black">
+      <div class="container">
+        <h2 class="mb-4 text-center text-gradient">Scripts e Recursos</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="download-card futuristic-glow">
+              <i class="fas fa-database fa-2x mb-2"></i>
+              <h5>Criação de Banco de Dados</h5>
+              <p>Definição de tabelas, relações, PKs, FKs e índices otimizados.</p>
+              <a href="downloads/criacao_bd.sql" class="btn btn-outline-light w-100 mt-2" download>Download</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="download-card futuristic-glow">
+              <i class="fas fa-code-branch fa-2x mb-2"></i>
+              <h5>Consultas e Junções</h5>
+              <p>Exemplos de queries com joins, agregações e filtros.</p>
+              <a href="downloads/consultas.sql" class="btn btn-outline-light w-100 mt-2" download>Download</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="download-card futuristic-glow">
+              <i class="fas fa-cogs fa-2x mb-2"></i>
+              <h5>Triggers e Procedures</h5>
+              <p>Automatizações para controle de integridade e lógica de negócios.</p>
+              <a href="downloads/triggers_procedures.sql" class="btn btn-outline-light w-100 mt-2" download>Download</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <h3 class="text-center text-gradient">Simulador de Consulta</h3>
+          <p class="text-center">Copie o código e execute em seu ambiente SQL favorito.</p>
+          <div class="bg-secondary p-3 rounded text-start">
+            <pre><code class="text-light">SELECT clientes.nome, pedidos.valor_total
+FROM clientes
+INNER JOIN pedidos ON clientes.id = pedidos.cliente_id
+WHERE pedidos.data BETWEEN '2025-01-01' AND '2025-03-31';</code></pre>
+          </div>
+        </div>
+
+        <div class="mt-5 text-center">
+          <h3 class="text-gradient">Modelagem Visual</h3>
+          <img src="img/diagrama-er.png" alt="Diagrama Entidade-Relacionamento" class="img-fluid futuristic-border mt-3">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-center text-light py-4">
+    <p class="mb-1">Contato: <a href="mailto:aluno@escola.pr.gov.br" class="text-light">aluno@escola.pr.gov.br</a></p>
+    <p>&copy; 2025 Nome do Estudante - Banco de Dados</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
