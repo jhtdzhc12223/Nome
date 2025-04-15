@@ -1,4 +1,4 @@
-// cyberEffects.js - Gerenciador Completo de Efeitos Cyberpunk
+// cyberEffects.js - Gerenciador Completo de Efeitos Futuristas
 
 class CyberEffectsManager {
     constructor() {
@@ -6,38 +6,37 @@ class CyberEffectsManager {
             crackedGlass: null,
             blackHole: null,
             particles: null,
-            interactive: null
+            holographic: null,
+            terminal: null
         };
+        
         this.initEffects();
     }
 
-    /* ========== INICIALIZAÇÃO PRINCIPAL ========== */
+    /* ========== INICIALIZAÇÃO ========== */
     initEffects() {
-        // Verificar e carregar dependências
         this.loadDependencies().then(() => {
-            // Inicializar efeitos visuais
+            // Verificar e inicializar cada efeito
             if (document.getElementById('cracked-glass-overlay')) {
                 this.effects.crackedGlass = new CrackedGlassEffect();
             }
             
-            if (document.getElementById('blackhole-bg')) {
-                this.effects.blackHole = new BlackHoleEffect();
+            if (document.getElementById('cyber-bg') && window.THREE) {
+                this.effects.blackHole = new BlackHoleEffect('cyber-bg');
             }
             
-            if (document.getElementById('cyber-particles')) {
-                this.effects.particles = new ParticlesEffect();
+            if (document.querySelector('.cyber-terminal')) {
+                this.effects.terminal = new TerminalEffects();
             }
             
-            // Inicializar efeitos interativos
-            this.effects.interactive = new InteractiveEffects();
+            if (document.querySelector('.holographic-card')) {
+                this.effects.holographic = new HolographicEffects();
+            }
             
-            // Inicializar controles do terminal
-            this.initTerminalControls();
-            
-            // Ativar animações quando visíveis
+            // Inicializar observadores de interseção
             this.initIntersectionObservers();
             
-            console.log('Cyber Effects Manager initialized with all effects');
+            console.log('Cyber Effects Manager initialized');
         }).catch(error => {
             console.error('Error loading dependencies:', error);
         });
@@ -48,21 +47,11 @@ class CyberEffectsManager {
         const promises = [];
         
         // Carregar Three.js se necessário
-        if (!window.THREE && document.getElementById('blackhole-bg')) {
-            promises.push(this.loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'));
+        if (!window.THREE && document.getElementById('cyber-bg')) {
+            promises.push(this.loadScript('https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js'));
         }
         
-        // Carregar Vanta.js se necessário
-        if (!window.VANTA && document.getElementById('cyber-particles')) {
-            promises.push(this.loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js'));
-        }
-        
-        // Carregar Chart.js se necessário
-        if (!window.Chart && document.getElementById('radarChart')) {
-            promises.push(this.loadScript('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js'));
-        }
-        
-        // Carregar GSAP se necessário
+        // Carregar GSAP para animações
         if (!window.gsap) {
             promises.push(this.loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js'));
         }
@@ -80,62 +69,13 @@ class CyberEffectsManager {
         });
     }
 
-    /* ========== CONTROLES DO TERMINAL ========== */
-    initTerminalControls() {
-        // Comando blackhole no terminal
-        const terminalInput = document.querySelector('.terminal-input');
-        if (terminalInput) {
-            terminalInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && terminalInput.value.trim().toLowerCase() === 'blackhole') {
-                    document.body.classList.toggle('blackhole-active');
-                    const output = document.querySelector('.terminal-output');
-                    if (output) {
-                        output.innerHTML += `<div>> blackhole</div><div>Efeito de buraco negro ${
-                            document.body.classList.contains('blackhole-active') ? 'ativado' : 'desativado'
-                        }</div>`;
-                    }
-                    terminalInput.value = '';
-                }
-            });
-        }
-
-        // Controles da janela do terminal
-        document.querySelectorAll('.terminal-btn.red').forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.style.transform = 'scale(1.2)';
-                setTimeout(() => this.style.transform = 'scale(1)', 200);
-                
-                if (confirm('Deseja realmente fechar esta janela?')) {
-                    const terminal = this.closest('.cyber-terminal');
-                    if (terminal) {
-                        terminal.style.transition = 'all 0.3s ease';
-                        terminal.style.transform = 'scale(0.8) translateY(20px)';
-                        terminal.style.opacity = '0';
-                        
-                        setTimeout(() => {
-                            terminal.classList.add('closed');
-                            terminal.style.display = 'none';
-                        }, 300);
-                    }
-                }
-            });
-
-            // Acessibilidade por teclado
-            btn.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    btn.click();
-                }
-            });
-        });
-    }
-
     /* ========== OBSERVADORES DE INTERSEÇÃO ========== */
     initIntersectionObservers() {
         // Animar elementos quando ficam visíveis
         const animateOnScroll = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.setAttribute('data-animate', 'in');
+                    entry.target.classList.add('animate-in');
                     observer.unobserve(entry.target);
                 }
             });
@@ -146,11 +86,12 @@ class CyberEffectsManager {
             rootMargin: '0px 0px -50px 0px'
         });
 
+        // Observar elementos com data-animate
         document.querySelectorAll('[data-animate]').forEach(el => {
             observer.observe(el);
         });
 
-        // Animar barras de habilidades
+        // Animar barras de habilidades quando visíveis
         const skillSection = document.querySelector('.cyber-skills');
         if (skillSection) {
             const skillObserver = new IntersectionObserver((entries) => {
@@ -167,7 +108,7 @@ class CyberEffectsManager {
     animateSkillBars() {
         const skillBars = document.querySelectorAll('.skill-level');
         skillBars.forEach(bar => {
-            const level = bar.dataset.level || bar.style.width.replace('%', '');
+            const level = bar.dataset.level || '50';
             bar.style.width = '0';
             
             setTimeout(() => {
@@ -176,12 +117,14 @@ class CyberEffectsManager {
         });
     }
 
-    /* ========== DESTRUIÇÃO/LIMPEZA ========== */
+    /* ========== DESTRUIÇÃO ========== */
     destroy() {
-        if (this.effects.crackedGlass) this.effects.crackedGlass.destroy();
-        if (this.effects.blackHole) this.effects.blackHole.destroy();
-        if (this.effects.particles) this.effects.particles.destroy();
-        if (this.effects.interactive) this.effects.interactive.destroy();
+        // Limpar todos os efeitos
+        Object.values(this.effects).forEach(effect => {
+            if (effect && typeof effect.destroy === 'function') {
+                effect.destroy();
+            }
+        });
         
         console.log('Cyber Effects Manager destroyed');
     }
@@ -192,10 +135,10 @@ class CrackedGlassEffect {
     constructor() {
         this.triggers = [];
         this.overlay = null;
-        this.initCrackedGlass();
+        this.initEffect();
     }
 
-    initCrackedGlass() {
+    initEffect() {
         this.overlay = document.getElementById('cracked-glass-overlay');
         if (!this.overlay) return;
 
@@ -204,17 +147,15 @@ class CrackedGlassEffect {
     }
 
     generateCracks() {
-        const crackCount = 25; // Aumentado de 15 para 25
+        const crackCount = 25;
         let cracksSVG = '';
         
-        // Adicionar rachaduras mais complexas
         for (let i = 0; i < crackCount; i++) {
             const x1 = Math.random() * 100;
             const y1 = Math.random() * 100;
-            const x2 = x1 + (Math.random() * 60 - 30); // Aumentada variação
+            const x2 = x1 + (Math.random() * 60 - 30);
             const y2 = y1 + (Math.random() * 60 - 30);
             
-            // Adicionar múltiplos segmentos para cada rachadura
             cracksSVG += `
                 <path d="M${x1},${y1} 
                         C${x1 + (Math.random() * 20 - 10)},${y1 + (Math.random() * 20 - 10)} 
@@ -255,7 +196,6 @@ class CrackedGlassEffect {
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         
-        // Efeito de deslocamento baseado na posição do mouse
         const offsetX = (x / rect.width - 0.5) * 20;
         const offsetY = (y / rect.height - 0.5) * 20;
         
@@ -279,7 +219,8 @@ class CrackedGlassEffect {
 
 /* ========== EFEITO DE BURACO NEGRO ========== */
 class BlackHoleEffect {
-    constructor() {
+    constructor(elementId) {
+        this.elementId = elementId;
         this.scene = null;
         this.camera = null;
         this.renderer = null;
@@ -287,13 +228,13 @@ class BlackHoleEffect {
         this.animationId = null;
         this.resizeHandler = null;
         this.particles = [];
-        this.particleCount = 500; // Aumentado de 300 para 500
+        this.particleCount = 500;
         
-        this.initBlackHole();
+        this.initEffect();
     }
 
-    initBlackHole() {
-        this.container = document.getElementById('blackhole-bg');
+    initEffect() {
+        this.container = document.getElementById(this.elementId);
         if (!this.container || !window.THREE) return;
 
         this.setupScene();
@@ -306,7 +247,6 @@ class BlackHoleEffect {
     setupScene() {
         this.scene = new THREE.Scene();
         
-        // Configuração de câmera aprimorada
         this.camera = new THREE.PerspectiveCamera(
             75, 
             window.innerWidth / window.innerHeight, 
@@ -315,7 +255,6 @@ class BlackHoleEffect {
         );
         this.camera.position.z = 5;
         
-        // Renderizador aprimorado
         this.renderer = new THREE.WebGLRenderer({ 
             alpha: true,
             antialias: true,
@@ -325,7 +264,6 @@ class BlackHoleEffect {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.container.appendChild(this.renderer.domElement);
         
-        // Adicionar luzes para melhor realismo
         const ambientLight = new THREE.AmbientLight(0x00aaff, 0.1);
         this.scene.add(ambientLight);
         
@@ -335,10 +273,8 @@ class BlackHoleEffect {
     }
 
     createBlackHole() {
-        // Geometria mais complexa
         const geometry = new THREE.SphereGeometry(1, 128, 128);
         
-        // Material aprimorado com textura de distorção
         const material = new THREE.MeshPhongMaterial({ 
             color: 0x000000,
             emissive: 0x0000ff,
@@ -353,7 +289,6 @@ class BlackHoleEffect {
         this.blackHole = new THREE.Mesh(geometry, material);
         this.scene.add(this.blackHole);
         
-        // Adicionar anel ao redor do buraco negro
         const ringGeometry = new THREE.RingGeometry(1.5, 2, 64);
         const ringMaterial = new THREE.MeshBasicMaterial({ 
             color: 0x00ffff,
@@ -373,7 +308,6 @@ class BlackHoleEffect {
         const sizes = new Float32Array(this.particleCount);
         
         for (let i = 0; i < this.particleCount; i++) {
-            // Posições em uma esfera ao redor do buraco negro
             const radius = 2 + Math.random() * 10;
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.random() * Math.PI;
@@ -382,12 +316,10 @@ class BlackHoleEffect {
             positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
             positions[i * 3 + 2] = radius * Math.cos(phi);
             
-            // Cores aleatórias em tons azulados
-            colors[i * 3] = 0.2 + Math.random() * 0.8; // R
-            colors[i * 3 + 1] = 0.5 + Math.random() * 0.5; // G
-            colors[i * 3 + 2] = 0.8 + Math.random() * 0.2; // B
+            colors[i * 3] = 0.2 + Math.random() * 0.8;
+            colors[i * 3 + 1] = 0.5 + Math.random() * 0.5;
+            colors[i * 3 + 2] = 0.8 + Math.random() * 0.2;
             
-            // Tamanhos variados
             sizes[i] = 0.1 + Math.random() * 0.5;
         }
         
@@ -417,29 +349,24 @@ class BlackHoleEffect {
             const delta = clock.getDelta();
             const time = clock.getElapsedTime();
             
-            // Animar buraco negro
             this.blackHole.rotation.x += 0.002;
             this.blackHole.rotation.y += 0.005;
             
-            // Animar anel
             if (this.ring) {
                 this.ring.rotation.z += 0.01;
                 this.ring.scale.setScalar(1 + Math.sin(time) * 0.1);
             }
             
-            // Animar partículas (espiral em direção ao buraco negro)
             const positions = this.particles.geometry.attributes.position.array;
             for (let i = 0; i < this.particleCount; i++) {
                 const ix = i * 3;
                 const iy = i * 3 + 1;
                 const iz = i * 3 + 2;
                 
-                // Mover partículas em espiral
                 positions[ix] *= 0.995;
                 positions[iy] *= 0.995;
                 positions[iz] *= 0.995;
                 
-                // Se a partícula chegou muito perto, reposicioná-la
                 if (Math.abs(positions[ix]) < 0.1 && 
                     Math.abs(positions[iy]) < 0.1 && 
                     Math.abs(positions[iz]) < 0.1) {
@@ -482,7 +409,6 @@ class BlackHoleEffect {
             this.container.removeChild(this.renderer.domElement);
         }
         
-        // Limpar recursos da Three.js
         if (this.scene) {
             this.scene.traverse(object => {
                 if (object.geometry) object.geometry.dispose();
@@ -492,234 +418,342 @@ class BlackHoleEffect {
     }
 }
 
-/* ========== EFEITO DE PARTÍCULAS ========== */
-class ParticlesEffect {
+/* ========== EFEITOS HOLOGRÁFICOS ========== */
+class HolographicEffects {
     constructor() {
-        this.vantaEffect = null;
-        this.initParticles();
+        this.animationIntervals = [];
+        this.gridIntervals = [];
+        this.scanlineInterval = null;
+        this.initEffect();
     }
 
-    initParticles() {
-        if (!document.getElementById('cyber-particles') || !window.VANTA) return;
+    initEffect() {
+        this.initHolographicItems();
+        this.initScanlineEffect();
+        this.initGridEffects();
+    }
+
+    initHolographicItems() {
+        const holographicItems = document.querySelectorAll('.holographic-card, .holographic-btn');
         
-        this.vantaEffect = VANTA.NET({
-            el: "#cyber-particles",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x7000ff,
-            backgroundColor: 0x0a0a12,
-            points: 15.00,
-            maxDistance: 25.00,
-            spacing: 15.00,
-            showDots: false
+        const handleHolographicMove = (e) => {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            
+            const x = e.clientX - e.currentTarget.getBoundingClientRect().left;
+            const y = e.clientY - e.currentTarget.getBoundingClientRect().top;
+            
+            const centerX = e.currentTarget.offsetWidth / 2;
+            const centerY = e.currentTarget.offsetHeight / 2;
+            
+            const angleX = (centerY - y) / 20;
+            const angleY = (x - centerX) / 20;
+            
+            e.currentTarget.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            
+            const lightPosX = (x / e.currentTarget.offsetWidth) * 100;
+            const lightPosY = (y / e.currentTarget.offsetHeight) * 100;
+            
+            e.currentTarget.style.setProperty('--light-pos-x', `${lightPosX}%`);
+            e.currentTarget.style.setProperty('--light-pos-y', `${lightPosY}%`);
+            
+            const glowIntensity = Math.sqrt(
+                Math.pow((x - centerX) / centerX, 2) + 
+                Math.pow((y - centerY) / centerY, 2)
+            );
+            
+            e.currentTarget.style.setProperty('--glow-intensity', glowIntensity);
+        };
+        
+        holographicItems.forEach(item => {
+            item.addEventListener('mousemove', handleHolographicMove);
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                this.style.setProperty('--glow-intensity', '0');
+            });
+        });
+    }
+
+    initScanlineEffect() {
+        const scanline = document.querySelector('.hologram-scanline, .nav-scanline');
+        
+        if (scanline) {
+            const animateScanline = () => {
+                scanline.style.top = '0';
+                scanline.style.transition = 'none';
+                scanline.style.opacity = '0';
+                
+                setTimeout(() => {
+                    scanline.style.transition = 'top 3s linear, opacity 0.5s ease';
+                    scanline.style.top = '100%';
+                    scanline.style.opacity = '0.7';
+                }, 10);
+            };
+            
+            animateScanline();
+            this.scanlineInterval = setInterval(animateScanline, 3000);
+            this.animationIntervals.push(this.scanlineInterval);
+        }
+    }
+
+    initGridEffects() {
+        const grids = document.querySelectorAll('.hologram-grid');
+        
+        grids.forEach((grid, index) => {
+            let posX = 0;
+            let posY = 0;
+            let direction = 1;
+            
+            const gridInterval = setInterval(() => {
+                posX = (posX + direction) % 60;
+                posY = (posY + direction) % 60;
+                
+                grid.style.backgroundPosition = `${posX}px ${posY}px`;
+                
+                if (Math.random() > 0.98) {
+                    direction = -direction;
+                }
+            }, 100);
+            
+            this.gridIntervals.push(gridInterval);
+            this.animationIntervals.push(gridInterval);
+            
+            const pulseInterval = setInterval(() => {
+                grid.style.opacity = (0.3 + Math.random() * 0.4).toString();
+            }, 2000 + Math.random() * 3000);
+            
+            this.animationIntervals.push(pulseInterval);
         });
     }
 
     destroy() {
-        if (this.vantaEffect) {
-            this.vantaEffect.destroy();
-        }
+        this.animationIntervals.forEach(interval => clearInterval(interval));
+        this.gridIntervals.forEach(interval => clearInterval(interval));
+        
+        if (this.scanlineInterval) clearInterval(this.scanlineInterval);
     }
 }
 
-/* ========== EFEITOS INTERATIVOS ========== */
-class InteractiveEffects {
+/* ========== EFEITOS DE TERMINAL ========== */
+class TerminalEffects {
     constructor() {
-        this.initInteractiveEffects();
+        this.typingIntervals = [];
+        this.noiseInterval = null;
+        this.cursorInterval = null;
+        this.initEffect();
     }
 
-    initInteractiveEffects() {
-        this.initGlitchEffects();
-        this.initHolographicCards();
-        this.initTypewriterEffects();
-        this.initSkillBars();
-        this.initNavigation();
+    initEffect() {
+        this.initTypingEffects();
+        this.initTerminalNoise();
+        this.initCursorEffect();
+        this.initTerminalCommands();
     }
 
-    /* ===== EFEITOS DE GLITCH ===== */
-    initGlitchEffects() {
-        const glitchElements = document.querySelectorAll('.glitch');
-        
-        glitchElements.forEach(el => {
-            // Efeito de hover
-            el.addEventListener('mouseenter', () => {
-                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-                
-                el.style.animation = 'glitch 0.5s linear infinite';
-                
-                // Adicionar elemento de glitch
-                if (!el.querySelector('.glitch-clone')) {
-                    const clone = el.cloneNode(true);
-                    clone.classList.add('glitch-clone');
-                    clone.style.position = 'absolute';
-                    clone.style.top = '0';
-                    clone.style.left = '0';
-                    clone.style.color = 'var(--cyber-pink)';
-                    clone.style.opacity = '0.7';
-                    clone.style.animation = 'glitch 0.3s linear infinite';
-                    el.style.position = 'relative';
-                    el.appendChild(clone);
-                }
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                el.style.animation = '';
-                
-                const clone = el.querySelector('.glitch-clone');
-                if (clone) {
-                    el.removeChild(clone);
-                }
-            });
-        });
-    }
-
-    /* ===== CARDS HOLOGRÁFICOS ===== */
-    initHolographicCards() {
-        const cards = document.querySelectorAll('.holographic-card');
-        
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-                
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = card.offsetWidth / 2;
-                const centerY = card.offsetHeight / 2;
-                const angleX = (centerY - y) / 20;
-                const angleY = (x - centerX) / 20;
-                
-                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
-                
-                // Efeito de luz
-                const lightPosX = (x / card.offsetWidth) * 100;
-                const lightPosY = (y / card.offsetHeight) * 100;
-                
-                card.style.setProperty('--light-pos-x', `${lightPosX}%`);
-                card.style.setProperty('--light-pos-y', `${lightPosY}%`);
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
-        });
-    }
-
-    /* ===== EFEITO DE MÁQUINA DE ESCREVER ===== */
-    initTypewriterEffects() {
+    initTypingEffects() {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         
-        const typewriterElements = document.querySelectorAll('.typewriter');
+        const commandLines = document.querySelectorAll('.command-line');
         
-        typewriterElements.forEach(el => {
-            const text = el.textContent;
-            el.textContent = '';
+        commandLines.forEach((line, index) => {
+            const command = line.querySelector('.command') || line;
+            const text = command.textContent;
+            command.textContent = '';
             
-            let i = 0;
-            const typing = setInterval(() => {
-                if (i < text.length) {
-                    el.textContent += text.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(typing);
-                    // Adicionar efeito de glitch após digitação
-                    setTimeout(() => {
-                        el.classList.add('glitch-active');
-                    }, 500);
+            const delay = index * 500;
+            
+            setTimeout(() => {
+                let i = 0;
+                const typingSpeed = 50 + Math.random() * 50;
+                
+                const typingInterval = setInterval(() => {
+                    if (i < text.length) {
+                        command.textContent += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typingInterval);
+                        this.typingIntervals = this.typingIntervals.filter(item => item !== typingInterval);
+                        
+                        setTimeout(() => {
+                            command.classList.add('glitch-active');
+                            setTimeout(() => command.classList.remove('glitch-active'), 500);
+                        }, 500);
+                    }
+                }, typingSpeed);
+                
+                this.typingIntervals.push(typingInterval);
+            }, delay);
+        });
+    }
+
+    initTerminalNoise() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        
+        const terminals = document.querySelectorAll('.cyber-terminal');
+        
+        terminals.forEach(terminal => {
+            const createNoise = () => {
+                const noise = document.createElement('div');
+                noise.className = 'terminal-noise';
+                
+                let noisePattern = '';
+                const noiseDensity = 50;
+                
+                for (let i = 0; i < noiseDensity; i++) {
+                    const x = Math.random() * 100;
+                    const y = Math.random() * 100;
+                    const opacity = 0.05 + Math.random() * 0.1;
+                    noisePattern += `<rect x="${x}" y="${y}" width="1" height="1" fill="rgba(0, 247, 255, ${opacity})"/>`;
                 }
-            }, 100 + Math.random() * 50); // Variação de velocidade
-        });
-    }
-
-    /* ===== BARRAS DE HABILIDADES ===== */
-    initSkillBars() {
-        const skillBars = document.querySelectorAll('.skill-level');
-        
-        skillBars.forEach(bar => {
-            bar.addEventListener('mouseenter', () => {
-                bar.style.boxShadow = '0 0 15px var(--cyber-blue)';
-            });
+                
+                noise.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">${noisePattern}</svg>')`;
+                
+                terminal.appendChild(noise);
+                
+                setTimeout(() => {
+                    if (noise.parentNode === terminal) {
+                        terminal.removeChild(noise);
+                    }
+                }, 100);
+            };
             
-            bar.addEventListener('mouseleave', () => {
-                bar.style.boxShadow = 'none';
-            });
+            this.noiseInterval = setInterval(() => {
+                if (Math.random() > 0.3) {
+                    createNoise();
+                }
+            }, 500);
         });
     }
 
-    /* ===== NAVEGAÇÃO RESPONSIVA ===== */
-    initNavigation() {
-        const menuToggle = document.getElementById('cyberMenuToggle');
-        const menu = document.getElementById('main-nav');
+    initCursorEffect() {
+        const cursors = document.querySelectorAll('.cursor');
         
-        if (menuToggle && menu) {
-            menuToggle.addEventListener('click', () => {
-                menuToggle.setAttribute('aria-expanded', 
-                    menuToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
-                menu.classList.toggle('active');
-            });
+        cursors.forEach(cursor => {
+            let visible = true;
+            
+            this.cursorInterval = setInterval(() => {
+                visible = !visible;
+                cursor.style.visibility = visible ? 'visible' : 'hidden';
+                
+                if (Math.random() > 0.8) {
+                    cursor.style.transform = `translateX(${Math.random() * 5 - 2.5}px)`;
+                } else {
+                    cursor.style.transform = 'translateX(0)';
+                }
+            }, 500);
+        });
+    }
+
+    initTerminalCommands() {
+        const terminalInput = document.querySelector('.terminal-input');
+        if (!terminalInput) return;
+        
+        const terminalOutput = document.querySelector('.terminal-output');
+        
+        const commandHistory = [];
+        let historyIndex = -1;
+        
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp') {
+                if (commandHistory.length === 0) return;
+                
+                historyIndex = Math.min(historyIndex + 1, commandHistory.length - 1);
+                terminalInput.value = commandHistory[commandHistory.length - 1 - historyIndex];
+                e.preventDefault();
+            } else if (e.key === 'ArrowDown') {
+                if (historyIndex <= 0) {
+                    historyIndex = -1;
+                    terminalInput.value = '';
+                } else {
+                    historyIndex = Math.max(historyIndex - 1, 0);
+                    terminalInput.value = commandHistory[commandHistory.length - 1 - historyIndex];
+                }
+                e.preventDefault();
+            }
+        });
+        
+        terminalInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const command = terminalInput.value.trim();
+                
+                if (command) {
+                    commandHistory.push(command);
+                    historyIndex = -1;
+                    
+                    this.processCommand(command, terminalOutput);
+                    terminalInput.value = '';
+                }
+            }
+        });
+    }
+
+    processCommand(command, outputElement) {
+        if (!outputElement) return;
+        
+        outputElement.innerHTML += `<div class="command-line"><span class="prompt">user@gabriel-dev:~$</span> <span class="command">${command}</span></div>`;
+        
+        switch (command.toLowerCase()) {
+            case 'help':
+                outputElement.innerHTML += `<div class="terminal-output">
+                    <div>Comandos disponíveis:</div>
+                    <div>- help: Mostra esta ajuda</div>
+                    <div>- clear: Limpa o terminal</div>
+                    <div>- blackhole: Ativa/desativa efeito de buraco negro</div>
+                    <div>- about: Mostra informações sobre o desenvolvedor</div>
+                </div>`;
+                break;
+                
+            case 'clear':
+                outputElement.innerHTML = '';
+                break;
+                
+            case 'about':
+                outputElement.innerHTML += `<div class="terminal-output">
+                    <div>Gabriel Alves - Desenvolvedor Full Stack</div>
+                    <div>Especializado em Python e JavaScript</div>
+                    <div>Estudante de Desenvolvimento de Sistemas</div>
+                </div>`;
+                break;
+                
+            case 'blackhole':
+                document.body.classList.toggle('blackhole-active');
+                outputElement.innerHTML += `<div>Efeito de buraco negro ${document.body.classList.contains('blackhole-active') ? 'ativado' : 'desativado'}</div>`;
+                break;
+                
+            default:
+                outputElement.innerHTML += `<div>Comando não reconhecido: ${command}</div>`;
+                outputElement.innerHTML += `<div>Digite "help" para ver os comandos disponíveis</div>`;
         }
         
-        // Fechar menu ao clicar em um link
-        const navLinks = document.querySelectorAll('.cyber-menu a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (menu.classList.contains('active')) {
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                    menu.classList.remove('active');
-                }
-            });
-        });
+        outputElement.scrollTop = outputElement.scrollHeight;
     }
 
     destroy() {
-        // Limpar todos os event listeners
-        const glitchElements = document.querySelectorAll('.glitch');
-        glitchElements.forEach(el => {
-            el.removeEventListener('mouseenter');
-            el.removeEventListener('mouseleave');
-        });
+        this.typingIntervals.forEach(interval => clearInterval(interval));
         
-        const cards = document.querySelectorAll('.holographic-card');
-        cards.forEach(card => {
-            card.removeEventListener('mousemove');
-            card.removeEventListener('mouseleave');
-        });
-        
-        const menuToggle = document.getElementById('cyberMenuToggle');
-        if (menuToggle) {
-            menuToggle.removeEventListener('click');
-        }
+        if (this.noiseInterval) clearInterval(this.noiseInterval);
+        if (this.cursorInterval) clearInterval(this.cursorInterval);
     }
 }
 
 /* ========== INICIALIZAÇÃO ========== */
 document.addEventListener('DOMContentLoaded', () => {
-    // Adicionar classe para indicar que JS está habilitado
-    document.documentElement.classList.add('js-enabled');
-    
-    // Inicializar todos os efeitos
     window.cyberEffects = new CyberEffectsManager();
 });
 
-// Limpeza ao sair da página (compatibilidade com SPAs)
 window.addEventListener('beforeunload', () => {
     if (window.cyberEffects) {
         window.cyberEffects.destroy();
     }
 });
 
-// Exportar para uso em outros arquivos se necessário
+// Exportar para módulos se necessário
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         CyberEffectsManager,
         CrackedGlassEffect,
         BlackHoleEffect,
-        ParticlesEffect,
-        InteractiveEffects
+        HolographicEffects,
+        TerminalEffects
     };
 }
