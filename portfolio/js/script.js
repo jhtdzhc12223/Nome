@@ -78,3 +78,12 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// Certificados - Flip no click para mobile
+document.querySelectorAll('.certificate-card').forEach(card => {
+    card.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+            this.querySelector('.certificate-flip').classList.toggle('flipped');
+        }
+    });
+});

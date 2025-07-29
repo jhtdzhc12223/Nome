@@ -312,76 +312,101 @@ nav a:hover {
     border-bottom: none;
 }
 
-/* EDUCATION SECTION */
-.education-container {
+/* CERTIFICADOS SECTION */
+.certificates-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
+    margin-top: 40px;
 }
 
-.education-card {
-    background-color: var(--gray);
-    padding: 30px;
+.certificate-card {
+    perspective: 1000px;
+    height: 420px;
     border-radius: 10px;
-    text-align: center;
-    border: 1px solid var(--light-gray);
-    transition: transform 0.3s ease;
-}
-
-.education-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--blue);
-}
-
-.edu-icon {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, var(--blue), var(--purple));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-}
-
-.edu-icon i {
-    font-size: 2rem;
-    color: var(--white);
-}
-
-.cert-image {
-    width: 100%;
-    height: 200px;
-    background-color: var(--dark-gray);
-    margin-bottom: 20px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
 }
 
-.cert-image img {
+.certificate-flip {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.certificate-card:hover .certificate-flip {
+    transform: rotateY(180deg);
+}
+
+.certificate-front, 
+.certificate-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.certificate-front {
+    background-color: var(--dark-gray);
+}
+
+.certificate-back {
+    background-color: var(--gray);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+}
+
+.certificate-front img, 
+.certificate-back img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.education-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
+.certificate-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    padding: 30px 20px 20px;
+    color: white;
+    text-align: center;
 }
 
-.education-card p {
-    margin-bottom: 5px;
-    font-size: 1rem;
-}
-
-.education-card a {
-    display: inline-block;
-    margin-top: 15px;
+.certificate-overlay h3 {
     color: var(--blue);
-    font-weight: 500;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.certificate-actions {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    margin-top: auto;
+}
+
+.btn-certificado {
+    display: inline-block;
+    background: var(--blue);
+    color: var(--black);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+}
+
+.btn-certificado:hover {
+    background: var(--purple);
+    color: white;
+    transform: translateY(-3px);
 }
 
 /* PROJECTS SECTION */
@@ -612,6 +637,22 @@ footer {
     
     .about-skills {
         grid-template-columns: 1fr;
+    }
+    
+    .certificate-card {
+        height: 350px;
+    }
+    
+    .certificate-card:hover .certificate-flip {
+        transform: none;
+    }
+    
+    .certificate-back {
+        display: none;
+    }
+    
+    .flipped {
+        transform: rotateY(180deg) !important;
     }
     
     .footer-content {
