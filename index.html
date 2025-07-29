@@ -1,463 +1,278 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfólio futurista de Gabriel Alves - Desenvolvedor Full Stack e Estudante de Sistemas">
-  <meta name="keywords" content="portfolio, desenvolvedor, programação, sistemas, futuro, tecnologia">
-  <meta name="author" content="Gabriel Alves">
-  <title>Portfólio Futurista | Gabriel Alves</title>
-  
-  <!-- Preload de recursos críticos -->
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="css/styles.css" as="style">
-  <link rel="preload" href="js/cyberEffects.js" as="script">
-  
-  <!-- Favicon e meta tags sociais -->
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-  <meta property="og:title" content="Portfólio Futurista | Gabriel Alves">
-  <meta property="og:description" content="Explore meus projetos de desenvolvimento de sistemas, banco de dados e programação mobile">
-  <meta property="og:image" content="https://seusite.com/img/social-preview.jpg">
-  <meta property="og:url" content="https://seusite.com">
-  <meta name="twitter:card" content="summary_large_image">
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap">
-  <link rel="stylesheet" href="css/styles.css" />
-  
-  <!-- Scripts assíncronos -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js" async></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js" async></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Alves Vieira | Desenvolvedor Full-Stack</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="cyber-theme">
-  <!-- Efeitos de fundo -->
-  <div id="cyber-bg" class="cyber-background"></div>
-  <div id="cracked-glass-overlay" class="cracked-glass"></div>
-  
-  <!-- Terminal flutuante -->
-  <div class="cyber-terminal" data-terminal-id="main-terminal">
-    <div class="terminal-header">
-      <div class="terminal-buttons">
-        <button class="terminal-btn red" aria-label="Fechar terminal"></button>
-        <button class="terminal-btn yellow" aria-label="Minimizar terminal"></button>
-        <button class="terminal-btn green" aria-label="Maximizar terminal"></button>
-      </div>
-      <div class="terminal-title">terminal@gabriel-dev</div>
-    </div>
-    <div class="terminal-body">
-      <div class="terminal-output">
-        <div class="command-line"><span class="prompt">user@gabriel-dev:~$</span> <span class="command">bemvindo --portfolio</span></div>
-        <div>Inicializando sistema de portfólio futurista...</div>
-        <div>Carregando módulos: [##########] 100%</div>
-        <div>Digite "help" para ver os comandos disponíveis</div>
-      </div>
-      <div class="terminal-input-container">
-        <span class="prompt">user@gabriel-dev:~$</span>
-        <input type="text" class="terminal-input" placeholder="Digite um comando..." aria-label="Terminal command input">
-        <span class="cursor">|</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Navegação principal -->
-  <header class="cyber-header fixed-top">
-    <nav class="navbar navbar-expand-lg">
-      <div class="container">
-        <a class="navbar-brand cyber-logo" href="index.html">
-          <img src="img/logo.png" alt="Logo Gabriel Alves" class="logo-image">
-          <span class="logo-blink">_</span>
-        </a>
-        
-        <button class="navbar-toggler cyber-menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav ms-auto cyber-menu">
-            <li class="nav-item">
-              <a href="index.html" class="nav-link active" data-crack-trigger>
-                <i class="fas fa-home me-2"></i>Início
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="sistemas.html" class="nav-link" data-crack-trigger>
-                <i class="fas fa-laptop-code me-2"></i>Sistemas
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="banco-dados.html" class="nav-link" data-crack-trigger>
-                <i class="fas fa-database me-2"></i>Banco de Dados
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#mobile" class="nav-link" data-crack-trigger>
-                <i class="fas fa-mobile-alt me-2"></i>Mobile
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#contato" class="nav-link" data-crack-trigger>
-                <i class="fas fa-envelope me-2"></i>Contato
-              </a>
-            </li>
-          </ul>
+<body>
+    <!-- Header/Navegação -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>GABRIEL <span>ALVES</span></h1>
+                <p>Desenvolvedor Full-Stack | Ciência de Dados</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#habilidades">Habilidades</a></li>
+                    <li><a href="#formacao">Formação</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
         </div>
-      </div>
-    </nav>
-    
-    <div class="nav-scanline"></div>
-  </header>
+    </header>
 
-  <main class="cyber-main">
-    <!-- Seção Hero -->
-    <section class="cyber-hero futuristic-gradient">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 hero-content">
-            <h1 class="hero-title typewriter" data-text="GABRIEL ALVES">GABRIEL ALVES</h1>
-            <h2 class="hero-subtitle glitch" data-text="DESENVOLVEDOR FULL STACK">DESENVOLVEDOR FULL STACK</h2>
-            
-            <div class="hero-badges">
-              <span class="badge cyber-badge">
-                <i class="fas fa-code"></i> Python
-              </span>
-              <span class="badge cyber-badge">
-                <i class="fab fa-js"></i> JavaScript
-              </span>
-              <span class="badge cyber-badge">
-                <i class="fas fa-database"></i> SQL
-              </span>
-              <span class="badge cyber-badge">
-                <i class="fab fa-react"></i> React
-              </span>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transformo <span>ideias</span> em soluções digitais</h1>
+                <p>Explorador digital em constante evolução. Desenvolvo soluções tecnológicas com foco em inovação e futuro.</p>
+                <a href="#projetos" class="btn">Ver Projetos</a>
             </div>
-            
-            <p class="hero-description">
-              Explorador digital em constante evolução. Desenvolvo soluções tecnológicas com foco em inovação e futuro. Atualmente sob orientação do Prof. Bruno Carvalho no curso de Desenvolvimento de Sistemas.
-            </p>
-            
-            <div class="hero-cta">
-              <a href="#projetos" class="btn cyber-btn futuristic-btn">
-                <i class="fas fa-rocket me-2"></i>Explorar Projetos
-              </a>
-              <a href="#sobre" class="btn cyber-btn-outline">
-                <i class="fas fa-user-astronaut me-2"></i>Sobre Mim
-              </a>
+            <div class="hero-image">
+                <div class="code-snippet">
+                    <pre><code>function inovacao() {
+  return tecnologia + criatividade;
+}</code></pre>
+                </div>
             </div>
-          </div>
-          
-          <div class="col-lg-6 hero-image">
-            <div class="holographic-frame">
-              <img src="img/profile-hologram.png" alt="Foto de perfil de Gabriel Alves" class="profile-hologram">
-              <div class="hologram-grid"></div>
-              <div class="hologram-scanline"></div>
-            </div>
-          </div>
         </div>
-      </div>
-      
-      <div class="hero-scroll-indicator">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-      </div>
     </section>
 
-    <!-- Seção Sobre -->
-    <section id="sobre" class="cyber-section cyber-about">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title"><span class="title-number">01</span> SOBRE MIM</h2>
-          <div class="section-divider"></div>
-        </div>
-        
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="about-card holographic-card">
-              <h3 class="card-title"><i class="fas fa-terminal"></i> MINHA JORNADA</h3>
-              <p class="card-text">
-                Comecei minha jornada na programação em 2020, criando pequenos scripts em Python. Desde então, mergulhei no mundo do desenvolvimento web e mobile, sempre buscando aprender novas tecnologias e aprimorar minhas habilidades.
-              </p>
-              
-              <div class="cyber-skills">
-                <h4><i class="fas fa-code-branch"></i> HABILIDADES PRINCIPAIS</h4>
-                
-                <div class="skill-item">
-                  <span class="skill-name">Python</span>
-                  <div class="skill-bar">
-                    <div class="skill-level" data-level="85"></div>
-                  </div>
+    <!-- Sobre -->
+    <section id="sobre" class="about">
+        <div class="container">
+            <h2>Sobre <span>Mim</span></h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Sou Gabriel Alves Vieira, desenvolvedor Full-Stack com especialização em JavaScript e análise de dados. Atualmente cursando Desenvolvimento de Sistemas no Colégio Vicente Rijo.</p>
+                    <p>Minha abordagem combina lógica de programação com criatividade para resolver problemas complexos e criar experiências digitais impactantes.</p>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> al4726390@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> (43) 99668-9102</p>
+                        <p><i class="fab fa-github"></i> github.com/jhtdzhc12223</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Londrina, Paraná</p>
+                    </div>
                 </div>
-                
-                <div class="skill-item">
-                  <span class="skill-name">JavaScript</span>
-                  <div class="skill-bar">
-                    <div class="skill-level" data-level="78"></div>
-                  </div>
+                <div class="about-skills">
+                    <div class="skill-card">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Desenvolvimento Web</h3>
+                        <p>Front-end e Back-end com tecnologias modernas</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Análise de Dados</h3>
+                        <p>Estatística e visualização com Python</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Mobile</h3>
+                        <p>Desenvolvimento de apps com React Native</p>
+                    </div>
                 </div>
-                
-                <div class="skill-item">
-                  <span class="skill-name">SQL</span>
-                  <div class="skill-bar">
-                    <div class="skill-level" data-level="82"></div>
-                  </div>
-                </div>
-                
-                <div class="skill-item">
-                  <span class="skill-name">HTML/CSS</span>
-                  <div class="skill-bar">
-                    <div class="skill-level" data-level="90"></div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-          
-          <div class="col-lg-6">
-            <div class="about-card holographic-card">
-              <h3 class="card-title"><i class="fas fa-graduation-cap"></i> EDUCAÇÃO</h3>
-              
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-date">2024 - Atual</div>
-                  <div class="timeline-content">
-                    <h4>Desenvolvimento de Sistemas</h4>
-                    <p>Centro Estadual de Educação Profissional - Escola Prof. Brasílio Machado</p>
-                    <p>Professor: Bruno Carvalho</p>
-                  </div>
-                </div>
-                
-                <div class="timeline-item">
-                  <div class="timeline-date">2023</div>
-                  <div class="timeline-content">
-                    <h4>Curso de Python Avançado</h4>
-                    <p>Plataforma Alura</p>
-                    <p>120 horas de conteúdo avançado</p>
-                  </div>
-                </div>
-                
-                <div class="timeline-item">
-                  <div class="timeline-date">2022</div>
-                  <div class="timeline-content">
-                    <h4>Web Development Bootcamp</h4>
-                    <p>Udemy - Dr. Angela Yu</p>
-                    <p>Desenvolvimento Full Stack</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <!-- Seção Projetos -->
-    <section id="projetos" class="cyber-section cyber-projects bg-dark">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title"><span class="title-number">02</span> PROJETOS</h2>
-          <div class="section-divider"></div>
+    <!-- Habilidades -->
+    <section id="habilidades" class="skills">
+        <div class="container">
+            <h2>Habilidades <span>Técnicas</span></h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Linguagens</h3>
+                    <ul>
+                        <li>JavaScript (Back-End, POO, Algoritmos)</li>
+                        <li>Python (Estatística, Automação)</li>
+                        <li>HTML5/CSS3</li>
+                        <li>Java (OOP)</li>
+                        <li>SQL/MySQL</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-cogs"></i> Frameworks & Ferramentas</h3>
+                    <ul>
+                        <li>Node.js</li>
+                        <li>React Native</li>
+                        <li>Git/GitHub</li>
+                        <li>Linux CLI</li>
+                        <li>UML</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Outras Competências</h3>
+                    <ul>
+                        <li>HTTP/Redes</li>
+                        <li>Excel (Análise de Dados)</li>
+                        <li>Arquitetura de Computadores</li>
+                        <li>Modelagem de Dados</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        
-        <div class="row g-4">
-          <div class="col-md-4">
-            <div class="project-card holographic-card">
-              <div class="card-icon">
-                <i class="fas fa-laptop-code"></i>
-              </div>
-              <h3>Programação de Sistemas</h3>
-              <p>Desenvolvimento web e desktop com tecnologias de ponta. Aplicações com Python, Java, C# e integração com APIs modernas.</p>
-              <a href="sistemas.html" class="btn cyber-btn futuristic-btn">Ver projetos <i class="fas fa-arrow-right"></i></a>
-              <div class="project-glitch"></div>
-            </div>
-          </div>
-          
-          <div class="col-md-4">
-            <div class="project-card holographic-card">
-              <div class="card-icon">
-                <i class="fas fa-database"></i>
-              </div>
-              <h3>Banco de Dados</h3>
-              <p>Modelagem de ER, normalização, consultas SQL complexas, e implementação de procedures e triggers em MySQL e SQL Server.</p>
-              <a href="banco-dados.html" class="btn cyber-btn futuristic-btn">Ver projetos <i class="fas fa-arrow-right"></i></a>
-              <div class="project-glitch"></div>
-            </div>
-          </div>
-          
-          <div class="col-md-4">
-            <div class="project-card holographic-card">
-              <div class="card-icon">
-                <i class="fas fa-mobile-alt"></i>
-              </div>
-              <h3>Programação Mobile</h3>
-              <p>Criação de apps Android/iOS com Flutter e React Native, explorando sensores, armazenamento local e APIs REST.</p>
-              <a href="#mobile" class="btn cyber-btn futuristic-btn">Ver projetos <i class="fas fa-arrow-right"></i></a>
-              <div class="project-glitch"></div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="tech-stack mt-5">
-          <h4 class="text-center mb-4">Tecnologias que domino</h4>
-          <div class="d-flex flex-wrap justify-content-center gap-3">
-            <div class="tech-item" data-tooltip="HTML5">
-              <i class="fab fa-html5"></i>
-            </div>
-            <div class="tech-item" data-tooltip="CSS3">
-              <i class="fab fa-css3-alt"></i>
-            </div>
-            <div class="tech-item" data-tooltip="JavaScript">
-              <i class="fab fa-js"></i>
-            </div>
-            <div class="tech-item" data-tooltip="Python">
-              <i class="fab fa-python"></i>
-            </div>
-            <div class="tech-item" data-tooltip="Java">
-              <i class="fab fa-java"></i>
-            </div>
-            <div class="tech-item" data-tooltip="MySQL">
-              <i class="fas fa-database"></i>
-            </div>
-            <div class="tech-item" data-tooltip="Git">
-              <i class="fab fa-git-alt"></i>
-            </div>
-            <div class="tech-item" data-tooltip="React">
-              <i class="fab fa-react"></i>
-            </div>
-            <div class="tech-item" data-tooltip="Bootstrap">
-              <i class="fab fa-bootstrap"></i>
-            </div>
-            <div class="tech-item" data-tooltip="Node.js">
-              <i class="fab fa-node-js"></i>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- Seção Contato -->
-    <section id="contato" class="cyber-section cyber-contact">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title"><span class="title-number">03</span> CONTATO</h2>
-          <div class="section-divider"></div>
-        </div>
-        
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="contact-card holographic-card">
-              <h3><i class="fas fa-paper-plane"></i> ENVIE UMA MENSAGEM</h3>
-              
-              <form id="contactForm" class="cyber-form">
-                <div class="form-group">
-                  <label for="name">Nome</label>
-                  <input type="text" id="name" name="name" required class="form-control cyber-input">
+    <!-- Formação -->
+    <section id="formacao" class="education">
+        <div class="container">
+            <h2>Formação <span>Acadêmica</span></h2>
+            <div class="education-container">
+                <div class="education-card">
+                    <div class="edu-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Desenvolvimento de Sistemas</h3>
+                    <p>Colégio Vicente Rijo</p>
+                    <p>Cursando</p>
                 </div>
                 
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" required class="form-control cyber-input">
+                <div class="education-card">
+                    <div class="cert-image">
+                        <img src="assets/certificado-js.png" alt="Certificado JavaScript">
+                    </div>
+                    <h3>JavaScript Back-End</h3>
+                    <p>Alura</p>
+                    <p>74h | Concluído 2025</p>
+                    <a href="https://cursos.alura.com.br/user/alves-vieira-gabriel/degree.js-backend-v210587-210587/certificate" target="_blank">Ver Certificado</a>
                 </div>
                 
-                <div class="form-group">
-                  <label for="message">Mensagem</label>
-                  <textarea id="message" name="message" rows="5" required class="form-control cyber-input"></textarea>
+                <div class="education-card">
+                    <div class="cert-image">
+                        <img src="assets/certificado-html.png" alt="Certificado HTML/CSS">
+                    </div>
+                    <h3>HTML & CSS Web</h3>
+                    <p>Alura</p>
+                    <p>35h | Concluído 2024</p>
+                    <a href="https://cursos.alura.com.br/user/alves-vieira-gabriel/degree.html-css-v534235-534235/certificate" target="_blank">Ver Certificado</a>
                 </div>
-                
-                <button type="submit" class="btn cyber-btn futuristic-btn">
-                  <i class="fas fa-paper-plane me-2"></i>Enviar Mensagem
-                </button>
-              </form>
             </div>
-          </div>
-          
-          <div class="col-lg-6">
-            <div class="contact-card holographic-card">
-              <h3><i class="fas fa-network-wired"></i> CONECTE-SE</h3>
-              
-              <div class="contact-info">
-                <div class="contact-item">
-                  <i class="fas fa-envelope"></i>
-                  <span>aluno@escola.pr.gov.br</span>
-                </div>
-                
-                <div class="contact-item">
-                  <i class="fas fa-map-marker-alt"></i>
-                  <span>Curitiba, Paraná, Brasil</span>
-                </div>
-              </div>
-              
-              <div class="social-links">
-                <a href="#" class="social-link" aria-label="LinkedIn">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="#" class="social-link" aria-label="GitHub">
-                  <i class="fab fa-github"></i>
-                </a>
-                <a href="#" class="social-link" aria-label="Instagram">
-                  <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" class="social-link" aria-label="Twitter">
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="social-link" aria-label="Discord">
-                  <i class="fab fa-discord"></i>
-                </a>
-              </div>
-              
-              <div class="qr-code-container">
-                <div class="qr-code">
-                  <img src="img/qr-code.png" alt="QR Code para contato">
-                </div>
-                <p>Escaneie para adicionar contato</p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
-  </main>
 
-  <!-- Rodapé -->
-  <footer class="cyber-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-logo">
-          <img src="img/logo.png" alt="Logo Gabriel Alves" class="logo-image">
-          <span class="logo-blink">_</span>
+    <!-- Projetos -->
+    <section id="projetos" class="projects">
+        <div class="container">
+            <h2>Meus <span>Projetos</span></h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Lista de Compras</h3>
+                    </div>
+                    <div class="project-body">
+                        <p>Sistema interativo para gerenciar listas de compras com autenticação.</p>
+                        <div class="technologies">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <a href="https://lista-compras-pearl.vercel.app/login.html" target="_blank" class="btn">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Portfólio Pessoal</h3>
+                    </div>
+                    <div class="project-body">
+                        <p>Site de portfólio pessoal com informações profissionais.</p>
+                        <div class="technologies">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <a href="https://jhtdzhc12223.github.io/Nome/" target="_blank" class="btn">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Repositório GitHub</h3>
+                    </div>
+                    <div class="project-body">
+                        <p>Coleção de projetos e códigos desenvolvidos.</p>
+                        <div class="technologies">
+                            <span>Várias Tecnologias</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <a href="https://github.com/jhtdzhc12223" target="_blank" class="btn">Ver GitHub</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="footer-links">
-          <a href="index.html">Início</a>
-          <a href="sistemas.html">Sistemas</a>
-          <a href="banco-dados.html">Banco de Dados</a>
-          <a href="#mobile">Mobile</a>
-          <a href="#contato">Contato</a>
-        </div>
-        
-        <div class="footer-social">
-          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; 2025 Gabriel Alves. Todos os direitos reservados.</p>
-        <p>Desenvolvido com <i class="fas fa-heart"></i> e <i class="fas fa-code"></i></p>
-      </div>
-    </div>
-  </footer>
+    </section>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-  <script src="js/cyberEffects.js"></script>
-  <script src="js/main.js"></script>
+    <!-- Contato -->
+    <section id="contato" class="contact">
+        <div class="container">
+            <h2>Entre em <span>Contato</span></h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Vamos conversar!</h3>
+                    <p>Estou aberto a oportunidades e colaborações. Entre em contato através dos canais abaixo:</p>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> al4726390@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> (43) 99668-9102</li>
+                        <li><i class="fab fa-github"></i> github.com/jhtdzhc12223</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/jhtdzhc12223" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Seu e-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" placeholder="Sua mensagem" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>GABRIEL ALVES VIEIRA</h3>
+                    <p>Desenvolvedor Full-Stack | Ciência de Dados</p>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#habilidades">Habilidades</a></li>
+                        <li><a href="#projetos">Projetos</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gabriel Alves Vieira. Todos os direitos reservados.</p>
+                <p>Código é poesia; transformo linhas em soluções.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
