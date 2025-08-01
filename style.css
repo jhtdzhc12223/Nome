@@ -7,6 +7,7 @@
     --gray: #1a1a1a;
     --dark-gray: #0d0d0d;
     --light-gray: #333;
+    --error: #ff3860;
 }
 
 /* ESTILOS GERAIS */
@@ -22,6 +23,18 @@ body {
     color: var(--white);
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: var(--black);
+    opacity: 0.5;
 }
 
 .container {
@@ -33,6 +46,7 @@ body {
 
 section {
     padding: 80px 0;
+    position: relative;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -66,6 +80,7 @@ p {
     margin-bottom: 15px;
     font-size: 1.1rem;
     line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 a {
@@ -96,12 +111,40 @@ ul {
     border: none;
     cursor: pointer;
     text-decoration: none;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 245, 255, 0.2);
     text-decoration: none;
+}
+
+.btn.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 245, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 245, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 245, 255, 0);
+    }
+}
+
+/* Efeitos de hover */
+.hover-grow {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-grow:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* HEADER */
@@ -113,6 +156,12 @@ header {
     padding: 20px 0;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--light-gray);
+    transition: all 0.3s ease;
+}
+
+header.scrolled {
+    padding: 15px 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
 header .container {
@@ -147,6 +196,8 @@ nav a {
     text-transform: uppercase;
     font-size: 0.9rem;
     letter-spacing: 1px;
+    position: relative;
+    padding: 5px 0;
 }
 
 nav a:hover {
@@ -154,10 +205,35 @@ nav a:hover {
     text-decoration: none;
 }
 
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--blue);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a.active {
+    color: var(--blue);
+}
+
+nav a.active::after {
+    width: 100%;
+}
+
 /* HERO SECTION */
 .hero {
     padding: 150px 0 100px;
     background: linear-gradient(135deg, var(--dark-gray), var(--black));
+    position: relative;
+    overflow: hidden;
 }
 
 .hero .container {
@@ -165,6 +241,8 @@ nav a:hover {
     align-items: center;
     justify-content: space-between;
     gap: 50px;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-content {
@@ -199,6 +277,12 @@ nav a:hover {
     padding: 30px;
     border: 1px solid var(--light-gray);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease;
+}
+
+.code-snippet:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
 }
 
 .code-snippet pre {
@@ -235,13 +319,14 @@ nav a:hover {
     padding: 25px;
     border-radius: 10px;
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     border: 1px solid var(--light-gray);
 }
 
 .skill-card:hover {
     transform: translateY(-10px);
     border-color: var(--blue);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .skill-card i {
@@ -255,6 +340,21 @@ nav a:hover {
     margin-bottom: 10px;
 }
 
+.skill-level {
+    margin-top: 10px;
+    height: 8px;
+    background-color: var(--dark-gray);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    border-radius: 4px;
+    transition: width 1s ease;
+}
+
 .contact-info p {
     display: flex;
     align-items: center;
@@ -265,6 +365,16 @@ nav a:hover {
 .contact-info i {
     color: var(--blue);
     width: 25px;
+}
+
+.contact-info a {
+    color: var(--white);
+    transition: all 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--blue);
+    text-decoration: none;
 }
 
 /* SKILLS SECTION */
@@ -283,6 +393,12 @@ nav a:hover {
     padding: 30px;
     border-radius: 10px;
     border: 1px solid var(--light-gray);
+    transition: all 0.3s ease;
+}
+
+.skill-category:hover {
+    border-color: var(--blue);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .skill-category h3 {
@@ -325,6 +441,11 @@ nav a:hover {
     height: 420px;
     border-radius: 10px;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.certificate-card:hover {
+    transform: translateY(-10px);
 }
 
 .certificate-flip {
@@ -407,6 +528,7 @@ nav a:hover {
     background: var(--purple);
     color: white;
     transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
 }
 
 /* PROJECTS SECTION */
@@ -421,12 +543,13 @@ nav a:hover {
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid var(--light-gray);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .project-card:hover {
     transform: translateY(-10px);
     border-color: var(--blue);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .project-header {
@@ -530,7 +653,7 @@ nav a:hover {
 .social-links a:hover {
     background: linear-gradient(135deg, var(--blue), var(--purple));
     color: var(--white);
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.1);
 }
 
 .contact-form {
@@ -539,6 +662,7 @@ nav a:hover {
 
 .form-group {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .form-group input,
@@ -550,11 +674,37 @@ nav a:hover {
     border-radius: 5px;
     color: var(--white);
     font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.2);
 }
 
 .form-group textarea {
     min-height: 150px;
     resize: vertical;
+}
+
+.error-message {
+    color: var(--error);
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.form-group.error .error-message {
+    opacity: 1;
+}
+
+.form-group.error input,
+.form-group.error textarea {
+    border-color: var(--error);
 }
 
 /* FOOTER */
@@ -603,6 +753,16 @@ footer {
     margin-bottom: 10px;
     font-size: 0.9rem;
     color: #aaa;
+}
+
+/* ANIMAÇÕES */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate {
+    animation: fadeIn 1s ease forwards;
 }
 
 /* RESPONSIVIDADE */
