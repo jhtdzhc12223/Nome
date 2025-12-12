@@ -197,18 +197,32 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!isValid) return;
             
-            // Simular envio (substituir por integração real)
-            console.log('Mensagem enviada:', { name, email, message });
+            // Simular envio
+            const formData = {
+                name: name,
+                email: email,
+                message: message,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Salvar no localStorage para demonstração
+            localStorage.setItem('contatoEnviado', JSON.stringify(formData));
             
             // Feedback visual
             const btn = contactForm.querySelector('button');
-            btn.textContent = 'Enviado com sucesso!';
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Mensagem Enviada!';
             btn.style.backgroundColor = '#4CAF50';
+            btn.disabled = true;
+            
+            // Mostrar notificação
+            showNotification('Mensagem enviada com sucesso! Em breve entrarei em contato.', 'success');
             
             setTimeout(() => {
                 contactForm.reset();
-                btn.textContent = 'Enviar Mensagem';
+                btn.textContent = originalText;
                 btn.style.backgroundColor = '';
+                btn.disabled = false;
             }, 3000);
         });
     }
@@ -233,25 +247,92 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                
+                // Animar stats dos projetos
+                if (entry.target.classList.contains('project-card')) {
+                    const stats = entry.target.querySelectorAll('.stat-item');
+                    stats.forEach((stat, index) => {
+                        setTimeout(() => {
+                            stat.style.opacity = '1';
+                            stat.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                }
             }
         });
     }, observerOptions);
 
     // Observar elementos para animação
     document.querySelectorAll('section, .skill-card, .project-card, .certificate-card').forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(element);
     });
 
-    // Inicializar parallax
-    if (window.innerWidth > 768) {
-        const hero = document.querySelector('.hero');
-        if (hero) {
-            new Parallax(hero, {
-                relativeInput: true,
-                hoverOnly: true
-            });
-        }
+    // Inicializar stats animation
+    document.querySelectorAll('.stat-item').forEach(stat => {
+        stat.style.opacity = '0';
+        stat.style.transform = 'translateY(10px)';
+        stat.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+
+    // Função de notificação
+    function showNotification(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Estilos da notificação
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'success' ? '#4CAF50' : '#ff3860'};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 10000;
+            animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+        `;
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
     }
+
+    // Adicionar estilos para animação da notificação
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
 });
 
 // Transformar textos de contato em links clicáveis
